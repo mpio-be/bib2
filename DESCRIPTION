@@ -1,0 +1,29 @@
+Package: bib2
+Version: 2016.1
+Author: Mihai Valcu
+Maintainer: Mihai Valcu <valcu@orn.mpg.de>
+Title: BIrd Breeding, field work planner
+Depends:
+    R (>= 3.0.0),
+    rgdal,
+    ggplot2,
+    ggthemes,
+    data.table,
+    sdb,
+    devtools,
+Suggests:
+    SNB,
+    shiny (>= 0.8.0),
+    rhandsontable (>= 0.3.4.01),
+    shinydashboard,
+    shinyBS,
+    shinyjs,
+    shinytoastr,
+    dygraphs
+Description: System management
+RoxygenNote: 5.0.1
+VignetteBuilder: knitr
+LazyData: true
+
+
+

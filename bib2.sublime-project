@@ -1,0 +1,9 @@
+{
+	"folders":[{
+		"name": "package: bib2",
+		"path": "/home/mihai/ownCloud/PACKAGES/bib2",
+		"folder_exclude_patterns": ["*_cache", "cache", "figure", "*_files", ".Rproj.user"]
+		}]
+
+
+	}
