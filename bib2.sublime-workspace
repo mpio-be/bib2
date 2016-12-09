@@ -568,16 +568,16 @@
 	"select_project":
 	{
 		"height": 669.0,
-		"last_filter": "sys",
+		"last_filter": "SN",
 		"selected_items":
 		[
 			[
-				"sys",
-				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
-			],
-			[
 				"SN",
 				"~/ownCloud/PACKAGES/SNB/SNB.sublime-project"
+			],
+			[
+				"sys",
+				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
 			],
 			[
 				"sh",
