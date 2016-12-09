@@ -9,7 +9,6 @@ Depends:
     ggplot2,
     ggthemes,
     data.table,
-    sdb,
     devtools,
 Suggests:
     SNB,
