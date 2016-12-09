@@ -202,16 +202,19 @@
 	"expanded_folders":
 	[
 		"/home/mihai/ownCloud/PACKAGES/bib2",
-		"/home/mihai/ownCloud/PACKAGES/bib2/R"
+		"/home/mihai/ownCloud/PACKAGES/bib2/R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main"
 	],
 	"file_history":
 	[
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/server.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/global.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/R/plot_elements.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/R/db_queries.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/ui.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/server.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/map/map_save_data.R",
 		"/home/mihai/ownCloud/NOTES/current_notes.todo",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/map/basemap_src.R",
@@ -565,9 +568,17 @@
 	"select_project":
 	{
 		"height": 669.0,
-		"last_filter": "sh",
+		"last_filter": "sys",
 		"selected_items":
 		[
+			[
+				"sys",
+				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
+			],
+			[
+				"SN",
+				"~/ownCloud/PACKAGES/SNB/SNB.sublime-project"
+			],
 			[
 				"sh",
 				"~/ownCloud/PROJECTS/SEMIPALMATED_SANDPIPER/nest_exchanges/nest_exchanges.sublime-project"
@@ -578,14 +589,6 @@
 			],
 			[
 				"s",
-				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
-			],
-			[
-				"SN",
-				"~/ownCloud/PACKAGES/SNB/SNB.sublime-project"
-			],
-			[
-				"sys",
 				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
 			],
 			[

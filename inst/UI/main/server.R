@@ -33,7 +33,7 @@ shinyServer(function(input, output, session) {
         position = 'top-center', progressBar = TRUE, timeOut = 9000)
 
       x = SNB::overnight(getOption('DB_user'), host, buffer = 2, date = as.Date(input$date)  )
-      x[, sleeping_bird := ifelse(is.na(transp), 'transponded', 'unknown')]
+      x[, sleeping_bird := ifelse( ! is.na(transp), 'transponded', 'unknown')]
       merge(boxesxy, x, by = 'box', all.x = TRUE)
       })
 
