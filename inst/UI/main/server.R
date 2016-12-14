@@ -1,7 +1,5 @@
 
-library(sysmanager)
-library(sdb)
-library(shinyAce)
+
 
 
 shinyServer(function(input, output, session) {
@@ -61,6 +59,29 @@ shinyServer(function(input, output, session) {
 
       })
 
+
+      observeEvent(input$diagnose_pull_compile, {
+
+        toastr_warning('This will take a couple of minutes. Wait untill the Download xlsx button is active.')
+
+        x = diagnose_pull(date=  format(input$date , "%Y.%m.%d") , shiny = TRUE)
+        diag_xls <<- tempfile(fileext = '.xlsx')
+
+        openxlsx::write.xlsx(x, file = diag_xls, overwrite = TRUE)
+
+        shinyjs::enable("diagnose_pull_download")
+
+        })
+
+    output$diagnose_pull_download <- downloadHandler(
+     filename = 'snb_diagnose.xlsx',
+     content = function(file) {
+       file.copy(diag_xls, file)
+
+
+     })
+
+    shinyjs::disable("diagnose_pull_download") # disabled on page load
 
 
 

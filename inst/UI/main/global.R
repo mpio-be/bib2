@@ -2,9 +2,11 @@
 # shiny::runApp('inst/UI/main')
 
 # settings
-    sapply(c('sdb', 'bib2','SNB', 'shiny','shinyjs','shinydashboard','shinyBS','shinytoastr','knitr', 'ggplot2'),
+    sapply(c('sdb', 'sysmanager', 'bib2','SNB', 'shiny','shinyjs','shinydashboard','shinyBS','shinytoastr','knitr', 'ggplot2'),
       function(x) suppressPackageStartupMessages( require(x, character.only = TRUE, quietly = TRUE) ))
     options( stringsAsFactors = FALSE)
+
+
 
     user          = 'bt'
     pwd           = 'bt'
@@ -12,3 +14,4 @@
     db            = 'FIELD_BTatWESTERHOLZ'
 
 
+# x = diagnose_pull(date= "2016.12.06")
