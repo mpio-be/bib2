@@ -202,7 +202,6 @@
 	"expanded_folders":
 	[
 		"/home/mihai/ownCloud/PACKAGES/bib2",
-		"/home/mihai/ownCloud/PACKAGES/bib2/R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main"
@@ -347,6 +346,7 @@
 		"height": 157.0,
 		"where_history":
 		[
+			"/home/mihai/ownCloud/PACKAGES/bib2/R",
 			"<project>",
 			"/media/mihai/M/GIT/grpkempenaers/Egg_Proteomics/R",
 			"<open folders>",
@@ -360,6 +360,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"localhost",
 			"diagnose_pull_xlsx",
 			"week",
 			"slpdat",
@@ -538,6 +539,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 110.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -569,9 +574,13 @@
 	"select_project":
 	{
 		"height": 669.0,
-		"last_filter": "SNB",
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"geo",
+				"~/ownCloud/PACKAGES/geotag/geotag.sublime-project"
+			],
 			[
 				"SNB",
 				"~/ownCloud/PACKAGES/SNB/SNB.sublime-project"
@@ -646,10 +655,6 @@
 			],
 			[
 				"g",
-				"~/ownCloud/PACKAGES/geotag/geotag.sublime-project"
-			],
-			[
-				"geo",
 				"~/ownCloud/PACKAGES/geotag/geotag.sublime-project"
 			],
 			[
