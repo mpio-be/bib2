@@ -9,6 +9,8 @@ dashboardPage(skin = 'green',
     sidebarMenu(
       dateInput("date", "Date:", value = Sys.Date() ),
 
+
+
       menuItem("Base map",    tabName  = "basemap_tab",  icon = icon("map-o") ),
       menuItem("Breeding map",   tabName  = "breedingmap_tab", icon = icon("map") ),
       menuItem("Overnight map",   tabName  = "overnight_tab", icon = icon("map") ),
@@ -53,11 +55,18 @@ dashboardPage(skin = 'green',
 
     tabItem(tabName = "SNB_tab",
       shinydashboard::box(title = "SNB txt files diagnostics", solidHeader = TRUE,
-
         actionButton("diagnose_pull_compile", "Compile diagnostic"),
         downloadButton('diagnose_pull_download',label =  'Download xlsx')
+        ),
 
-      ) )
+      shinydashboard::box(title = "Pull dates", solidHeader = TRUE,
+        shinyTree('snbPullDates')
+        )
+
+     )
+
+
+      )
 
 
     )
@@ -67,5 +76,5 @@ dashboardPage(skin = 'green',
 
 
 
- ))
+ )
 

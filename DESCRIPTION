@@ -17,6 +17,7 @@ Suggests:
     shinyBS,
     shinyjs,
     shinytoastr,
+    shinyTree,
     dygraphs,
     openxlsx
 Description: System management

@@ -84,6 +84,15 @@ shinyServer(function(input, output, session) {
     shinyjs::disable("diagnose_pull_download") # disabled on page load
 
 
+    output$snbPullDates <- renderTree({
+      x = data_dirs(p =  getOption('path.to.raw') )
+      x = split(x$dir, x$year)
+      lapply(x, function(i) eval(parse(text = paste('list(', paste(shQuote(i), "=''", collapse = ','), ')' ) )) )
+
+      })
+
+
+
 
 })
 
