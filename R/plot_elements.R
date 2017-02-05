@@ -38,12 +38,18 @@ map_empty <- function() {
 #' map_geom_label(x = 'long', y = 'lat', label = 'box3d', size = 2, color = 'g', dat = x)
 #' map_geom_label(x = 'long', y = 'lat', label = 'box3d', size = 2, color = 'f', fill = 'g', dat = x)
 #'
-map_geom_label <- function(dat = boxesxy, size = 2.5, ...) {
+#' require(showtext)
+#' showtext.auto(enable = TRUE)
+#' font.add.google("Abril Fatface", "Abril Fatface")
+#' map_geom_label(x = 'long', y = 'lat', label = 'box3d', size = 2)
+#'
+map_geom_label <- function(dat = boxesxy, size = 2.5, family = , ...) {
+
     map_empty() +
 
     geom_label(
       data          = dat,
-      family        = 'Helvetica-Narrow',
+      family        = family,
       fontface      = 'bold',
       size          = size,
       label.padding = unit(0.07, "lines"),
