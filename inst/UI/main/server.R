@@ -8,7 +8,7 @@ shinyServer(function(input, output, session) {
     output$basemap_pdf <- downloadHandler(
       filename = 'basemap.pdf',
       content = function(file) {
-          x = map_base(size = 2)
+          x = map_base(size = input$font_size)
           pdf(file = file, width = 8.5, height = 11)
           print(x)
           dev.off()
@@ -38,7 +38,7 @@ shinyServer(function(input, output, session) {
 
     output$overnight_show <- renderPlot({
       x = overnight_data()
-      map_base(dat = x, color = 'sleeping_bird', size = 5) +
+      map_base(dat = x, color = 'sleeping_bird', size = input$font_size) +
       ggtitle(input$date)
       })
 
@@ -46,7 +46,7 @@ shinyServer(function(input, output, session) {
       filename = 'sleep.pdf',
       content = function(file) {
         x = overnight_data()
-        g = map_base(dat = x, color = 'sleeping_bird', size = 3) +
+        g = map_base(dat = x, color = 'sleeping_bird', size = input$font_size) +
             ggtitle(input$date)
 
         tf <<- tempfile(fileext = 'sleep.pdf')

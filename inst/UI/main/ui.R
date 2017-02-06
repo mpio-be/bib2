@@ -36,7 +36,7 @@ dashboardPage(skin = 'green',
 
       absolutePanel(right = "0%", top="10%", width = "20%",draggable = TRUE,style = "opacity: 0.9",
       downloadButton('basemap_pdf',label = 'PDF'),
-       sliderInput("font_size", "Box size:", min = 1, max = 7,step = 0.2, value = 2)
+       sliderInput("font_size", "Text and symbol size:", min = 1, max = 7,step = 0.2, value = 4)
       )),
 
 
