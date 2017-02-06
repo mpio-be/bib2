@@ -2,5 +2,5 @@
 
 export(ADULTS)
 export(boostrap_table)
+export(map_base)
 export(map_empty)
-export(map_geom_label)

@@ -8,14 +8,14 @@ shinyServer(function(input, output, session) {
     output$basemap_pdf <- downloadHandler(
       filename = 'basemap.pdf',
       content = function(file) {
-          x = map_geom_label(x = 'long', y = 'lat', label = 'box3d', size = 2)
+          x = map_base(size = 2)
           pdf(file = file, width = 8.5, height = 11)
           print(x)
           dev.off()
       })
 
     output$basemap_show <- renderPlot({
-      print( map_geom_label(x = 'long', y = 'lat', label = 'box3d', size = input$font_size) )
+      print( map_base(size = input$font_size) )
       })
 
  # breeding map
@@ -38,7 +38,7 @@ shinyServer(function(input, output, session) {
 
     output$overnight_show <- renderPlot({
       x = overnight_data()
-      map_geom_label(dat = x, x = 'long', y = 'lat', label = 'box3d', color = 'sleeping_bird', size = 5) +
+      map_base(dat = x, color = 'sleeping_bird', size = 5) +
       ggtitle(input$date)
       })
 
@@ -46,7 +46,7 @@ shinyServer(function(input, output, session) {
       filename = 'sleep.pdf',
       content = function(file) {
         x = overnight_data()
-        g = map_geom_label(dat = x, x = 'long', y = 'lat', label = 'box3d', color = 'sleeping_bird', size = 3) +
+        g = map_base(dat = x, color = 'sleeping_bird', size = 3) +
             ggtitle(input$date)
 
         tf <<- tempfile(fileext = 'sleep.pdf')

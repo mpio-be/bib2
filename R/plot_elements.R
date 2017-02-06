@@ -1,6 +1,18 @@
 
-
+#' Maps
 #' @export
+#' @examples
+#' map_base()
+#' map_base(family = 'Arial')
+#'
+#' x = copy(boxesxy)
+#' x[, ':=' (g = cut(1:277, 4), f = ifelse( as.numeric(box) < 100, 's', 'l') ) ]
+#'
+#' map_base(x,  color = 'g')
+#' map_base(x, label = 'box3d', size = 2, color = 'f', fill = 'g')
+#'
+#'
+#'
 map_empty <- function() {
 
   ggplot() +
@@ -28,41 +40,39 @@ map_empty <- function() {
 
   }
 
-#' Map w. geom_label()
 #' @export
-#' @examples
-#' map_geom_label(x = 'long', y = 'lat', label = 'box3d', size = 2)
-#' x = copy(boxesxy)
-#'
-#' x[, ':=' (g = cut(1:277, 4), f = ifelse( as.numeric(box) < 100, 's', 'l') ) ]
-#' map_geom_label(x = 'long', y = 'lat', label = 'box3d', size = 2, color = 'g', dat = x)
-#' map_geom_label(x = 'long', y = 'lat', label = 'box3d', size = 2, color = 'f', fill = 'g', dat = x)
-#'
-#' require(showtext)
-#' showtext.auto(enable = TRUE)
-#' font.add.google("Abril Fatface", "Abril Fatface")
-#' map_geom_label(x = 'long', y = 'lat', label = 'box3d', size = 2)
-#'
-map_geom_label <- function(dat = boxesxy, size = 2.5, family = , ...) {
+map_base <- function(dat = boxesxy, size = 2.5,
+                                      family = 'Trebuchet MS', fontface = 'bold' ,
+                                      x = 'long', y = 'lat', label = 'box' , ...) {
+  map_empty() +
 
-    map_empty() +
+  geom_point(
+    data = dat,
+    color = 'grey',
+    pch = 21,
+    size = size,
+    aes_string(x = x, y = y, ...)
 
-    geom_label(
-      data          = dat,
-      family        = family,
-      fontface      = 'bold',
-      size          = size,
-      label.padding = unit(0.07, "lines"),
-      label.r       = unit(0.2, "lines"),
-      label.size    = 0.1,
-      na.rm         = TRUE,
-
-      aes_string(...)
     ) +
 
-     theme( legend.justification = c(0, 1),legend.position = c(0,1) )
+  geom_text(
+    data                 = dat,
+    family              = family,
+    fontface           = fontface,
+    size                  = size,
+    nudge_y          = -10,
+
+    aes_string(x = x, y = y, label = label, ... )
+  ) +
+
+  theme( legend.justification = c(0, 1),legend.position = c(0,1) )
+
+  }
 
 
- }
+
+
+
+
 
 

@@ -16,8 +16,7 @@ ADULTS
 }
 \examples{
 require(dygraphs)
-x = ADULTS()
-dygraph()
+x = ADULTS()[, week := week(capture_date)]
+dygraph(x)
 
 }
-

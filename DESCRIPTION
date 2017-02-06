@@ -21,9 +21,6 @@ Suggests:
     dygraphs,
     openxlsx
 Description: System management
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.0
 VignetteBuilder: knitr
 LazyData: true
-
-
-
