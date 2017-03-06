@@ -64,10 +64,20 @@ shinyServer(function(input, output, session) {
 
         toastr_warning('This will take a couple of minutes. Wait untill the Download xlsx button is active.')
 
-        x = diagnose_pull(date=  format(input$date , "%Y.%m.%d") , shiny = TRUE)
+        x1 = diagnose_pull(date=  format(input$date , "%Y.%m.%d") , shiny = TRUE)
+        x2 = diagnose_pull_v2(date=  format(input$date , "%Y.%m.%d") , shiny = TRUE)
+        
         diag_xls <<- tempfile(fileext = '.xlsx')
 
-        openxlsx::write.xlsx(x, file = diag_xls, overwrite = TRUE)
+        require(openxlsx)
+        wb = createWorkbook()
+        addWorksheet(wb, "v1")
+        addWorksheet(wb, "v2")
+        writeDataTable(wb, "v1", x = x1, rowNames= FALSE, withFilter = TRUE, tableStyle="TableStyleLight9")
+        writeDataTable(wb, "v2", x = x2, rowNames= FALSE, withFilter = TRUE, tableStyle="TableStyleLight9")
+        
+        saveWorkbook(wb,diag_xls, overwrite = TRUE)
+
 
         shinyjs::enable("diagnose_pull_download")
 

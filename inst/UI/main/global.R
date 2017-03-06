@@ -13,4 +13,4 @@
     db            = 'FIELD_BTatWESTERHOLZ'
 
 
-# x = diagnose_pull(date= "2016.12.06")
+# x = diagnose_pull(date= "2017.03.03")
