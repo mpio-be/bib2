@@ -17,7 +17,7 @@ dashboardPage(skin = 'green',
 
       menuItem("Data entry",  icon = icon("table"),
         menuSubItem('ADULTS', href = '/DataEntry/DB/BTatWESTERHOLZ/ADULTS', newtab = TRUE),
-        menuSubItem('NESTS',  href = '/DataEntry/DB/SNBatWESTERHOLZ/NESTS', newtab = TRUE),
+        menuSubItem('NESTS',  href = '/DataEntry/DB/BTatWESTERHOLZ/NESTS', newtab = TRUE),
         menuSubItem('SNB ',   href = '/DataEntry/DB/SNBatWESTERHOLZ/file_status', newtab = TRUE)
         ),
 

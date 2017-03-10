@@ -54,6 +54,7 @@
 	"file_history":
 	[
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/ui.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/notes.md",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/server.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/global.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/R/ui_elements.R",
@@ -191,16 +192,20 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "sys",
+		"last_filter": "",
 		"selected_items":
 		[
 			[
-				"sys",
+				"",
 				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
 			],
 			[
-				"",
-				"~/ownCloud/PACKAGES/SNB/SNB.sublime-project"
+				"Data",
+				"~/ownCloud/PACKAGES/DataEntry/DataEntry.sublime-project"
+			],
+			[
+				"sys",
+				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
 			],
 			[
 				"egg",
