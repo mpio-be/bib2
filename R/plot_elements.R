@@ -11,8 +11,6 @@
 #' map_base(x,  color = 'g')
 #' map_base(x, label = 'box3d', size = 2, color = 'f', fill = 'g')
 #'
-#'
-#'
 map_empty <- function() {
 
   ggplot() +
@@ -43,33 +41,33 @@ map_empty <- function() {
 #' @export
 #' @rdname map_empty
 map_base <- function(dat = boxesxy, size = 2.5, family = 'Times', fontface = 'bold' ,x = 'long', y = 'lat',
-                    label = 'box', bottom_ann = paste('Printed on',format(Sys.time(), "%a, %d %b %y %H:%M") ) , ...) {
-  map_empty() +
+     label = 'box', bottom_ann = paste('Printed on',format(Sys.time(), "%a, %d %b %y %H:%M") ) , ...) {
+      map_empty() +
 
-  geom_point(
-    data = dat,
-    color = 'grey',
-    pch = 21,
-    size = size,
-    aes_string(x = x, y = y, ...)
+      geom_point(
+        data = dat,
+        color = 'grey',
+        pch = 21,
+        size = size,
+        aes_string(x = x, y = y, ...)
 
-    ) +
+        ) +
 
-  geom_text(
-    data                 = dat,
-    family              = family,
-    fontface           = fontface,
-    size                  = size,
-    nudge_y          = -10,
+      geom_text(
+        data                 = dat,
+        family              = family,
+        fontface           = fontface,
+        size                  = size,
+        nudge_y          = -10,
 
-    aes_string(x = x, y = y, label = label, ... )
-  ) +
+        aes_string(x = x, y = y, label = label, ... )
+      ) +
 
-  annotate("text", x = 4417300, y = 5334170, label = bottom_ann, col = 'grey', fontface = "bold") +
+      annotate("text", x = 4417300, y = 5334170, label = bottom_ann, col = 'grey', fontface = "bold") +
 
-  theme( legend.justification = c(0, 1),legend.position = c(0,1) )
+      theme( legend.justification = c(0, 1),legend.position = c(0,1) )
 
-  }
+      }
 
 
 

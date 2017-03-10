@@ -24,6 +24,4 @@ x[, ':=' (g = cut(1:277, 4), f = ifelse( as.numeric(box) < 100, 's', 'l') ) ]
 map_base(x,  color = 'g')
 map_base(x, label = 'box3d', size = 2, color = 'f', fill = 'g')
 
-
-
 }

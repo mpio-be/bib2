@@ -4,7 +4,7 @@
 \alias{ADULTS}
 \title{ADULTS}
 \usage{
-ADULTS(username = "bt", host = "scidb.mpio.orn.mpg.de")
+ADULTS()
 }
 \arguments{
 \item{username}{user}
@@ -15,8 +15,5 @@ ADULTS(username = "bt", host = "scidb.mpio.orn.mpg.de")
 ADULTS
 }
 \examples{
-require(dygraphs)
-x = ADULTS()[, week := week(capture_date)]
-dygraph(x)
-
+x = ADULTS()
 }

@@ -4,7 +4,7 @@
 
 shinyServer(function(input, output, session) {
 
- # basemap
+ # base-map
     output$basemap_pdf <- downloadHandler(
       filename = 'basemap.pdf',
       content = function(file) {
@@ -59,29 +59,29 @@ shinyServer(function(input, output, session) {
 
       })
 
+ # SNB diagnostics
+    observeEvent(input$diagnose_pull_compile, {
 
-      observeEvent(input$diagnose_pull_compile, {
+      toastr_warning('This will take a couple of minutes. Wait untill the Download xlsx button is active.')
 
-        toastr_warning('This will take a couple of minutes. Wait untill the Download xlsx button is active.')
+      x1 = diagnose_pull(date=  format(input$date , "%Y.%m.%d") , shiny = TRUE)
+      x2 = diagnose_pull_v2(date=  format(input$date , "%Y.%m.%d") , shiny = TRUE)
+      
+      diag_xls <<- tempfile(fileext = '.xlsx')
 
-        x1 = diagnose_pull(date=  format(input$date , "%Y.%m.%d") , shiny = TRUE)
-        x2 = diagnose_pull_v2(date=  format(input$date , "%Y.%m.%d") , shiny = TRUE)
-        
-        diag_xls <<- tempfile(fileext = '.xlsx')
-
-        require(openxlsx)
-        wb = createWorkbook()
-        addWorksheet(wb, "v1")
-        addWorksheet(wb, "v2")
-        writeDataTable(wb, "v1", x = x1, rowNames= FALSE, withFilter = TRUE, tableStyle="TableStyleLight9")
-        writeDataTable(wb, "v2", x = x2, rowNames= FALSE, withFilter = TRUE, tableStyle="TableStyleLight9")
-        
-        saveWorkbook(wb,diag_xls, overwrite = TRUE)
+      require(openxlsx)
+      wb = createWorkbook()
+      addWorksheet(wb, "v1")
+      addWorksheet(wb, "v2")
+      writeDataTable(wb, "v1", x = x1, rowNames= FALSE, withFilter = TRUE, tableStyle="TableStyleLight9")
+      writeDataTable(wb, "v2", x = x2, rowNames= FALSE, withFilter = TRUE, tableStyle="TableStyleLight9")
+      
+      saveWorkbook(wb,diag_xls, overwrite = TRUE)
 
 
-        shinyjs::enable("diagnose_pull_download")
+      shinyjs::enable("diagnose_pull_download")
 
-        })
+      })
 
     output$diagnose_pull_download <- downloadHandler(
      filename = 'snb_diagnose.xlsx',
