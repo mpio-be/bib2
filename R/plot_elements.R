@@ -1,16 +1,9 @@
+#' @name maps
+#' @title  maps
+NULL
 
-#' Maps
 #' @export
-#' @examples
-#' map_base()
-#' map_base(family = 'Arial')
-#'
-#' x = copy(boxesxy)
-#' x[, ':=' (g = cut(1:277, 4), f = ifelse( as.numeric(box) < 100, 's', 'l') ) ]
-#'
-#' map_base(x,  color = 'g')
-#' map_base(x, label = 'box3d', size = 2, color = 'f', fill = 'g')
-#'
+#' @rdname maps
 map_empty <- function() {
 
   ggplot() +
@@ -39,40 +32,60 @@ map_empty <- function() {
   }
 
 #' @export
-#' @rdname map_empty
-map_base <- function(dat = boxesxy, size = 2.5, family = 'Times', fontface = 'bold' ,x = 'long', y = 'lat',
-     label = 'box', bottom_ann = paste('Printed on',format(Sys.time(), "%a, %d %b %y %H:%M") ) , ...) {
+#' @rdname maps
+#' @examples
+#' map_base(family = 'Times')
+map_base <- function(size = 2.5, family = 'Times', fontface = 'bold', bottom_ann = paste('Printed on',format(Sys.time(), "%a, %d %b %y %H:%M")) ) {
+      g = 
       map_empty() +
-
-      geom_point(
-        data = dat,
-        color = 'grey',
-        pch = 21,
-        size = size,
-        aes_string(x = x, y = y, ...)
-
-        ) +
-
-      geom_text(
-        data                 = dat,
-        family              = family,
-        fontface           = fontface,
-        size                  = size,
-        nudge_y          = -10,
-
-        aes_string(x = x, y = y, label = label, ... )
-      ) +
+      
+      geom_point(data = boxesxy, color = 'grey', pch = 21, size = size,
+        aes(x = long, y = lat) ) + 
+      
+      geom_text(data = boxesxy,family  = family,fontface = fontface, size= size,nudge_y= -10,
+        aes(x = long, y = lat, label = box) ) + 
 
       annotate("text", x = 4417300, y = 5334170, label = bottom_ann, col = 'grey', fontface = "bold") +
-
       theme( legend.justification = c(0, 1),legend.position = c(0,1) )
 
-      }
+      g
+}
 
+#' @export
+#' @rdname maps
+#' @param   n     a data.table returned by  nests()
+#' @param   title goes to ggtitle (should be the reference date)
+#' @examples
+#'  rdate = Sys.Date() - 1
+#'  n = nests(rdate) %>% nest_state(ref_date  =rdate )
+#'  map_nests(n)
+map_nests <- function(n, size = 2.5, family = 'Times', fontface = 'bold', 
+     title      = paste('made on:', Sys.Date() ), 
+     bottom_ann = paste('Printed on',format(Sys.time(), "%a, %d %b %y %H:%M")) ) {
 
+     # legend data
+        ld =  n[, .N, by = nest_stage]
+        x = data.table( nscol = getOption('nest.stages.col'), nest_stage = getOption('nest.stages') )
+        ld = merge(ld, x, by = 'nest_stage')
+        nsc = ld$nscol ; names(nsc) =  ld$nest_stage
 
+      g = 
+        map_empty() +
+        
+        geom_point(data = boxesxy, color = 'grey', pch = 21, size = size, aes(x = long, y = lat) ) + 
 
+        geom_point(data=n, pch = 19, size = size, aes(x = long, y = lat, color = nest_stage) ) + 
+          scale_colour_manual(values = nsc, labels = paste0(ld$nest_stage, ' [',ld$N,']') ) +
 
+        geom_text(data = boxesxy,family  = family,fontface = fontface, size= size, nudge_y= -10, aes(x = long, y = lat, label = box) ) +
+        geom_text( data = n, nudge_x = 10, size = size, family = family, fontface = 'italic', aes(x = long, y = lat, label = lastCheck) ) + 
+
+        annotate("text", x = 4417300, y = 5334170, label = bottom_ann, col = 'grey', fontface = "bold") +
+        theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + 
+        ggtitle(title)
+
+      g
+}
 
 
 

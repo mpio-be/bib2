@@ -1,26 +1,43 @@
 
-
-
-
 shinyServer(function(input, output, session) {
 
+  observe( on.exit( assign('input', reactiveValuesToList(input) , envir = .GlobalEnv)) )
+
  # base-map
+    output$basemap_show <- renderPlot({
+      print( map_base(size = input$font_size1) )
+      })
+
     output$basemap_pdf <- downloadHandler(
       filename = 'basemap.pdf',
       content = function(file) {
-          x = map_base(size = input$font_size)
+          x = map_base(size = input$font_size1)
           pdf(file = file, width = 8.5, height = 11)
           print(x)
           dev.off()
       })
 
-    output$basemap_show <- renderPlot({
-      print( map_base(size = input$font_size) )
+ # NESTS map
+    output$nestsmap_show <- renderPlot({
+      if(length(input$date) > 0 ) { # to avoid the split moment when the date  is changed
+        nd = nests(input$date) 
+        if(nrow(nd) ==0)  stop( toastr_warning( paste('There are no data on', input$date ) ) )
+        map_nests(nest_state(nd)  , size = input$font_size2, title = paste('Reference:', input$date) ) %>% print
+        }
       })
 
- # breeding map
-    output$breedingmap_show <- renderPlot({
-      plot(1, main = 'Under construction', xlab = '', ylab = '', col = NA, axes = FALSE)
+
+    output$nestsmap_pdf <- downloadHandler(
+      filename = 'nestsmap.pdf',
+      content = function(file) {
+          
+          nd = nests(input$date) 
+          if(nrow(nd) ==0) stop( toastr_warning( paste('There are no data on', input$date ) ) )
+          m = map_nests(nest_state(nd)  , size = input$font_size2, title = paste('Reference:', input$date) )
+          
+          pdf(file = file, width = 8.5, height = 11)
+          print(m)
+          dev.off()
       })
 
  # overnight map

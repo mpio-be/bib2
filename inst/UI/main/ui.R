@@ -7,12 +7,12 @@ dashboardPage(skin = 'green',
 
   dashboardSidebar(
     sidebarMenu(
-      dateInput("date", "Date:", value = Sys.Date() ),
+      dateInput("date", "Date:", value = Sys.Date(), min = '2007-01-01', max =  Sys.Date() + 6 ),
 
 
 
-      menuItem("Base map",    tabName  = "basemap_tab",  icon = icon("map-o") ),
-      menuItem("Breeding map",   tabName  = "breedingmap_tab", icon = icon("map") ),
+      menuItem("Base map",        tabName  = "basemap_tab",  icon = icon("map-o") ),
+      menuItem("Breeding map",    tabName  = "nestsmap_tab", icon = icon("map") ),
       menuItem("Overnight map",   tabName  = "overnight_tab", icon = icon("map") ),
 
       menuItem("Data entry",  icon = icon("table"),
@@ -36,13 +36,17 @@ dashboardPage(skin = 'green',
 
       absolutePanel(right = "0%", top="10%", width = "20%",draggable = TRUE,style = "opacity: 0.9",
       downloadButton('basemap_pdf',label = 'PDF'),
-       sliderInput("font_size", "Text and symbol size:", min = 1, max = 7,step = 0.2, value = 4)
+       sliderInput("font_size1", "Text and symbol size:", min = 1, max = 7,step = 0.2, value = 4)
       )),
 
+    tabItem(tabName = "nestsmap_tab",
+      shiny::tags$style(type = "text/css", "#nestsmap_show {height: calc(100vh - 1px) !important;}"),
+      plotOutput('nestsmap_show'),
 
-    tabItem(tabName = "breedingmap_tab",
-      plotOutput('breedingmap_show')
-    ),
+      absolutePanel(right = "0%", top="10%", width = "20%",draggable = TRUE,style = "opacity: 0.9",
+      downloadButton('nestsmap_pdf',label = 'PDF'),
+       sliderInput("font_size2", "Text and symbol size:", min = 1, max = 7,step = 0.2, value = 4)
+      )),
 
     tabItem(tabName = "overnight_tab",
       shiny::tags$style(type = "text/css", "#overnight_show {height: calc(100vh - 1px) !important;}"),

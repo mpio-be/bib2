@@ -10,8 +10,8 @@ yy2dbnam <- function(year) {
 
 #' query function
 #' @export
-bdbq <- function(query, year = year(Sys.Date()), db = yy2dbnam(year) , host = "scidb.mpio.orn.mpg.de", user = 'bt' ) {
-
+idbq <- function(query, year = year(Sys.Date()), db = yy2dbnam(year) , host = getOption('host.bib2') , user = getOption('user.bib2') ) {
+    require(sdb)
     if(missing(year))
     year = format(Sys.Date(), format = "%Y")
     if(missing(db))
@@ -31,6 +31,11 @@ is.breeding <- function(x = Sys.time()) {
     d = as.numeric(format(x, "%m"))
     if(d %in% 3:5) TRUE else FALSE
     }
+
+#' @export
+infuture <- function(x) {
+  as.Date(x) %>% as.POSIXct > Sys.time()
+  }
 
 
 

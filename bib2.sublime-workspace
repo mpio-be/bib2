@@ -3,6 +3,14 @@
 	{
 		"selected_items":
 		[
+			[
+				"toastr_",
+				"toastr_warning"
+			],
+			[
+				"Sys.t",
+				"Sys.time\t{base}"
+			]
 		]
 	},
 	"buffers":
@@ -53,14 +61,15 @@
 	],
 	"file_history":
 	[
-		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/ui.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/notes.md",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/server.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/global.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/R/ui_elements.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/R/plot_elements.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/R/db_queries.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/R/utils.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/ui.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/R/db_queries.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/global.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/DESCRIPTION",
+		"/home/mihai/ownCloud/PACKAGES/bib2/notes.md",
+		"/home/mihai/ownCloud/PACKAGES/bib2/R/ui_elements.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/RStudio.Rproj",
 		"/home/mihai/ownCloud/NOTES/current_notes.todo",
 		"/home/mihai/ownCloud/PACKAGES/bib2/bib2.sublime-project",
@@ -94,6 +103,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"date",
+			"nests_show",
+			"basemap",
+			"NESTS",
 			"CON",
 			",",
 			"map_geom_label",
@@ -197,19 +210,27 @@
 		[
 			[
 				"",
-				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
-			],
-			[
-				"Data",
-				"~/ownCloud/PACKAGES/DataEntry/DataEntry.sublime-project"
+				"~/ownCloud/PACKAGES/bib/bib.sublime-project"
 			],
 			[
 				"sys",
-				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
+				"~/ownCloud/SYSTEMS_MANAGEMENT/system_management.sublime-project"
 			],
 			[
 				"egg",
 				"~/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/Egg_proteomics.sublime-project"
+			],
+			[
+				"E",
+				"~/ownCloud/PACKAGES/DataEntry/DataEntry.sublime-project"
+			],
+			[
+				"sdb",
+				"~/ownCloud/PACKAGES/sdb/sdb.sublime-project"
+			],
+			[
+				"Data",
+				"~/ownCloud/PACKAGES/DataEntry/DataEntry.sublime-project"
 			]
 		],
 		"width": 380.0
