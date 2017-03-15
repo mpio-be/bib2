@@ -5,6 +5,7 @@ Maintainer: Mihai Valcu <valcu@orn.mpg.de>
 Title: BIrd Breeding, field work planner
 Depends:
     R (>= 3.0.0),
+    sdb,
     rgdal,
     ggplot2,
     ggthemes,

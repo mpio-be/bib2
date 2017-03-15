@@ -61,12 +61,12 @@
 	],
 	"file_history":
 	[
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/global.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/ui.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/server.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/R/plot_elements.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/R/utils.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/ui.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/R/db_queries.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/global.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/bib2/notes.md",
 		"/home/mihai/ownCloud/PACKAGES/bib2/R/ui_elements.R",
@@ -210,7 +210,7 @@
 		[
 			[
 				"",
-				"~/ownCloud/PACKAGES/bib/bib.sublime-project"
+				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
 			],
 			[
 				"sys",

@@ -2,20 +2,20 @@
 % Please edit documentation in R/plot_elements.R
 \name{maps}
 \alias{maps}
+\alias{theme_bib2}
 \alias{map_empty}
 \alias{map_base}
 \alias{map_nests}
 \title{maps}
 \usage{
+theme_bib2()
+
 map_empty()
 
-map_base(size = 2.5, family = "Times", fontface = "bold",
-  bottom_ann = paste("Printed on", format(Sys.time(),
-  "\%a, \%d \%b \%y \%H:\%M")))
+map_base(size = 2.5, family = "Times", fontface = "bold")
 
 map_nests(n, size = 2.5, family = "Times", fontface = "bold",
-  title = paste("made on:", Sys.Date()), bottom_ann = paste("Printed on",
-  format(Sys.time(), "\%a, \%d \%b \%y \%H:\%M")))
+  title = paste("made on:", Sys.Date()))
 }
 \arguments{
 \item{n}{a data.table returned by  nests()}
@@ -23,8 +23,9 @@ map_nests(n, size = 2.5, family = "Times", fontface = "bold",
 \item{title}{goes to ggtitle (should be the reference date)}
 }
 \examples{
-map_base(family = 'Times')
+map_empty() + print_ann()
+map_base(family = 'Times') + print_ann()
  rdate = Sys.Date() - 1
- n = nests(rdate) \%>\% nest_state(ref_date  =rdate )
- map_nests(n)
+ n = nests(rdate) \%>\% nest_state( )
+ map_nests(n) 
 }

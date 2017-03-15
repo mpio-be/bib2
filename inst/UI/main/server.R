@@ -44,26 +44,32 @@ shinyServer(function(input, output, session) {
 
     overnight_data <- reactive({
 
-      toastr_info('Please wait a few seconds for the map to appear.\nIf you get an Empty Dataset error choose another date',
-        position = 'top-center', progressBar = TRUE, timeOut = 9000)
+      toastr_info('Please wait a few seconds for the map to appear.', progressBar = TRUE, timeOut = 9000)
 
-      x = SNB::overnight(getOption('DB_user'), host, buffer = 2, date = as.Date(input$date)  )
+      x = SNB::overnight(buffer = 2, date = as.Date(input$date)  )
+
+      if(nrow(x) == 0)
+      stop( toastr_error('No data for the chosen date', progressBar = TRUE, timeOut = 9000) )
+      
       x[, sleeping_bird := ifelse( ! is.na(transp), 'transponded', 'unknown')]
       merge(boxesxy, x, by = 'box', all.x = TRUE)
       })
 
 
     output$overnight_show <- renderPlot({
-      x = overnight_data()
-      map_base(dat = x, color = 'sleeping_bird', size = input$font_size) +
-      ggtitle(input$date)
+        x = overnight_data()
+        map_base() + print_ann() + 
+            geom_point(dat = x, aes(x = long, y = lat, color = sleeping_bird) )+ 
+            ggtitle(input$date)
       })
 
     output$overnight_pdf <- downloadHandler(
       filename = 'sleep.pdf',
       content = function(file) {
         x = overnight_data()
-        g = map_base(dat = x, color = 'sleeping_bird', size = input$font_size) +
+        g = 
+        map_base() + print_ann() + 
+            geom_point(dat = x, aes(x = long, y = lat, color = sleeping_bird) )+ 
             ggtitle(input$date)
 
         tf <<- tempfile(fileext = 'sleep.pdf')
@@ -72,8 +78,6 @@ shinyServer(function(input, output, session) {
         dev.off()
 
         file.copy(tf, file)
-
-
       })
 
  # SNB diagnostics
