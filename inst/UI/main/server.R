@@ -11,7 +11,7 @@ shinyServer(function(input, output, session) {
     output$basemap_pdf <- downloadHandler(
       filename = 'basemap.pdf',
       content = function(file) {
-          x = map_base(size = input$font_size1)
+          x = map_base(size = input$font_size1) + print_ann()
           pdf(file = file, width = 8.5, height = 11)
           print(x)
           dev.off()
@@ -22,7 +22,8 @@ shinyServer(function(input, output, session) {
       if(length(input$date) > 0 ) { # to avoid the split moment when the date  is changed
         nd = nests(input$date) 
         if(nrow(nd) ==0)  stop( toastr_warning( paste('There are no data on', input$date ) ) )
-        map_nests(nest_state(nd)  , size = input$font_size2, title = paste('Reference:', input$date) ) %>% print
+        m = map_nests(nest_state(nd)  , size = input$font_size2, title = paste('Reference:', input$date) )  
+        print(m)
         }
       })
 
@@ -33,7 +34,7 @@ shinyServer(function(input, output, session) {
           
           nd = nests(input$date) 
           if(nrow(nd) ==0) stop( toastr_warning( paste('There are no data on', input$date ) ) )
-          m = map_nests(nest_state(nd)  , size = input$font_size2, title = paste('Reference:', input$date) )
+          m = map_nests(nest_state(nd)  , size = input$font_size2, title = paste('Reference:', input$date) ) + print_ann()
           
           pdf(file = file, width = 8.5, height = 11)
           print(m)

@@ -22,6 +22,7 @@ theme_bib2  <- function() {
   }
 
 #' @export
+#' @rdname maps
 print_ann <- function(color = 'grey',  x = Inf, y = Inf, vjust = 'bottom', hjust  = 'top', angle = 90) { 
     z = data.frame(
         x = x, 
