@@ -41,7 +41,7 @@ print_ann <- function(color = 'grey',  x = Inf, y = Inf, vjust = 'bottom', hjust
 map_empty <- function() {
 
   ggplot() +
-    geom_polygon(data = map_layers[nam == 'buildings'] , aes(x=long, y=lat, group=group), size = .2, fill = 'grey95', col = 'grey60' ) +
+    geom_polygon(data = map_layers[nam == 'buildings'] , aes(x=long, y=lat, group=group), size = .2, fill = 'grey97', col = 'grey97' ) +
     geom_path(data =  map_layers[nam == 'streets'], aes(x=long, y=lat, group=group) , size = .2, col = 'grey60' ) +
 
     coord_equal(ratio=1) +
@@ -64,7 +64,7 @@ map_base <- function(size = 2.5, family = 'Times', fontface = 'bold',printdt = F
   geom_point(data = boxesxy, color = 'grey', pch = 21, size = size,
     aes(x = long, y = lat) ) + 
 
-  geom_text(data = boxesxy,family  = family, fontface = fontface, size= size, nudge_y= -10,
+  geom_text(data = boxesxy,family  = family, fontface = fontface, size= size, nudge_x = 10,
     aes(x = long, y = lat, label = box) ) + 
 
   theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + 
@@ -72,6 +72,7 @@ map_base <- function(size = 2.5, family = 'Times', fontface = 'bold',printdt = F
 
   g  
   }
+
 
 
 #' @export
@@ -84,35 +85,35 @@ map_base <- function(size = 2.5, family = 'Times', fontface = 'bold',printdt = F
 #'  map_nests(n)  
 map_nests <- function(n, size = 2.5, family = 'Times', fontface = 'bold', title  = paste('made on:', Sys.Date() ), printdt = FALSE ) {
 
-  # legend data
-    ld =  n[, .N, by = nest_stage]
-    x = data.table( nscol = getOption('nest.stages.col'), nest_stage = getOption('nest.stages') )
-    ld = merge(ld, x, by = 'nest_stage')
-    nsc = ld$nscol ; names(nsc) =  ld$nest_stage
-    inset_legend_pos = data.frame( x = 4417640, y = 5334960)
+    legend = nest_legend(n)
+    nsc = legend$col ; names(nsc) =  legend$nest_stage
+    isp = inset_legend_pos()
 
   g = 
-    map_empty() +
+    map_empty() + theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + ggtitle(title) +
     
     geom_point(data = boxesxy, color = 'grey', pch = 21, size = size, aes(x = long, y = lat) ) + 
 
     geom_point(data=n, pch = 19, size = size, aes(x = long, y = lat, color = nest_stage) ) + 
-      scale_colour_manual(values = nsc, labels = paste0(ld$nest_stage, ' [',ld$N,']') ) +
+      scale_colour_manual(values = nsc, labels = legend$labs ) +
 
-    geom_text(data = boxesxy,family  = family, fontface = fontface, size= size, nudge_y= -10, aes(x = long, y = lat, label = box) ) +
-    geom_text( data = n, nudge_x = 10, size = size, family = family, fontface = 'italic', aes(x = long, y = lat, label = lastCheck) ) + 
+    geom_text(data = boxesxy,aes(x = long, y = lat, label = box) ,  hjust = 'left', nudge_x = 5,
+        family  = family, fontface = fontface, size= size) +
+    geom_text( data = n, aes(x = long, y = lat, label = lastCheck), hjust = 'right', nudge_x = -5,
+         size = size, family = family, fontface = 'italic') +
 
-    theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + 
-    ggtitle(title) +
-    # legend
-    geom_point(data = inset_legend_pos, aes(x = x, y = y), pch = 19, size = size*.5) + 
-    geom_text(data = inset_legend_pos, aes(x = x, y = y, label = 'box'), vjust = 'top') + 
-    geom_text(data = inset_legend_pos, aes(x = x, y = y, label = 'checked days ago'), hjust = 'left') + 
+
+    geom_point(data = isp, aes(x = x, y = y), pch = 19, size = size*.5) + 
+    geom_text(data  = isp, aes(x = x, y = y, label = 'box'), hjust = 'left', nudge_x = 5) +
+    geom_text(data  = isp, aes(x = x, y = y, label = 'checked days ago'), hjust = 'right', nudge_x = -5)  +
+    geom_text(data  = isp, aes(x = x, y = y, label = 'days till hatching or chick age'), vjust = 'bottom', nudge_y = 7)  +
+    geom_text(data  = isp, aes(x = x, y = y, label = 'eggs|chicks(?=guessed)'), vjust = 'top', nudge_y = -7)  +
+
+    
     #print ann
     if(printdt) print_ann() else NULL
-
-
-  g
+    g
+  
   }
 
 

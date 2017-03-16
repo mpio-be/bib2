@@ -43,24 +43,6 @@ nests <-   function(refdate = Sys.Date() ) {
    }
 
 
-#' nest_state
-#' @export
-#' @param x       a commented [using setattr] (with ref date) data.table returned by nests()
-#' @param ref_date reference date
-#' @examples
-#' nests() %>% nest_state()
-#' nests("2016-04-12") %>% nest_state()
-nest_state <-   function(x) {
-  x[, lastCheck := max(date_time), by = box]
-  o = x[ lastCheck == date_time , .(box,date_time, nest_stage)]
-  setorder(o, box)
-  o[, lastCheck := difftime(attr(x, 'refdate'), date_time, units = 'days') %>% as.integer]
-  merge(o, boxesxy[, .(box, long, lat)])
-
-   
- }
-
-
 
 
 
