@@ -62,11 +62,13 @@
 	],
 	"file_history":
 	[
-		"/home/mihai/ownCloud/PACKAGES/bib2/R/plot_elements.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/server.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/DESCRIPTION",
-		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/global.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/ui.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/global.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/server.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/R/plot_elements.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/DESCRIPTION",
+		"/home/mihai/ownCloud/PACKAGES/bib2/R/AAA.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/NAMESPACE",
 		"/home/mihai/ownCloud/PACKAGES/bib2/R/utils.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/R/db_queries.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/notes.md",
@@ -104,6 +106,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"goButton",
+			"font_size1",
+			"font_size2",
 			"date",
 			"nests_show",
 			"basemap",
@@ -146,7 +151,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 43.0
 	},
 	"layout":
 	{
@@ -206,16 +211,20 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "",
+		"last_filter": "sys",
 		"selected_items":
 		[
 			[
-				"",
+				"sys",
 				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
 			],
 			[
-				"sys",
-				"~/ownCloud/SYSTEMS_MANAGEMENT/system_management.sublime-project"
+				"",
+				"~/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/Egg_proteomics.sublime-project"
+			],
+			[
+				"bib",
+				"~/ownCloud/PACKAGES/bib/bib.sublime-project"
 			],
 			[
 				"egg",

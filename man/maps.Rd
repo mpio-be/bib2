@@ -3,6 +3,7 @@
 \name{maps}
 \alias{maps}
 \alias{theme_bib2}
+\alias{print_ann}
 \alias{map_empty}
 \alias{map_base}
 \alias{map_nests}
@@ -10,12 +11,16 @@
 \usage{
 theme_bib2()
 
+print_ann(color = "grey", x = Inf, y = Inf, vjust = "bottom",
+  hjust = "top", angle = 90)
+
 map_empty()
 
-map_base(size = 2.5, family = "Times", fontface = "bold")
+map_base(size = 2.5, family = "Times", fontface = "bold",
+  printdt = FALSE)
 
 map_nests(n, size = 2.5, family = "Times", fontface = "bold",
-  title = paste("made on:", Sys.Date()))
+  title = paste("made on:", Sys.Date()), printdt = FALSE)
 }
 \arguments{
 \item{n}{a data.table returned by  nests()}
@@ -23,9 +28,9 @@ map_nests(n, size = 2.5, family = "Times", fontface = "bold",
 \item{title}{goes to ggtitle (should be the reference date)}
 }
 \examples{
-map_empty() + print_ann()
-map_base(family = 'Times') + print_ann()
+map_empty() 
+map_base(family = 'Times') 
  rdate = Sys.Date() - 1
  n = nests(rdate) \%>\% nest_state( )
- map_nests(n) 
+ map_nests(n)  
 }

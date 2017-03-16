@@ -6,10 +6,8 @@ dashboardPage(skin = 'green',
   dashboardHeader(title = 'Westerholz'),
 
   dashboardSidebar(
-    sidebarMenu(
+    sidebarMenu(id = 'menubar',
       dateInput("date", "Date:", value = Sys.Date(), min = '2007-01-01', max =  Sys.Date() + 6 ),
-
-
 
       menuItem("Base map",        tabName  = "basemap_tab",  icon = icon("map-o") ),
       menuItem("Breeding map",    tabName  = "nestsmap_tab", icon = icon("map") ),
@@ -21,7 +19,14 @@ dashboardPage(skin = 'green',
         menuSubItem('SNB ',   href = '/DataEntry/DB/SNBatWESTERHOLZ/file_status', newtab = TRUE)
         ),
 
-      menuItem("SNB",  icon = icon("tablet"), tabName  = 'SNB_tab' )
+      menuItem("SNB",  icon = icon("tablet"), tabName  = 'SNB_tab' ),
+
+      conditionalPanel(
+        condition = "input.menubar == 'basemap_tab' | input.menubar == 'nestsmap_tab' | input.menubar == 'overnight_tab'",
+        sliderInput("font_size", "Text and symbol size:", min = 1, max = 7,step = 0.2, value = 4)
+        )
+
+
   )),
 
  dashboardBody(
@@ -35,8 +40,7 @@ dashboardPage(skin = 'green',
       plotOutput('basemap_show'),
 
       absolutePanel(right = "0%", top="10%", width = "20%",draggable = TRUE,style = "opacity: 0.9",
-      downloadButton('basemap_pdf',label = 'PDF'),
-       sliderInput("font_size1", "Text and symbol size:", min = 1, max = 7,step = 0.2, value = 4)
+      downloadButton('basemap_pdf',label = 'PDF')
       )),
 
     tabItem(tabName = "nestsmap_tab",
@@ -44,15 +48,15 @@ dashboardPage(skin = 'green',
       plotOutput('nestsmap_show'),
 
       absolutePanel(right = "0%", top="10%", width = "20%",draggable = TRUE,style = "opacity: 0.9",
-      downloadButton('nestsmap_pdf',label = 'PDF'),
-       sliderInput("font_size2", "Text and symbol size:", min = 1, max = 7,step = 0.2, value = 4)
-      )),
+      downloadButton('nestsmap_pdf',label = 'PDF')
+       )),
 
     tabItem(tabName = "overnight_tab",
       shiny::tags$style(type = "text/css", "#overnight_show {height: calc(100vh - 1px) !important;}"),
       plotOutput('overnight_show'),
 
       absolutePanel(right = "0%", top="10%", width = "20%",draggable = TRUE,style = "opacity: 0.9",
+        actionButton("goOvernight", "Compile dataset"),
         downloadButton('overnight_pdf',label = 'PDF')
       )),
 
