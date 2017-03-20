@@ -24,8 +24,6 @@ idbq <- function(query, year = year(Sys.Date()), db = yy2dbnam(year) , host = ge
 
     }
 
-
-
 #' @export
 is.breeding <- function(x = Sys.time()) {
     d = as.numeric(format(x, "%m"))
@@ -38,6 +36,9 @@ infuture <- function(x) {
   }
 
 
-
+#' @export
+inset_legend_pos <- function() {
+    data.frame( x = 4417700, y = 5334960)
+}
 
 

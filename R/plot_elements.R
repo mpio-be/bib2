@@ -42,7 +42,7 @@ map_empty <- function() {
 
   ggplot() +
     geom_polygon(data = map_layers[nam == 'buildings'] , aes(x=long, y=lat, group=group), size = .2, fill = 'grey97', col = 'grey97' ) +
-    geom_path(data =  map_layers[nam == 'streets'], aes(x=long, y=lat, group=group) , size = .2, col = 'grey60' ) +
+    geom_path(data =  map_layers[nam == 'streets'],         aes(x=long, y=lat, group=group) , size = .2, col = 'grey60' ) +
 
     coord_equal(ratio=1) +
     scale_x_continuous(expand = c(0,0), limits =  map_layers[nam == 'streets', c( min(long), max(long) )]  ) +
@@ -106,7 +106,7 @@ map_nests <- function(n, size = 2.5, family = 'Times', fontface = 'bold', title 
     geom_point(data = isp, aes(x = x, y = y), pch = 19, size = size*.5) + 
     geom_text(data  = isp, aes(x = x, y = y, label = 'box'), hjust = 'left', nudge_x = 5) +
     geom_text(data  = isp, aes(x = x, y = y, label = 'checked days ago'), hjust = 'right', nudge_x = -5)  +
-    geom_text(data  = isp, aes(x = x, y = y, label = 'days till hatching or chick age'), vjust = 'bottom', nudge_y = 7)  +
+    geom_text(data  = isp, aes(x = x, y = y, label = 'stage age/days till hatch/chick age'), vjust = 'bottom', nudge_y = 7)  +
     geom_text(data  = isp, aes(x = x, y = y, label = 'eggs|chicks(?=guessed)'), vjust = 'top', nudge_y = -7)  +
 
     

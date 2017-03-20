@@ -14,7 +14,7 @@ allAdults <- function() {
       rbind(a, x)
     }
 
-# TODO: select the last catch and add transponder
+
 #' adults
 #' @export
 #' @examples
@@ -39,8 +39,9 @@ nests <-   function(refdate = Sys.Date() ) {
     x = x[ as.Date(date_time) <= as.Date(refdate)  ]
     setattr(x, 'refdate', refdate)
     x
-
    }
+
+
 
 
 

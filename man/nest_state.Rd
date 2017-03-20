@@ -7,7 +7,7 @@
 nest_state(x)
 }
 \arguments{
-\item{x}{a commented [using setattr] (with ref date) data.table returned by nests()}
+\item{x}{a  data.table (commented with ref date) returned by nests()}
 
 \item{ref_date}{reference date}
 }
