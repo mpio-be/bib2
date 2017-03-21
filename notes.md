@@ -7,6 +7,6 @@
 
 # server
     require(sysmanager);install_github('valcu/bib2', auth_token = github_pat(TRUE) )
-    restart_shinyServer(readline())
+    restart_shinyServer(pwd = )
 
     
