@@ -4,6 +4,30 @@ shinyServer(function(input, output, session) {
   observe( on.exit( assign('input', reactiveValuesToList(input) , envir = .GlobalEnv)) )
   overnightdata <<- data.table(long = integer(0), lat = integer(0), sleeping_bird = character(0))
 
+ # main board
+    output$predict_first_egg <- renderPlot({
+      if(length(input$date) > 0 ) {
+
+        firstLining = nests(input$date)[nest_stage == "LIN", min(date_time)] 
+        predFirstEggData = predict_firstEgg_data(F, input$date )
+        predFirstEgg = predict_firstEgg(predFirstEggData, yday(firstLining), year(input$date) )[, firstLining := firstLining]
+        predFirstEgg = predFirstEgg[!is.na(fit)]
+        
+        reldays = predFirstEgg[, difftime(fit, input$date, units = 'days')%>% as.integer ]
+        if ( length(reldays) > 0) {
+         lword = if(reldays < 0) 'since' else 'to'
+         Title = paste( abs(reldays) , 'days', lword , 'the estimated first egg.')
+         } else Title = NULL
+
+        ggplot(predFirstEggData, aes(y = first_Egg , x = first_Lining, x) ) + 
+           geom_point() + 
+           geom_smooth(method = 'lm') + geom_text(aes(label = year_), vjust= 'bottom') + 
+           geom_pointrange(data = predFirstEgg, aes(x = firstLining, y = fit, ymin = lwr, ymax = upr ), col = 2) + 
+           ggtitle(Title)
+        }   
+
+    })
+
  # base-map
   output$basemap_show <- renderPlot({
     print( map_base(size = input$font_size) )
@@ -28,7 +52,6 @@ shinyServer(function(input, output, session) {
       }
     })
 
-
   output$nestsmap_pdf <- downloadHandler(
     filename = 'nestsmap.pdf',
     content = function(file) {
@@ -40,7 +63,7 @@ shinyServer(function(input, output, session) {
                       title = paste('Reference:', input$date), 
                       printdt = TRUE)
         
-        pdf(file = file, width = 8.5, height = 11)
+        cairo_pdf(file = file, width = 8.5, height = 11)
         print(m)
         dev.off()
     })

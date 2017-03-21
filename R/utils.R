@@ -35,10 +35,15 @@ infuture <- function(x) {
   as.Date(x) %>% as.POSIXct > Sys.time()
   }
 
-
+#' dayofyear2date
 #' @export
-inset_legend_pos <- function() {
-    data.frame( x = 4417700, y = 5334960)
-}
+#' @examples
+#' dayofyear2date(1)
+dayofyear2date <- function(dayofyear, year) {
+  if(missing(year)) year = data.table::year(Sys.Date())
+  ans = as.Date(dayofyear - 1, origin = paste(year, "01-01", sep = "-"))
+  as.POSIXct(round( as.POSIXct(ans), units = "days"))
+
+  }
 
 

@@ -26,26 +26,41 @@ adults <-   function(refdate = Sys.Date(), ...) {
                                 ON a.ID = s.ID ", ...)
     suppressWarnings( x[!is.na(gsex), sex := gsex] )
     x[, gsex := NULL]
-        x[ as.Date(datetime_) <= as.Date(refdate)  ]
+        x[ round(as.Date(datetime_))  <= round(as.Date(refdate))  ]
 
  }
+
+
+
 
 #' nests
 #' @export
 #' @examples
 #' nests()
 nests <-   function(refdate = Sys.Date() ) {
-    x = idbq("SELECT * FROM NESTS  where nest_stage is not  NULL and date_time is not NULL", year = year(refdate)  )
-    x = x[ as.Date(date_time) <= as.Date(refdate)  ]
+    x = idbq(
+        paste("SELECT * FROM NESTS  
+                    WHERE nest_stage is not  NULL and date_time is not NULL and date_time <=", shQuote(refdate))
+                , year = year(refdate)  )
     setattr(x, 'refdate', refdate)
     x
+   
+
    }
 
 
+#' phenology
+#' @export
+#' @examples
+#' phenology()
+phenology <-  function() {
 
+ x = idbq("SELECT n.year_,n.box, date_C firstCup ,date_LIN firstLining,  firstEgg,hatchDate,fledgeDate 
+    from BTatWESTERHOLZ.NESTS n left join BTatWESTERHOLZ.BREEDING b
+        on n.box = b.box and n.year_ = b.year_")
 
+ melt(x, id.vars  = c('year_', 'box'), na.rm = TRUE, value.name = 'date_')
 
-
-
-
+   
+ }
 

@@ -9,6 +9,7 @@ dashboardPage(skin = 'green',
     sidebarMenu(id = 'menubar',
       dateInput("date", "Date:", value = Sys.Date(), min = '2007-01-01', max =  Sys.Date() + 6 ),
 
+      menuItem("Main board",        tabName  = "board_tab",  icon = icon("dashboard") ),
       menuItem("Base map",        tabName  = "basemap_tab",  icon = icon("map-o") ),
       menuItem("Breeding map",    tabName  = "nestsmap_tab", icon = icon("map") ),
       menuItem("Overnight map",   tabName  = "overnight_tab", icon = icon("map") ),
@@ -34,6 +35,14 @@ dashboardPage(skin = 'green',
   useShinyjs(),
 
   tabItems(
+
+    tabItem(tabName = "board_tab",
+        box(title = 'Laying date estimation', 
+          plotOutput('predict_first_egg') 
+          )
+
+      ),
+
 
     tabItem(tabName = "basemap_tab",
       shiny::tags$style(type = "text/css", "#basemap_show {height: calc(100vh - 1px) !important;}"),

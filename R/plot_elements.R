@@ -1,120 +1,17 @@
-#' @name maps
-#' @title  maps
+#' @name plots
+#' @title  plots
 NULL
 
 #' @export
-#' @rdname maps
-theme_bib2  <- function() {
-  theme(
-    axis.line = element_blank(),
-    axis.text = element_blank(),
-    axis.ticks = element_blank(),
-    axis.title = element_blank(),
-
-    panel.background = element_blank(),
-    panel.border = element_blank(),
-    panel.grid = element_blank(),
-    panel.spacing = unit(0, "lines"),
-
-    plot.background = element_blank(),
-    plot.margin = unit(c(0,0,0,0), "in")
-    )
-  }
-
-#' @export
-#' @rdname maps
-print_ann <- function(color = 'grey',  x = Inf, y = Inf, vjust = 'bottom', hjust  = 'top', angle = 90) { 
-  z = data.frame(
-      x = x, 
-      y = y, 
-      annlabel = paste( 'Printed on',format(Sys.time(), "%a, %d %b %y %H:%M") ), 
-      color = color)
-
-    geom_text(data = z ,color = z$color,  vjust =vjust, hjust = hjust, angle =angle,
-      aes(x = x, y = y, label = annlabel)  ) 
-  }
-
-#' @export
-#' @rdname maps
+#' @rdname plots
 #' @examples
-#' map_empty() 
-map_empty <- function() {
+#'   all_phenology = phenology()
+#' plot_phenology_firstDates()
+plot_phenology_firstDates <- function(refdate = Sys.Date(), x = phenology_firstDates(refdate) ) {
 
-  ggplot() +
-    geom_polygon(data = map_layers[nam == 'buildings'] , aes(x=long, y=lat, group=group), size = .2, fill = 'grey97', col = 'grey97' ) +
-    geom_path(data =  map_layers[nam == 'streets'],         aes(x=long, y=lat, group=group) , size = .2, col = 'grey60' ) +
+  ggplot(x , aes(x = Start, fill = variable)) + 
+   geom_histogram(position="dodge") + xlim( c( as.POSIXct(refdate) , NA))+
+   theme_solarized_2(light = FALSE) +
+   scale_fill_solarized("blue")
 
-    coord_equal(ratio=1) +
-    scale_x_continuous(expand = c(0,0), limits =  map_layers[nam == 'streets', c( min(long), max(long) )]  ) +
-    scale_y_continuous(expand = c(0,0)) +
-
-    theme_bib2()
-
-  }
-
-
-#' @export
-#' @rdname maps
-#' @examples
-#' map_base(family = 'Times') 
-map_base <- function(size = 2.5, family = 'Times', fontface = 'bold',printdt = FALSE) {
-  g = 
-  map_empty() + 
-  
-  geom_point(data = boxesxy, color = 'grey', pch = 21, size = size,
-    aes(x = long, y = lat) ) + 
-
-  geom_text(data = boxesxy,family  = family, fontface = fontface, size= size, nudge_x = 10,
-    aes(x = long, y = lat, label = box) ) + 
-
-  theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + 
-  if(printdt) print_ann() else NULL
-
-  g  
-  }
-
-
-
-#' @export
-#' @rdname maps
-#' @param   n     a data.table returned by  nests()
-#' @param   title goes to ggtitle (should be the reference date)
-#' @examples
-#'  rdate = Sys.Date() - 1
-#'  n = nests(rdate) %>% nest_state( )
-#'  map_nests(n)  
-map_nests <- function(n, size = 2.5, family = 'Times', fontface = 'bold', title  = paste('made on:', Sys.Date() ), printdt = FALSE ) {
-
-    legend = nest_legend(n)
-    nsc = legend$col ; names(nsc) =  legend$nest_stage
-    isp = inset_legend_pos()
-
-  g = 
-    map_empty() + theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + ggtitle(title) +
-    
-    geom_point(data = boxesxy, color = 'grey', pch = 21, size = size, aes(x = long, y = lat) ) + 
-
-    geom_point(data=n, pch = 19, size = size, aes(x = long, y = lat, color = nest_stage) ) + 
-      scale_colour_manual(values = nsc, labels = legend$labs ) +
-
-    geom_text(data = boxesxy,aes(x = long, y = lat, label = box) ,  hjust = 'left', nudge_x = 5,
-        family  = family, fontface = fontface, size= size) +
-    geom_text( data = n, aes(x = long, y = lat, label = lastCheck), hjust = 'right', nudge_x = -5,
-         size = size, family = family, fontface = 'italic') +
-
-
-    geom_point(data = isp, aes(x = x, y = y), pch = 19, size = size*.5) + 
-    geom_text(data  = isp, aes(x = x, y = y, label = 'box'), hjust = 'left', nudge_x = 5) +
-    geom_text(data  = isp, aes(x = x, y = y, label = 'checked days ago'), hjust = 'right', nudge_x = -5)  +
-    geom_text(data  = isp, aes(x = x, y = y, label = 'stage age/days till hatch/chick age'), vjust = 'bottom', nudge_y = 7)  +
-    geom_text(data  = isp, aes(x = x, y = y, label = 'eggs|chicks(?=guessed)'), vjust = 'top', nudge_y = -7)  +
-
-    
-    #print ann
-    if(printdt) print_ann() else NULL
-    g
-  
-  }
-
-
-
+ }
