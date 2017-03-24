@@ -28,7 +28,31 @@ shinyServer(function(input, output, session) {
 
     })
 
- # base-map
+ # custom map
+  output$custom_show <- renderPlot({
+    input$update_custom_map
+    rm(css) 
+    css = isolate(eval(parse(text=input$custom_script)))
+    nd = nests(input$date) 
+
+    map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )   + customGeoms
+
+    })
+
+  output$custom_pdf <- downloadHandler(
+    filename = 'custom.pdf',
+    content = function(file) {
+        input$update_custom_map
+        rm(css)
+        css = isolate(eval(parse(text = input$custom_script)))
+
+        x = map_base(size = input$font_size, printdt = TRUE) + ggtitle(cs) 
+        pdf(file = file, width = 8.5, height = 11)
+        print(x)
+        dev.off()
+    }) 
+
+  # base-map
   output$basemap_show <- renderPlot({
     print( map_base(size = input$font_size) )
     })
@@ -47,8 +71,8 @@ shinyServer(function(input, output, session) {
     if(length(input$date) > 0 ) { # to avoid the split moment when the date  is changed
       nd = nests(input$date) 
       if(nrow(nd) ==0)  stop( toastr_warning( paste('There are no data on', input$date ) ) )
-      m = map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )  
-      print(m)
+      
+      map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )  
       }
     })
 

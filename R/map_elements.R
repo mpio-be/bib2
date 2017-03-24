@@ -26,7 +26,7 @@ theme_bib2  <- function() {
 #' @return a list of geoms defining the legend around the box
 map_legend <- function(size = 2.5, right = 'box', left = 'checked days ago', 
                         top = 'stage age/days till hatch/chick age', bottom = 'eggs|chicks(?=guessed)', 
-                        x =4417700 , y = 5334960) {
+                        x = 543 , y = 735 ) {
     isp = data.frame( x = x, y = y, right, left, top, bottom)
     list( 
     geom_point(data = isp, aes(x = x, y = y), pch = 19, size = size*.5) , 
@@ -74,7 +74,7 @@ map_empty <- function() {
 #' @rdname maps
 #' @examples
 #' map_base(family = 'Times') 
-map_base <- function(size = 2.5, family = 'Times', fontface = 'bold',printdt = FALSE) {
+map_base <- function(size = 2.5, family = 'Times', fontface = 'plain',printdt = FALSE) {
   g = 
   map_empty() + 
   
@@ -100,28 +100,29 @@ map_base <- function(size = 2.5, family = 'Times', fontface = 'bold',printdt = F
 #'  rdate = Sys.Date() - 1
 #'  n = nests(rdate) %>% nest_state( )
 #'  map_nests(n)  
-map_nests <- function(n, size = 2.5, family = 'Times', fontface = 'bold', title  = paste('made on:', Sys.Date() ), printdt = FALSE ) {
+map_nests <- function(n, size = 2.5, family = 'Times', fontface = 'plain', title  = paste('made on:', Sys.Date() ), printdt = FALSE ) {
 
     legend = nest_legend(n)
-    nsc = legend$col ; names(nsc) =  legend$nest_stage
+    printAnn = if(printdt) print_ann() else NULL
+
+    nxy = merge(n, boxesxy, by= 'box')
 
   g = 
     # frame
-    map_empty() %+% boxesxy + 
-      theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + ggtitle(title) + map_legend() + 
+    map_empty()+
+      theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + ggtitle(title) + map_legend() + printAnn +  
     # boxes
-    geom_point(color = 'grey', pch = 21, size = size, aes(x = long, y = lat)) + 
-    geom_text(hjust = 'left', nudge_x = 5, family  = family, fontface = fontface, size= size, aes(x = long, y = lat, label = box)) +
+    geom_point(data = boxesxy, color = 'grey', pch = 21, size = size, aes(x = long, y = lat) ) + 
+    geom_text( data = boxesxy, hjust = 'left', nudge_x = 5, family  = family, fontface = fontface, size = size, aes(x = long, y = lat, label = box) )+ 
+    
     # nest stage  
-    geom_point(data=n, pch = 19, size = size, aes(x = long, y = lat, color = nest_stage) ) + scale_colour_manual(values = nsc, labels = legend$labs ) +
+    geom_point(data = nxy, pch = 19, size = size, aes(x = long, y = lat, color = nest_stage), na.rm = TRUE ) +
+     scale_colour_manual(values = legend$col , labels = legend$labs ) +
     # last check
-    geom_text( data = n, aes(x = long, y = lat, label = lastCheck), hjust = 'right', nudge_x = -5,size = size, family = family, fontface = 'italic') +
+    geom_text(data = nxy, aes(x = long, y = lat, label = lastCheck), hjust = 'right', nudge_x = -5,size = size, family = family, fontface = 'italic') +
     # nest stage age
-    geom_text( data = n, aes(x = long, y = lat, label = nest_stage_age), vjust = 'bottom', nudge_y = 5,size = size, family = family, fontface = 'italic') +
-
-   
-    #print ann
-    if(printdt) print_ann() else NULL
+    geom_text(data = nxy,aes(x = long, y = lat, label = nest_stage_age), vjust = 'bottom', nudge_y = 5,size = size, family = family, fontface = 'italic') 
+    
     g
   
   }

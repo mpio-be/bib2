@@ -14,17 +14,17 @@ theme_bib2()
 
 map_legend(size = 2.5, right = "box", left = "checked days ago",
   top = "stage age/days till hatch/chick age",
-  bottom = "eggs|chicks(?=guessed)", x = 4417700, y = 5334960)
+  bottom = "eggs|chicks(?=guessed)", x = 543, y = 735)
 
 print_ann(color = "grey", x = Inf, y = Inf, vjust = "bottom",
   hjust = "top", angle = 90)
 
 map_empty()
 
-map_base(size = 2.5, family = "Times", fontface = "bold",
+map_base(size = 2.5, family = "Times", fontface = "plain",
   printdt = FALSE)
 
-map_nests(n, size = 2.5, family = "Times", fontface = "bold",
+map_nests(n, size = 2.5, family = "Times", fontface = "plain",
   title = paste("made on:", Sys.Date()), printdt = FALSE)
 }
 \arguments{

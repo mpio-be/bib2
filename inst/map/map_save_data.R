@@ -24,8 +24,23 @@
         boxesxy     = readOGR('./inst/map/src/', 'boxes', verbose = FALSE) %>% data.frame %>% data.table %>% .[, optional := NULL]
         setnames(boxesxy, c('coords.x1' , 'coords.x2') , c('long', 'lat') )
         boxesxy[, box := as.integer(box)]
-        boxesxy[, box3d := str_pad(box, 3, 'left', pad = '0') ]
 
-        save(map_layers, file = './data/map_layers.RData')
-        save(boxesxy, file = './data/boxesxy.RData')
+    # scale (box 1 = c(0,0))   
+        longmin = boxesxy[box == 1, long]
+        latmin = boxesxy[box == 1, lat]
+
+        map_layers[, long := long - longmin]
+        map_layers[, lat := lat - latmin]
+
+        boxesxy[, long := long - longmin]
+        boxesxy[, lat := lat - latmin]
+
+
+    # save 
+      save(map_layers, file = './data/map_layers.RData')
+      save(boxesxy,    file = './data/boxesxy.RData')
+
+
+
+
 

@@ -22,7 +22,6 @@ nest_state <-   function(x) {
     z[, V1 := NULL]
     o = merge(o, z, by = c('box', 'nest_stage'), all.x = TRUE)
 
-    o = merge(o, boxesxy[, .(box, long, lat)], by = 'box')
     setattr(o, 'refdate', attr(x, 'refdate') )
     o
 
