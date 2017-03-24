@@ -43,10 +43,12 @@ shinyServer(function(input, output, session) {
     filename = 'custom.pdf',
     content = function(file) {
         input$update_custom_map
-        rm(css)
-        css = isolate(eval(parse(text = input$custom_script)))
+        rm(css) 
+        css = isolate(eval(parse(text=input$custom_script)))
+        nd = nests(input$date) 
 
-        x = map_base(size = input$font_size, printdt = TRUE) + ggtitle(cs) 
+        x = map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )   + customGeoms
+
         pdf(file = file, width = 8.5, height = 11)
         print(x)
         dev.off()

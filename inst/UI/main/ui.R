@@ -24,7 +24,7 @@ dashboardPage(skin = 'green',
       menuItem("SNB",  icon = icon("tablet"), tabName  = 'SNB_tab' ),
 
       conditionalPanel(
-        condition = "input.menubar == 'basemap_tab' | input.menubar == 'nestsmap_tab' | input.menubar == 'overnight_tab'",
+        condition = "input.menubar == 'basemap_tab' | input.menubar == 'nestsmap_tab' | input.menubar == 'overnight_tab' | input.menubar == 'custom_tab'",
         sliderInput("font_size", "Text and symbol size:", min = 1, max = 7,step = 0.2, value = 4)
         )
   )),
