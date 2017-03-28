@@ -29,70 +29,71 @@ shinyServer(function(input, output, session) {
     })
 
  # custom map
-  output$custom_show <- renderPlot({
-    input$update_custom_map
-    rm(css) 
-    css = isolate(eval(parse(text=input$custom_script)))
-    nd = nests(input$date) 
+    output$custom_show <- renderPlot({
+      input$update_custom_map
+      rm(css) 
+      css = isolate(eval(parse(text=input$custom_script)))
+      nd = nests(input$date, input$nest_stages) 
 
-    map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )   + customGeoms
+      map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )   + customGeoms
 
-    })
+      })
 
-  output$custom_pdf <- downloadHandler(
-    filename = 'custom.pdf',
-    content = function(file) {
-        input$update_custom_map
-        rm(css) 
-        css = isolate(eval(parse(text=input$custom_script)))
-        nd = nests(input$date) 
+    output$custom_pdf <- downloadHandler(
+      filename = 'custom.pdf',
+      content = function(file) {
+          input$update_custom_map
+          rm(css) 
+          css = isolate(eval(parse(text=input$custom_script)))
+          nd = nests(input$date, input$nest_stages) 
 
-        x = map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )   + customGeoms
 
-        pdf(file = file, width = 8.5, height = 11)
-        print(x)
-        dev.off()
-    }) 
+          x = map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )   + customGeoms
+
+          pdf(file = file, width = 8.5, height = 11)
+          print(x)
+          dev.off()
+      }) 
 
   # base-map
-  output$basemap_show <- renderPlot({
-    print( map_base(size = input$font_size) )
-    })
+    output$basemap_show <- renderPlot({
+      print( map_base(size = input$font_size) )
+      })
 
-  output$basemap_pdf <- downloadHandler(
-    filename = 'basemap.pdf',
-    content = function(file) {
-        x = map_base(size = input$font_size, printdt = TRUE) 
-        pdf(file = file, width = 8.5, height = 11)
-        print(x)
-        dev.off()
-    })
+    output$basemap_pdf <- downloadHandler(
+      filename = 'basemap.pdf',
+      content = function(file) {
+          x = map_base(size = input$font_size, printdt = TRUE) 
+          pdf(file = file, width = 8.5, height = 11)
+          print(x)
+          dev.off()
+      })
 
  # NESTS map
-  output$nestsmap_show <- renderPlot({
-    if(length(input$date) > 0 ) { # to avoid the split moment when the date  is changed
-      nd = nests(input$date) 
-      if(nrow(nd) ==0)  stop( toastr_warning( paste('There are no data on', input$date ) ) )
-      
-      map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )  
-      }
-    })
+    output$nestsmap_show <- renderPlot({
+      if(length(input$date) > 0 ) { # to avoid the split moment when the date  is changed
+        nd = nests(input$date, input$nest_stages)  
+        if(nrow(nd) ==0)  stop( toastr_warning( paste('There are no data on', input$date ) ) )
+        
+        map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )  
+        }
+      })
 
-  output$nestsmap_pdf <- downloadHandler(
-    filename = 'nestsmap.pdf',
-    content = function(file) {
-        
-        nd = nests(input$date) 
-        if(nrow(nd) ==0) stop( toastr_warning( paste('There are no data on', input$date ) ) )
-        m = map_nests(nest_state(nd)  , 
-                      size = input$font_size, 
-                      title = paste('Reference:', input$date), 
-                      printdt = TRUE)
-        
-        cairo_pdf(file = file, width = 8.5, height = 11)
-        print(m)
-        dev.off()
-    })
+    output$nestsmap_pdf <- downloadHandler(
+      filename = 'nestsmap.pdf',
+      content = function(file) {
+          
+          nd = nests(input$date, input$nest_stages) 
+          if(nrow(nd) ==0) stop( toastr_warning( paste('There are no data on', input$date ) ) )
+          m = map_nests(nest_state(nd)  , 
+                        size = input$font_size, 
+                        title = paste('Reference:', input$date), 
+                        printdt = TRUE)
+          
+          cairo_pdf(file = file, width = 8.5, height = 11)
+          print(m)
+          dev.off()
+      })
 
  # overnight map [ observeEvent: makes the dataset to .GlobalEnv when button is pressed; reactivePoll checks if the set was changed ]
     # compile the overnight set
@@ -115,14 +116,14 @@ shinyServer(function(input, output, session) {
                     valueFunc = function() get('overnightdata', '.GlobalEnv') )
 
 
-  output$overnight_show <- renderPlot({
+    output$overnight_show <- renderPlot({
     map_base(size = input$font_size) +
           geom_point(dat = overnightdataGet() , size = input$font_size,
                     aes(x = long, y = lat, color = sleeping_bird) )+ 
           ggtitle(input$date)
     })
 
-  output$overnight_pdf <- downloadHandler(
+    output$overnight_pdf <- downloadHandler(
     filename = 'sleep.pdf',
     content = function(file) {
       g = 
@@ -146,7 +147,7 @@ shinyServer(function(input, output, session) {
 
     x1 = diagnose_pull(date=  format(input$date , "%Y.%m.%d") , shiny = TRUE)
     x2 = diagnose_pull_v2(date=  format(input$date , "%Y.%m.%d") , shiny = TRUE)
-    
+
     diag_xls <<- tempfile(fileext = '.xlsx')
 
     require(openxlsx)
@@ -155,7 +156,7 @@ shinyServer(function(input, output, session) {
     addWorksheet(wb, "v2")
     writeDataTable(wb, "v1", x = x1, rowNames= FALSE, withFilter = TRUE, tableStyle="TableStyleLight9")
     writeDataTable(wb, "v2", x = x2, rowNames= FALSE, withFilter = TRUE, tableStyle="TableStyleLight9")
-    
+
     saveWorkbook(wb,diag_xls, overwrite = TRUE)
 
 
@@ -163,18 +164,18 @@ shinyServer(function(input, output, session) {
 
     })
 
-  output$diagnose_pull_download <- downloadHandler(
-   filename = 'snb_diagnose.xlsx',
-   content = function(file) {
+    output$diagnose_pull_download <- downloadHandler(
+    filename = 'snb_diagnose.xlsx',
+    content = function(file) {
      file.copy(diag_xls, file)
 
 
-   })
+    })
 
-  shinyjs::disable("diagnose_pull_download") # disabled on page load
+    shinyjs::disable("diagnose_pull_download") # disabled on page load
 
 
-  output$snbPullDates <- renderTree({
+    output$snbPullDates <- renderTree({
     x = data_dirs(p =  getOption('path.to.raw') )
     x = split(x$dir, x$year)
     lapply(x, function(i) eval(parse(text = paste('list(', paste(shQuote(i), "=''", collapse = ','), ')' ) )) )

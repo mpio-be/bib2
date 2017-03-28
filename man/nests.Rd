@@ -4,7 +4,7 @@
 \alias{nests}
 \title{nests}
 \usage{
-nests(refdate = Sys.Date())
+nests(refdate = Sys.Date(), stages = NULL)
 }
 \description{
 nests

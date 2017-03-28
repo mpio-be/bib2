@@ -9,7 +9,7 @@
 #' nests() %>% nest_state()
 #' nests("2016-04-12") %>% nest_state()
 nest_state <-   function(x) {
-  x[, lastCheck := max(date_time), by = box]
+    x[, lastCheck := max(date_time), by = box]
   
   # last nest stage & last check
     o = x[ lastCheck == date_time , .(box,date_time, nest_stage)]

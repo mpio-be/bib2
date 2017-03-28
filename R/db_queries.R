@@ -14,7 +14,6 @@ allAdults <- function() {
       rbind(a, x)
     }
 
-
 #' adults
 #' @export
 #' @examples
@@ -30,18 +29,25 @@ adults <-   function(refdate = Sys.Date(), ...) {
 
  }
 
-
-
-
 #' nests
 #' @export
 #' @examples
-#' nests()
-nests <-   function(refdate = Sys.Date() ) {
-    x = idbq(
-        paste("SELECT * FROM NESTS  
+#' nests() %>% head
+#' nests(stages = 'LIN')
+nests <-   function(refdate = Sys.Date(), stages = NULL ) {
+    
+    if( is.null(stages) )
+    sql = paste("SELECT * FROM NESTS  
                     WHERE nest_stage is not  NULL and date_time is not NULL and date_time <=", shQuote(refdate))
-                , year = year(refdate)  )
+
+    if( !is.null(stages) )
+    sql = paste("SELECT * FROM NESTS  
+                    WHERE nest_stage in(",
+                    paste0(shQuote(stages), collapse = ',')
+                     , ") and date_time is not NULL and date_time <=", shQuote(refdate))
+
+    x = idbq(sql, year = year(refdate)  )
+
     setattr(x, 'refdate', refdate)
     x
    

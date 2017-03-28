@@ -5,7 +5,6 @@
 #' @examples
 #' F = phenology()
 #' predict_firstEgg_data(F)
-
 predict_firstEgg_data <- function(F, refdate = Sys.Date() ) {
     refyear = year(refdate)
 
@@ -31,13 +30,12 @@ predict_firstEgg_data <- function(F, refdate = Sys.Date() ) {
 #'  geom_smooth(method = 'lm') + geom_text(aes(label = year_), vjust= 'bottom') + 
 #'  geom_pointrange(data = predFirstEgg, aes(x = date_, y = fit, ymin = lwr, ymax = upr ), col = 2) + 
 #'  ggtitle(paste(predFirstEgg[, difftime(fit, date_, units = 'days')%>% round], 'days till first egg.'))
-
 predict_firstEgg <- function(dat, v, refyear = year(Sys.Date()) ) {
-        
-     v = data.frame(firstLining = v) 
+
+    v = data.frame(firstLining = v) 
 
     if(missing(v))
-        v = dat[, .(firstLining)]
+    v = dat[, .(firstLining)]
 
     fm = lm(firstEgg ~ firstLining , dat)
 
@@ -45,4 +43,15 @@ predict_firstEgg <- function(dat, v, refyear = year(Sys.Date()) ) {
     o[, ":=" (fit = dayofyear2date(fit, refyear), lwr= dayofyear2date(lwr, refyear),  upr = dayofyear2date(upr, refyear) )  ]
     o
 
+    }
+
+
+
+#' @export
+#' @examples
+#' # predict_hatchday_data
+predict_hatchday_data <- function(F, refdate = Sys.Date() ) {
+    refyear = year(refdate)
+
   }
+
