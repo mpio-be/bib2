@@ -33,9 +33,9 @@ shinyServer(function(input, output, session) {
       input$update_custom_map
       rm(css) 
       css = isolate(eval(parse(text=input$custom_script)))
-      nd = nests(input$date, input$nest_stages) 
+      nd = nests(input$date) 
 
-      map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )   + customGeoms
+      map_nests(nest_state(nd, input$nest_stages)  , size = input$font_size, title = paste('Reference:', input$date) )   + customGeoms
 
       })
 
@@ -45,10 +45,10 @@ shinyServer(function(input, output, session) {
           input$update_custom_map
           rm(css) 
           css = isolate(eval(parse(text=input$custom_script)))
-          nd = nests(input$date, input$nest_stages) 
+          nd = nests(input$date) 
 
 
-          x = map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )   + customGeoms
+          x = map_nests(nest_state(nd, input$nest_stages)  , size = input$font_size, title = paste('Reference:', input$date) )   + customGeoms
 
           pdf(file = file, width = 8.5, height = 11)
           print(x)
@@ -72,10 +72,10 @@ shinyServer(function(input, output, session) {
  # NESTS map
     output$nestsmap_show <- renderPlot({
       if(length(input$date) > 0 ) { # to avoid the split moment when the date  is changed
-        nd = nests(input$date, input$nest_stages)  
+        nd = nests(input$date)  
         if(nrow(nd) ==0)  stop( toastr_warning( paste('There are no data on', input$date ) ) )
         
-        map_nests(nest_state(nd)  , size = input$font_size, title = paste('Reference:', input$date) )  
+        map_nests(nest_state(nd, input$nest_stages)  , size = input$font_size, title = paste('Reference:', input$date) )  
         }
       })
 
@@ -83,9 +83,9 @@ shinyServer(function(input, output, session) {
       filename = 'nestsmap.pdf',
       content = function(file) {
           
-          nd = nests(input$date, input$nest_stages) 
+          nd = nests(input$date) 
           if(nrow(nd) ==0) stop( toastr_warning( paste('There are no data on', input$date ) ) )
-          m = map_nests(nest_state(nd)  , 
+          m = map_nests(nest_state(nd, input$nest_stages)  , 
                         size = input$font_size, 
                         title = paste('Reference:', input$date), 
                         printdt = TRUE)
