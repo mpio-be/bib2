@@ -121,7 +121,11 @@ map_nests <- function(n, size = 2.5, family = 'Times', fontface = 'plain', title
     # last check
     geom_text(data = nxy, aes(x = long, y = lat, label = lastCheck), hjust = 'right', nudge_x = -5,size = size, family = family, fontface = 'italic') +
     # nest stage age
-    geom_text(data = nxy,aes(x = long, y = lat, label = nest_stage_age), vjust = 'bottom', nudge_y = 5,size = size, family = family, fontface = 'italic') 
+    geom_text(data = nxy,aes(x = long, y = lat, label = nest_stage_age), vjust = 'bottom', nudge_y = 5,size = size, family = family, fontface = 'italic')+
+    # clutch | chicks
+    geom_text(data =  nxy[!is.na(ECK)] ,aes(x = long, y = lat, label = ECK), vjust = 'top', nudge_y = -5,size = size, family = family) 
+
+     
     
     g
   

@@ -8,7 +8,7 @@
 #' @examples
 #' nests() %>% nest_state()
 #' nests("2016-04-12") %>% nest_state()
-nest_state <-   function(x) {
+nest_state <-   function(x, nest_stages = NULL) {
     x[, lastCheck := max(date_time), by = box]
   
   # last nest stage & last check
@@ -21,6 +21,16 @@ nest_state <-   function(x) {
     z[, nest_stage_age := difftime(attr(x, 'refdate'), V1, units = 'days') %>% as.integer   ]
     z[, V1 := NULL]
     o = merge(o, z, by = c('box', 'nest_stage'), all.x = TRUE)
+
+  # eggs chicks  # TODO: add chicks
+    eck =  x[, .(ECK = sum(eggs, na.rm = TRUE) ), by = .(nest_stage, box)]
+    eck[ECK == 0, ECK := NA]  
+    o = merge(o, eck, by = c('box', 'nest_stage'), all.x = TRUE)
+
+  # subset by nest_stages
+    if(!is.null(nest_stages))
+     o = o[nest_stage %in% nest_stages]
+
 
     setattr(o, 'refdate', attr(x, 'refdate') )
     o
@@ -36,15 +46,11 @@ nest_state <-   function(x) {
 #' n = nests(Sys.Date() ) %>% nest_state()
 #' nest_legend(n)
 nest_legend <- function(n) {
-    x = data.table( col = getOption('nest.stages.col'), nest_stage = getOption('nest.stages') )
-    ld =  n[, .N, by = nest_stage]
-    ld = merge(ld, x, by = 'nest_stage')
-    ld[, labs := paste0(nest_stage, ' [',N,']')]
-    ld
-   }
-
-
-
-
+  x = data.table( col = getOption('nest.stages.col'), nest_stage = getOption('nest.stages') )
+  ld =  n[, .N, by = nest_stage]
+  ld = merge(ld, x, by = 'nest_stage')
+  ld[, labs := paste0(nest_stage, ' [',N,']')]
+  ld
+  }
 
 

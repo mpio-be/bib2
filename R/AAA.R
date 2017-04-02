@@ -1,8 +1,8 @@
 
 
 #' @title 		Breding BIrd Planer (v2)
-#' @description 	Mapping and field work organiser
-#' @docType 		package
+#' @description Mapping and field work organiser
+#' @docType 	package
 #' @name 		bib2
 #' @usage
 #' The user interface is installed at in at http://scidb.mpio.orn.mpg.de
@@ -13,6 +13,7 @@
     packageStartupMessage(paste('This is', pkgname, dcf[, 'Version'] ))
 
     options(host.bib2      = '127.0.0.1')
+    # options(host.bib2      = '192.168.88.42') # local mysql server on VM
     options(user.bib2      = 'bt')
     options(nest.stages   
         = c( 'U',         'LT' ,   'R' ,     'B'  ,    'BC' ,    'C' ,    'LIN'  ,    'E'  ,   'WE',    'Y',      'NOTA',  'WSP')  )
