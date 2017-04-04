@@ -13,7 +13,7 @@
     packageStartupMessage(paste('This is', pkgname, dcf[, 'Version'] ))
 
     options(host.bib2      = '127.0.0.1')
-    # options(host.bib2      = '192.168.88.42') # local mysql server on VM
+    # options(host.bib2      = '192.168.88.199') # local mysql server on VM
     options(user.bib2      = 'bt')
     options(nest.stages   
         = c( 'U',         'LT' ,   'R' ,     'B'  ,    'BC' ,    'C' ,    'LIN'  ,    'E'  ,   'WE',    'Y',      'NOTA',  'WSP')  )

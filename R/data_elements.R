@@ -23,7 +23,7 @@ nest_state <-   function(x, nest_stages = NULL) {
     o = merge(o, z, by = c('box', 'nest_stage'), all.x = TRUE)
 
   # eggs chicks  # TODO: add chicks
-    eck =  x[, .(ECK = sum(eggs, na.rm = TRUE) ), by = .(nest_stage, box)]
+    eck =  x[, .(ECK = max(eggs, na.rm = TRUE) ), by = .(nest_stage, box)]
     eck[ECK == 0, ECK := NA]  
     o = merge(o, eck, by = c('box', 'nest_stage'), all.x = TRUE)
 
