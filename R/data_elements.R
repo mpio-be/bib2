@@ -24,7 +24,7 @@ nest_state <-   function(x, nest_stages = NULL) {
 
   # eggs chicks  # TODO: add chicks
     eck =  x[, .(ECK = max(eggs, na.rm = TRUE) ), by = .(nest_stage, box)]
-    eck[ECK == 0, ECK := NA]  
+    eck[ECK == -Inf, ECK := NA]  
     o = merge(o, eck, by = c('box', 'nest_stage'), all.x = TRUE)
 
   # subset by nest_stages

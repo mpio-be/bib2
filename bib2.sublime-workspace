@@ -278,16 +278,16 @@
 	"select_project":
 	{
 		"height": 750.0,
-		"last_filter": "sys",
+		"last_filter": "",
 		"selected_items":
 		[
 			[
-				"sys",
-				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
+				"",
+				"D:\\GIT\\sysmanager\\sysmanager.sublime-project"
 			],
 			[
-				"",
-				"~/ownCloud/DATABASE_MANAGEMENT/scidb.mpio.orn.mpg.de/scidb_management.sublime-project"
+				"sys",
+				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
 			],
 			[
 				"bib",
