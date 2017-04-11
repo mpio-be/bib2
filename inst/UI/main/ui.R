@@ -11,7 +11,8 @@ dashboardPage(skin = 'green',
 
       menuItem("Main board",      tabName  = "board_tab",     icon = icon("dashboard") ),
       menuItem("Base map",        tabName  = "basemap_tab",   icon = icon("map-o") ),
-      menuItem("Breeding map",    tabName  = "nestsmap_tab",  icon = icon("map") ),
+      menuItem("Nests map",       tabName  = "nestsmap_tab",  icon = icon("map") ),
+      menuItem("Nests data",      tabName  = "nestsdata_tab", icon = icon("binoculars") ),
       menuItem("Overnight map",   tabName  = "overnight_tab", icon = icon("map") ),
       menuItem("Custom map",      tabName  = "custom_tab",    icon = icon("wrench") ),
 
@@ -27,15 +28,14 @@ dashboardPage(skin = 'green',
         condition = "input.menubar == 'basemap_tab' | input.menubar == 'nestsmap_tab' | input.menubar == 'overnight_tab' | input.menubar == 'custom_tab'",
         sliderInput("font_size", "Text and symbol size:", min = 1, max = 7,step = 0.2, value = 4)
         ),
-  
       conditionalPanel(
         condition = "input.menubar == 'nestsmap_tab' | input.menubar == 'custom_tab'",
         selectInput("nest_stages", "Nest stages:" , choices = getOption('nest.stages'), selected = getOption('nest.stages'), multiple = TRUE )
+        ),
+      conditionalPanel(
+        condition = "input.menubar == 'nestsdata_tab'",
+        selectInput("box_number", "Box number:" , choices = 1:277 )
         )
-  
-
-
-
 
   )),
 
@@ -47,9 +47,7 @@ dashboardPage(skin = 'green',
     tabItem(tabName = "board_tab",
         box(title = 'Laying date estimation', 
           plotOutput('predict_first_egg') 
-          )
-
-      ),
+          ) ),
 
     tabItem(tabName = "custom_tab",
       shiny::tags$style(type = "text/css", "#custom_script {height: calc(81vh - 1px) !important;}"),
@@ -78,6 +76,10 @@ dashboardPage(skin = 'green',
       shiny::tags$style(type = "text/css", "#nestsmap_show {height: calc(93vh - 1px) !important;}"),
       plotOutput('nestsmap_show'),
       absDownloadButton('nestsmap_pdf')
+      ),    
+
+    tabItem(tabName = "nestsdata_tab",
+      dataTableOutput('nestsdata_show')
       ),
 
     tabItem(tabName = "overnight_tab",
@@ -88,7 +90,6 @@ dashboardPage(skin = 'green',
         actionButton("goOvernight", "Compile dataset"),
         downloadButton('overnight_pdf',label = 'Download PDF')
       )),
-
 
     tabItem(tabName = "SNB_tab",
       shinydashboard::box(title = "SNB txt files diagnostics", solidHeader = TRUE,

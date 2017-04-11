@@ -10,5 +10,6 @@ nests(refdate = Sys.Date(), stages = NULL)
 nests
 }
 \examples{
-nests()
+nests() \%>\% head
+nests(stages = 'LIN')
 }

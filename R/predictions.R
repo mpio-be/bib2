@@ -1,22 +1,6 @@
 
 
 
-#' @export
-#' @examples
-#' F = phenology()
-#' predict_firstEgg_data(F)
-predict_firstEgg_data <- function(F, refdate = Sys.Date() ) {
-    refyear = year(refdate)
-
-    z = F[, .( yday(min(date_)) ), by = .(year_, variable)]
-
-
-    z = dcast(z, year_ ~ variable, value.var = "V1")
-    z[, first_Lining := dayofyear2date(firstLining, refyear)  ]
-    z[, first_Egg := dayofyear2date(firstEgg, refyear)  ]
-    z
-  }
-
 #' predict_firstEgg
 #' @export
 #' @examples
@@ -49,8 +33,31 @@ predict_firstEgg <- function(dat, v, refyear = year(Sys.Date()) ) {
 
 #' @export
 #' @examples
-#' # predict_hatchday_data
-predict_hatchday_data <- function(F, refdate = Sys.Date() ) {
+#' x = Breeding()
+#' 
+predict_hatchday_model <- function(x) {
+ 
+
+  }
+
+
+#' @export
+#' @examples
+#' n = nests() 
+#' # predict_hatchday()
+predict_hatchday <- function() {
+    refyear = year(refdate)
+
+  }
+
+
+
+
+
+#' @export
+#' @examples
+#'
+predict_hatchday_test <- function() {
     refyear = year(refdate)
 
   }

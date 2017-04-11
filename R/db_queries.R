@@ -2,6 +2,17 @@
 #' allAdults
 #' @export
 #' @examples
+#' x = Breeding()
+Breeding <- function() {
+    idbq("select year_,box,IDfemale,firstEgg,clutch, laying_gap, hatchDate FROM BTatWESTERHOLZ.BREEDING 
+    WHERE secondClutch IS NULL and firstEgg is not NULL and hatchDate is not NULL and laying_gap < 4
+        order by year_, firstEgg")
+    }
+
+
+#' allAdults
+#' @export
+#' @examples
 #' x = allAdults()
 allAdults <- function() {
     a = idbq("SELECT a.ID, capture_date_time datetime_, age, weight, s.sex FROM BTatWESTERHOLZ.ADULTS a 
