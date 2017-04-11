@@ -4,7 +4,7 @@
 \alias{nest_state}
 \title{nest_state}
 \usage{
-nest_state(x)
+nest_state(x, nest_stages = NULL)
 }
 \arguments{
 \item{x}{a  data.table (commented with ref date) returned by nests()}

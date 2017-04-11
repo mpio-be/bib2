@@ -2,9 +2,12 @@
 % Please edit documentation in R/predictions.R
 \name{predict_firstEgg}
 \alias{predict_firstEgg}
+\alias{predict_firstEgg_data}
 \title{predict_firstEgg}
 \usage{
 predict_firstEgg(dat, v, refyear = year(Sys.Date()))
+
+predict_firstEgg_data(F, refdate = Sys.Date())
 }
 \description{
 predict_firstEgg
