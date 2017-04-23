@@ -6,18 +6,18 @@ NULL
 #' @rdname maps
 theme_bib2  <- function() {
   theme(
-    axis.line = element_blank(),
-    axis.text = element_blank(),
-    axis.ticks = element_blank(),
-    axis.title = element_blank(),
+    axis.line        = element_blank(),
+    axis.text        = element_blank(),
+    axis.ticks       = element_blank(),
+    axis.title       = element_blank(),
 
     panel.background = element_blank(),
-    panel.border = element_blank(),
-    panel.grid = element_blank(),
-    panel.spacing = unit(0, "lines"),
+    panel.border     = element_blank(),
+    panel.grid       = element_blank(),
+    panel.spacing    = unit(0, "lines"),
 
-    plot.background = element_blank(),
-    plot.margin = unit(c(0,0,0,0), "in")
+    plot.background  = element_blank(),
+    plot.margin      = unit(c(0,0,0,0), "in")
     )
   }
 

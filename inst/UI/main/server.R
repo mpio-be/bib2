@@ -102,7 +102,6 @@ shinyServer(function(input, output, session) {
         o[,which(unlist(lapply(o, function(x)!all(is.na(x))))),with=FALSE]
         }, options = list(scrollX = TRUE) )
 
-
  # overnight map [ observeEvent: makes the dataset to .GlobalEnv when button is pressed; reactivePoll checks if the set was changed ]
     # compile the overnight set
     observeEvent(input$goOvernight, {
