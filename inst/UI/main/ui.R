@@ -18,9 +18,9 @@ dashboardPage(skin = 'green',
       menuItem("Custom map",        tabName  = "custom_tab",    icon = icon("wrench") ),
 
       menuItem("Data entry",  icon = icon("table"),
-        menuSubItem('ADULTS', href = '/DataEntry/DB/BTatWESTERHOLZ/ADULTS', newtab = TRUE),
-        menuSubItem('NESTS',  href = '/DataEntry/DB/BTatWESTERHOLZ/NESTS', newtab = TRUE),
-        menuSubItem('SNB ',   href = '/DataEntry/DB/SNBatWESTERHOLZ/file_status', newtab = TRUE)
+        menuSubItem('ADULTS', href = '/bib2/DataEntry/BTatWESTERHOLZ/ADULTS', newtab = TRUE),
+        menuSubItem('NESTS',  href = '/bib2/DataEntry/BTatWESTERHOLZ/NESTS', newtab = TRUE),
+        menuSubItem('SNB ',   href = '/bib2/DataEntry/SNBatWESTERHOLZ/file_status', newtab = TRUE)
         ),
 
       menuItem("SNB",  icon = icon("tablet"), tabName  = 'SNB_tab' ),
