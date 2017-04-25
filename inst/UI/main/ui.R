@@ -9,12 +9,13 @@ dashboardPage(skin = 'green',
     sidebarMenu(id = 'menubar',
       dateInput("date", "Date:", value = Sys.Date(), min = '2007-01-01', max =  Sys.Date() + 6 ),
 
-      menuItem("Main board",      tabName  = "board_tab",     icon = icon("dashboard") ),
-      menuItem("Base map",        tabName  = "basemap_tab",   icon = icon("map-o") ),
-      menuItem("Nests map",       tabName  = "nestsmap_tab",  icon = icon("map") ),
-      menuItem("Nests data",      tabName  = "nestsdata_tab", icon = icon("binoculars") ),
-      menuItem("Overnight map",   tabName  = "overnight_tab", icon = icon("map") ),
-      menuItem("Custom map",      tabName  = "custom_tab",    icon = icon("wrench") ),
+      menuItem("Main board",        tabName  = "board_tab",     icon = icon("dashboard") ),
+      menuItem("Base map",          tabName  = "basemap_tab",   icon = icon("map-o") ),
+      menuItem("Nests map",         tabName  = "nestsmap_tab",  icon = icon("map") ),
+      menuItem("Nests data viewer", tabName  = "nestsdata_tab", icon = icon("binoculars") ),
+      menuItem("Adult data viewer", tabName  = "adultdata_tab", icon = icon("binoculars") ),
+      menuItem("Overnight map",     tabName  = "overnight_tab", icon = icon("map") ),
+      menuItem("Custom map",        tabName  = "custom_tab",    icon = icon("wrench") ),
 
       menuItem("Data entry",  icon = icon("table"),
         menuSubItem('ADULTS', href = '/DataEntry/DB/BTatWESTERHOLZ/ADULTS', newtab = TRUE),
@@ -80,6 +81,10 @@ dashboardPage(skin = 'green',
 
     tabItem(tabName = "nestsdata_tab",
       dataTableOutput('nestsdata_show')
+      ),    
+
+    tabItem(tabName = "adultdata_tab",
+      dataTableOutput('adultdata_show')
       ),
 
     tabItem(tabName = "overnight_tab",

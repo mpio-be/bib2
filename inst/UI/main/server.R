@@ -97,10 +97,18 @@ shinyServer(function(input, output, session) {
 
  # NESTS data
     output$nestsdata_show <- renderDataTable({
-        o = nests(input$date)[box == input$box_number]
+        o = nests(input$date)
         setorder(o, date_time)
         o[,which(unlist(lapply(o, function(x)!all(is.na(x))))),with=FALSE]
         }, options = list(scrollX = TRUE) )
+
+ # all ADULT data
+    output$adultdata_show <- renderDataTable({
+        a = allAdults()
+        a[, Year := year(datetime_)]
+        }, options = list(scrollX = TRUE) )
+
+
 
  # overnight map [ observeEvent: makes the dataset to .GlobalEnv when button is pressed; reactivePoll checks if the set was changed ]
     # compile the overnight set
