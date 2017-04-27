@@ -31,13 +31,21 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 400.0,
-		"last_filter": "ins",
+		"height": 344.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
+				"unico",
+				"UnicodeMath: Insert"
+			],
+			[
 				"ins",
 				"Package Control: Install Package"
+			],
+			[
+				"uni",
+				"Unicode Character Insert: Show Panel"
 			],
 			[
 				"lowe",
@@ -92,9 +100,10 @@
 	],
 	"file_history":
 	[
-		"/home/mihai/ownCloud/PACKAGES/bib2/R/data_elements.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/server.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/DESCRIPTION",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/ui.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/server.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/R/data_elements.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/global.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/R/map_elements.R",
 		"/home/mihai/ownCloud/NOTES/current_notes.todo",
@@ -298,7 +307,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 290.0,
+	"side_bar_width": 243.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

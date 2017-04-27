@@ -74,8 +74,10 @@ dashboardPage(skin = 'green',
         selectInput("nest_stages", "Nest stages:" , getOption('nest.stages'), getOption('nest.stages'), multiple = TRUE ),
         selectInput("stage_age_type", "Stages selection" , c('Equal with', "Greater or equal than"), selected = "Greater or equal than"),
         
-        conditionalPanel(condition = "input.stage_age_type=='Equal with'",  numericInput("stage_age_equal", "Stage age = ", 4 , min = 1) ), 
-        conditionalPanel(condition = "input.stage_age_type=='Greater or equal than'",numericInput("stage_age_greater", "Stage age >", 0 , min = 0) ), 
+        conditionalPanel(condition = "input.stage_age_type=='Equal with'",  
+          selectInput("stage_age_equal", "Stage age = ",1:60, multiple = TRUE) ), 
+        conditionalPanel(condition = "input.stage_age_type=='Greater or equal than'",
+          numericInput("stage_age_greater", "Stage age ⋝", 0 , min = 0) ), 
 
         downloadButton('nestsmap_pdf',label = 'Download PDF')
         )   

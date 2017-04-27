@@ -76,7 +76,7 @@ shinyServer(function(input, output, session) {
         if(nrow(nd) ==0)  stop( toastr_warning( paste('There are no data on', input$date ) ) )
  
         if( input$stage_age_type == 'Equal with' )
-          N = nest_state(nd, input$nest_stages)[nest_stage_age == input$stage_age_equal]
+          N = nest_state(nd, input$nest_stages)[nest_stage_age %in% (input$stage_age_equal %>% as.numeric)]
         if( input$stage_age_type == 'Greater or equal than' )
           N = nest_state(nd, input$nest_stages)[nest_stage_age >= input$stage_age_greater]
 
