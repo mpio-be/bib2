@@ -28,14 +28,6 @@ dashboardPage(skin = 'green',
       conditionalPanel(
         condition = "input.menubar == 'basemap_tab' | input.menubar == 'nestsmap_tab' | input.menubar == 'overnight_tab' | input.menubar == 'custom_tab'",
         sliderInput("font_size", "Text and symbol size:", min = 1, max = 7,step = 0.2, value = 4)
-        ),
-      conditionalPanel(
-        condition = "input.menubar == 'nestsmap_tab' | input.menubar == 'custom_tab'",
-        selectInput("nest_stages", "Nest stages:" , choices = getOption('nest.stages'), selected = getOption('nest.stages'), multiple = TRUE )
-        ),
-      conditionalPanel(
-        condition = "input.menubar == 'nestsdata_tab'",
-        selectInput("box_number", "Box number:" , choices = 1:277 )
         )
 
   )),
@@ -54,7 +46,7 @@ dashboardPage(skin = 'green',
       shiny::tags$style(type = "text/css", "#custom_script {height: calc(81vh - 1px) !important;}"),
       shiny::tags$style(type = "text/css", "#custom_show {height: calc(85vh - 1px) !important;}"),
       fluidRow( 
-        shinydashboard::box(width = 4, 
+        Box(width = 4, 
           actionButton("update_custom_map", "Update map"), 
 
           aceEditor("custom_script",theme = 'merbivore' , mode = "r", wordWrap = TRUE, 
@@ -62,7 +54,7 @@ dashboardPage(skin = 'green',
 
            ) , 
 
-        shinydashboard::box(width = 8,
+        Box(width = 8,
           absDownloadButton('custom_pdf'),
           plotOutput('custom_show') )
       )),
@@ -75,10 +67,20 @@ dashboardPage(skin = 'green',
 
     tabItem(tabName = "nestsmap_tab",
       shiny::tags$style(type = "text/css", "#nestsmap_show {height: calc(93vh - 1px) !important;}"),
-      plotOutput('nestsmap_show'),
-      absDownloadButton('nestsmap_pdf')
-      ),    
+      
+      fluidRow( 
+        Box(width = 10, plotOutput('nestsmap_show')  ),
+        Box(width = 2,
+        selectInput("nest_stages", "Nest stages:" , getOption('nest.stages'), getOption('nest.stages'), multiple = TRUE ),
+        selectInput("stage_age_type", "Stages selection" , c('Equal with', "Greater or equal than"), selected = "Greater or equal than"),
+        
+        conditionalPanel(condition = "input.stage_age_type=='Equal with'",  numericInput("stage_age_equal", "Stage age = ", 4 , min = 1) ), 
+        conditionalPanel(condition = "input.stage_age_type=='Greater or equal than'",numericInput("stage_age_greater", "Stage age >", 0 , min = 0) ), 
 
+        downloadButton('nestsmap_pdf',label = 'Download PDF')
+        )   
+      )), 
+        
     tabItem(tabName = "nestsdata_tab",
       dataTableOutput('nestsdata_show')
       ),    
@@ -97,12 +99,12 @@ dashboardPage(skin = 'green',
       )),
 
     tabItem(tabName = "SNB_tab",
-      shinydashboard::box(title = "SNB txt files diagnostics", solidHeader = TRUE,
+      Box(title = "SNB txt files diagnostics", solidHeader = TRUE,
         actionButton("diagnose_pull_compile", "Compile diagnostic"),
         downloadButton('diagnose_pull_download',label =  'Download xlsx')
         ),
 
-      shinydashboard::box(title = "Pull dates", solidHeader = TRUE,
+      Box(title = "Pull dates", solidHeader = TRUE,
         shinyTree('snbPullDates')
         )
      )

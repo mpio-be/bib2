@@ -74,24 +74,24 @@ shinyServer(function(input, output, session) {
       if(length(input$date) > 0 ) { # to avoid the split moment when the date  is changed
         nd = nests(input$date)  
         if(nrow(nd) ==0)  stop( toastr_warning( paste('There are no data on', input$date ) ) )
-        
-        map_nests(nest_state(nd, input$nest_stages)  , size = input$font_size, title = paste('Reference:', input$date) )  
+ 
+        if( input$stage_age_type == 'Equal with' )
+          N = nest_state(nd, input$nest_stages)[nest_stage_age == input$stage_age_equal]
+        if( input$stage_age_type == 'Greater or equal than' )
+          N = nest_state(nd, input$nest_stages)[nest_stage_age >= input$stage_age_greater]
+
+        m <<- map_nests(N , size = input$font_size, title = paste('Reference:', input$date) )  
+        m
         }
+      
       })
 
     output$nestsmap_pdf <- downloadHandler(
       filename = 'nestsmap.pdf',
       content = function(file) {
           
-          nd = nests(input$date) 
-          if(nrow(nd) ==0) stop( toastr_warning( paste('There are no data on', input$date ) ) )
-          m = map_nests(nest_state(nd, input$nest_stages)  , 
-                        size = input$font_size, 
-                        title = paste('Reference:', input$date), 
-                        printdt = TRUE)
-          
           cairo_pdf(file = file, width = 8.5, height = 11)
-          print(m)
+          print(m + print_ann() )
           dev.off()
       })
 

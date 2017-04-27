@@ -25,7 +25,7 @@ theme_bib2  <- function() {
 #' @rdname maps
 #' @return a list of geoms defining the legend around the box
 map_legend <- function(size = 2.5, right = 'box', left = 'checked days ago', 
-                        top = 'stage age/days till hatch/chick age', bottom = 'eggs|chicks(?=guessed)', 
+                        top = 'stage age', bottom = 'eggs|chicks', 
                         x = 543 , y = 735 ) {
     isp = data.frame( x = x, y = y, right, left, top, bottom)
     list( 
@@ -100,17 +100,17 @@ map_base <- function(size = 2.5, family = 'Times', fontface = 'plain',printdt = 
 #'  rdate = Sys.Date() - 1
 #'  n = nests(rdate) %>% nest_state( )
 #'  map_nests(n)  
-map_nests <- function(n, size = 2.5, family = 'Times', fontface = 'plain', title  = paste('made on:', Sys.Date() ), printdt = FALSE ) {
+#'  map_nests(n) + print_ann() 
+map_nests <- function(n, size = 2.5, family = 'Times', fontface = 'plain', title  = paste('made on:', Sys.Date() ) )  {
 
     legend = nest_legend(n)
-    printAnn = if(printdt) print_ann() else NULL
 
     nxy = merge(n, boxesxy, by= 'box')
 
   g = 
     # frame
     map_empty()+
-      theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + ggtitle(title) + map_legend() + printAnn +  
+      theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + ggtitle(title) + map_legend() + 
     # boxes
     geom_point(data = boxesxy, color = 'grey', pch = 21, size = size, aes(x = long, y = lat) ) + 
     geom_text( data = boxesxy, hjust = 'left', nudge_x = 5, family  = family, fontface = fontface, size = size, aes(x = long, y = lat, label = box) )+ 

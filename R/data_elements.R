@@ -18,14 +18,26 @@ nest_state <-   function(x, nest_stages = NULL) {
     
   # nest_stage age
     z = x[, min(date_time), by = .(nest_stage, box)]
-    z[, nest_stage_age := difftime(attr(x, 'refdate'), V1, units = 'days') %>% as.integer   ]
+    z[, nest_stage_age := (difftime(attr(x, 'refdate'), V1, units = 'days') %>% as.integer )+1  ]
     z[, V1 := NULL]
     o = merge(o, z, by = c('box', 'nest_stage'), all.x = TRUE)
 
-  # eggs chicks  # TODO: add chicks
-    eck =  x[, .(ECK = max(eggs, na.rm = TRUE) ), by = .(nest_stage, box)]
-    eck[ECK == -Inf, ECK := NA]  
-    o = merge(o, eck, by = c('box', 'nest_stage'), all.x = TRUE)
+  # eggs chicks  
+    egck =  x[, .(maxegg = Max(eggs), maxck = Max(chicks)  ), by = box]
+    out =  x[, .(ce = sum(collect_eggs, na.rm=TRUE), 
+                 de = sum(dead_eggs, na.rm=TRUE),
+                 dc = sum(dead_chicks, na.rm=TRUE)
+              ), by = box]
+    z = merge(egck, out, by = 'box' )
+    z = z[, ':=' (egg = maxegg-ce-de-maxck, ckc = maxck - dc)]
+    z = z[ !is.na(egg) | !is.na(ckc), ECK := Paste( c(egg, ckc) ), by = box][, .(box, ECK)]
+
+
+    o = merge(o, z, by = 'box', all.x = TRUE)
+
+
+
+
 
   # subset by nest_stages
     if(!is.null(nest_stages))

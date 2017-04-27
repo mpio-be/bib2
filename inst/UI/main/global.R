@@ -1,5 +1,5 @@
 
-# shiny::runApp('inst/UI/main')
+# shiny::runApp('inst/UI/main', launch.browser = TRUE)
 
 # settings
     sapply(c('sdb', 'sysmanager', 'bib2','SNB', 'knitr', 'ggplot2', 'ggthemes','digest',

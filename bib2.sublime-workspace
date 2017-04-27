@@ -3,6 +3,22 @@
 	{
 		"selected_items":
 		[
+			[
+				"prot",
+				"prot_function"
+			],
+			[
+				"temp",
+				"tempfile\t{base}"
+			],
+			[
+				"nest",
+				"nests"
+			],
+			[
+				"geom_",
+				"geom_point"
+			]
 		]
 	},
 	"buffers":
@@ -15,7 +31,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 400.0,
 		"last_filter": "ins",
 		"selected_items":
 		[
@@ -24,11 +40,31 @@
 				"Package Control: Install Package"
 			],
 			[
+				"lowe",
+				"Convert Case: Lower Case"
+			],
+			[
+				"upp",
+				"Convert Case: Upper Case"
+			],
+			[
+				"align",
+				"Preferences: Alignment Key Bindings – Default"
+			],
+			[
+				"in",
+				"Indent XML"
+			],
+			[
+				"del",
+				"File: Delete"
+			],
+			[
 				"color",
 				"Colorsublime: Install Theme"
 			]
 		],
-		"width": 593.0
+		"width": 609.0
 	},
 	"console":
 	{
@@ -56,28 +92,64 @@
 	],
 	"file_history":
 	[
+		"/home/mihai/ownCloud/PACKAGES/bib2/R/data_elements.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/server.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/ui.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/global.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/R/db_queries.R",
-		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/main/server.R",
-		"/home/mihai/ownCloud/PACKAGES/wader/R/data_elements.R",
-		"/home/mihai/ownCloud/PACKAGES/wader/inst/demo/install_demo.R",
-		"/home/mihai/ownCloud/PACKAGES/wader/inst/demo/tables_definition.sql",
+		"/home/mihai/ownCloud/PACKAGES/bib2/R/map_elements.R",
+		"/home/mihai/ownCloud/NOTES/current_notes.todo",
+		"/home/mihai/ownCloud/PACKAGES/bib2/R/ui_elements.R",
+		"/home/mihai/ownCloud/PACKAGES/bib2/R/utils.R",
+		"/home/mihai/.local/share/applications/wine-extension-chm.desktop",
+		"/home/mihai/.local/share/applications/mihai_todo.desktop",
+		"/home/mihai/Templates/opennotestodo.sh",
+		"/home/mihai/ownCloud/PROJECTS/BLUE_TIT/Egg_Proteomics/R/2_proteins/3_by_prot_models_results.R",
+		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/scicomp-2017.mpio.orn.mpg.de/log.md",
+		"/home/mihai/ownCloud/SYSTEMS_MANAGEMENT/linux.PCs/linux_desktops.sh",
+		"/home/mihai/ownCloud/PACKAGES/SNB/R/admin_ELEMENTS_ds_to_scidb.R",
+		"/home/mihai/ownCloud/PACKAGES/SNB/R/admin_PIPELINE_ds_to_scidb.R",
+		"/home/mihai/ownCloud/PACKAGES/SNB/R/admin_butler_GUI.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/R/map_elements.R",
+		"/home/mihai/ownCloud/PACKAGES/DataEntry/inst/UI/DB/BTatWESTERHOLZ/ADULTS/global.R",
+		"/home/mihai/ownCloud/PACKAGES/DataEntry/R/ui_helpers.R",
+		"/home/mihai/ownCloud/PACKAGES/DataEntry/notes.md",
+		"/home/mihai/ownCloud/PACKAGES/wader/server_install.R",
 		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/main/global.R",
-		"/home/mihai/ownCloud/PACKAGES/wader/inst/gps/garmin_oregon_450.md",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/main/ui.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/main/server.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/UI/main/www/text.js",
+		"/media/mihai/GARMIN/.Trash-1000/dummy.gpx",
+		"/home/mihai/ownCloud/PACKAGES/sysmanager/R/install_site.R",
+		"/etc/sh",
+		"/home/mihai/ownCloud/PACKAGES/wader/R/gps.R",
+		"/tmp/RtmpqJv7xO/file1c1f410fd7ff.gpx",
+		"/tmp/RtmpCbGZt6/file13557ef6e4bd.gpx",
+		"/tmp/RtmpCbGZt6/file1355127fa1f5.gpx",
+		"/home/mihai/ownCloud/PACKAGES/wader/todo.md",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/demo/install_demo.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/R/data_elements.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/demo/tables_definition.sql",
+		"/home/mihai/.config/sublime-text-3/Packages/Alignment/Default (Linux).sublime-keymap",
+		"/home/mihai/ownCloud/PACKAGES/bib2/R/plot_elements.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/R/utils.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/DESCRIPTION",
+		"/home/mihai/R/x86_64-pc-linux-gnu-library/3.4",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/demo/GARMIN/GPX/Waypoints_18-APR-17.gpx",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/demo/GARMIN/GPX/POI.gpx",
 		"/home/mihai/.config/sublime-text-3/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/etc/default/locale",
+		"/home/mihai/ownCloud/PACKAGES/wader/R/db_queries.R",
+		"/home/mihai/ownCloud/PACKAGES/wader/inst/gps/garmin_oregon_450.md",
 		"/home/mihai/Desktop/linux_desktops.sh",
 		"/home/mihai/ownCloud/PACKAGES/U/install.sh",
-		"/home/mihai/ownCloud/NOTES/current_notes.todo",
 		"/etc/bash.bashrc",
 		"/home/mihai/ownCloud/PACKAGES/sysmanager/install.R",
-		"/etc/default/locale",
 		"/home/mihai/.config/doublecmd/doublecmd.xml[A",
 		"/home/mihai/Desktop/linux_desktops.md"
 	],
 	"find":
 	{
-		"height": 24.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -91,11 +163,28 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"shinydashboard::box",
+			"shinydashboard::box ",
+			"DownloadButton",
+			"eck",
+			" ggplot(mf[Predictor == 'Laying\\nsequence' ], aes(x = est_norm_int, y = Estimate, color = signif) ) +  \n  facet_wrap(tissue ~ prot_function, scales = 'free_x', ncol = 4) + \n  geom_label_repel(data = mf[est_norm_int > 2], aes(label = pid))\n  geom_point()  \n",
+			"ids",
+			"shellinabox",
+			"mariadb",
+			"h",
+			"H",
+			"host",
+			"= ",
+			"=",
 			"nests",
+			"resightings",
+			"nests",
+			"empty",
+			"`",
 			" "
 		],
-		"highlight": true,
-		"in_selection": true,
+		"highlight": false,
+		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
@@ -118,7 +207,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 24.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -159,7 +248,7 @@
 	"project": "bib2.sublime-project",
 	"replace":
 	{
-		"height": 44.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -179,7 +268,15 @@
 		[
 			[
 				"",
-				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
+				"~/ownCloud/PACKAGES/bib2/bib2.sublime-project"
+			],
+			[
+				"bib",
+				"~/ownCloud/PACKAGES/bib2/bib2.sublime-project"
+			],
+			[
+				"sys",
+				"~/ownCloud/SYSTEMS_MANAGEMENT/system_management.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -201,7 +298,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 267.0,
+	"side_bar_width": 290.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

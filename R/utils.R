@@ -47,3 +47,19 @@ dayofyear2date <- function(dayofyear, year) {
   }
 
 
+#' Max
+#' @export
+Max <- function(x) {
+     o = suppressWarnings(max(x, na.rm = TRUE) )
+     if(o %in% c(Inf, -Inf) )  o = as.numeric(NA)
+     o
+    }
+
+#' noNApaste
+#' @export
+#' @examples
+#' x = c(NA, 1)
+Paste <- function(x) {
+    x[is.na(x)] = ''
+     paste(x, collapse = "|")
+    }

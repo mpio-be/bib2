@@ -10,11 +10,16 @@ boostrap_table <- function(x, class = 'responsive') {
         ' </table> </div>' )
   }
 
-#' @examples
-#' pdfButton('basemap_pdf', label = 'Download PDF')
+
 #' @export
 absDownloadButton <- function(nam, label = 'Download PDF') {
-      absolutePanel(right = "0%", top="10%", width = "20%",draggable = TRUE,style = "opacity: 0.9",
+      absolutePanel(right = "0%", top="10%", width = "40%",draggable = TRUE,style = "opacity: 0.9",
       downloadButton(nam,label = label)
       )
 }
+
+#' @export
+Box <- function(...) {
+    shinydashboard::box(...)
+    }
+
