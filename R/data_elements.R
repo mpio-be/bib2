@@ -30,10 +30,12 @@ nest_state <-   function(x, nest_stages = NULL) {
               ), by = box]
     z = merge(egck, out, by = 'box' )
     z = z[, ':=' (egg = maxegg-ce-de-maxck, ckc = maxck - dc)]
-    z = z[ !is.na(egg) | !is.na(ckc), ECK := Paste( c(egg, ckc) ), by = box][, .(box, ECK)]
+    z = z[ egg >0 & ckc >0, ECK := Paste( c(egg, ckc) ), by = box]
+    z = z[ egg >0 & ckc == 0, ECK := as.character(egg) , by = box]
+    z = z[ egg == 0 & ckc >0, ECK := as.character(ckc) , by = box]
 
 
-    o = merge(o, z, by = 'box', all.x = TRUE)
+    o = merge(o, z[, .(box, ECK)], by = 'box', all.x = TRUE)
 
 
 

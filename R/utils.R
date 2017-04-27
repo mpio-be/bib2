@@ -51,7 +51,7 @@ dayofyear2date <- function(dayofyear, year) {
 #' @export
 Max <- function(x) {
      o = suppressWarnings(max(x, na.rm = TRUE) )
-     if(o %in% c(Inf, -Inf) )  o = as.numeric(NA)
+     if(o %in% c(Inf, -Inf) )  o = 0
      o
     }
 
