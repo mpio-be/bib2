@@ -263,9 +263,13 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "",
+		"last_filter": "sys",
 		"selected_items":
 		[
+			[
+				"sys",
+				"~/ownCloud/PACKAGES/sysmanager/sysmanager.sublime-project"
+			],
 			[
 				"",
 				"~/ownCloud/PACKAGES/bib2/bib2.sublime-project"
@@ -273,10 +277,6 @@
 			[
 				"bib",
 				"~/ownCloud/PACKAGES/bib2/bib2.sublime-project"
-			],
-			[
-				"sys",
-				"~/ownCloud/SYSTEMS_MANAGEMENT/system_management.sublime-project"
 			]
 		],
 		"width": 380.0
