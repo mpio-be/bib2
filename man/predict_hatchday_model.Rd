@@ -4,12 +4,11 @@
 \alias{predict_hatchday_model}
 \title{predict_hatchday_model}
 \usage{
-predict_hatchday_model(x)
+predict_hatchday_model(x, model = lm)
 }
 \description{
 predict_hatchday_model
 }
 \examples{
-x = Breeding()
-
+predict_hatchday_model( Breeding() )
 }

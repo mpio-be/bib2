@@ -4,12 +4,14 @@
 \alias{nest_state}
 \title{nest_state}
 \usage{
-nest_state(x, nest_stages = NULL)
+nest_state(x, nest_stages = NULL, hatchingModel)
 }
 \arguments{
-\item{x}{a  data.table (commented with ref date) returned by nests()}
+\item{x}{a data.table as returned by nests()}
 
-\item{ref_date}{reference date}
+\item{hatchingModel}{a model to use for prediction}
+
+\item{nesr_stages}{character vector}
 }
 \description{
 nest_state

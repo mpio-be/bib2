@@ -13,17 +13,18 @@
 theme_bib2()
 
 map_legend(size = 2.5, right = "box", left = "checked days ago",
-  top = "stage age", bottom = "eggs|chicks", x = 543, y = 735)
+  top = "stage age|days to hatch", bottom = "eggs|chicks", x = 543,
+  y = 735)
 
 print_ann(color = "grey", x = Inf, y = Inf, vjust = "bottom",
   hjust = "top", angle = 90)
 
 map_empty()
 
-map_base(size = 2.5, family = "Times", fontface = "plain",
+map_base(size = 2.5, family = "sans", fontface = "plain",
   printdt = FALSE)
 
-map_nests(n, size = 2.5, family = "Times", fontface = "plain",
+map_nests(n, size = 2.5, family = "sans", fontface = "plain",
   title = paste("made on:", Sys.Date()))
 }
 \arguments{
@@ -36,9 +37,9 @@ a list of geoms defining the legend around the box
 }
 \examples{
 map_empty() 
-map_base(family = 'Times') 
- rdate = Sys.Date() - 1
- n = nests(rdate) \%>\% nest_state( )
- map_nests(n)  
- map_nests(n) + print_ann() 
+map_base(family = 'sans') 
+ n = nests(Sys.Date() - 1 )
+ ns = nest_state(n, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
+ map_nests(ns)  
+ map_nests(ns) + print_ann() 
 }

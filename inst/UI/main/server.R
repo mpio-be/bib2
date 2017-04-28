@@ -75,10 +75,14 @@ shinyServer(function(input, output, session) {
         nd = nests(input$date)  
         if(nrow(nd) ==0)  stop( toastr_warning( paste('There are no data on', input$date ) ) )
  
-        if( input$stage_age_type == 'Equal with' )
-          N = nest_state(nd, input$nest_stages)[nest_stage_age %in% (input$stage_age_equal %>% as.numeric)]
-        if( input$stage_age_type == 'Greater or equal than' )
-          N = nest_state(nd, input$nest_stages)[nest_stage_age >= input$stage_age_greater]
+        if( input$stage_age_type == 'Equal with' ) {
+          N = nest_state(nd, input$nest_stages, hatchingModel)[nest_stage_age %in% (input$stage_age_equal %>% as.numeric) ]
+          N = N[days_to_hatch < input$days_to_hatch | is.na(days_to_hatch)]
+          }
+        if( input$stage_age_type == 'Greater or equal than' ) {
+          N = nest_state(nd, input$nest_stages, hatchingModel)[nest_stage_age >= input$stage_age_greater]
+          N = N[days_to_hatch < input$days_to_hatch | is.na(days_to_hatch)]
+          }
 
         m <<- map_nests(N , size = input$font_size, title = paste('Reference:', input$date) )  
         m

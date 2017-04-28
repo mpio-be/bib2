@@ -25,7 +25,7 @@ theme_bib2  <- function() {
 #' @rdname maps
 #' @return a list of geoms defining the legend around the box
 map_legend <- function(size = 2.5, right = 'box', left = 'checked days ago', 
-                        top = 'stage age', bottom = 'eggs|chicks', 
+                        top = 'stage age|days to hatch', bottom = 'eggs|chicks', 
                         x = 543 , y = 735 ) {
     isp = data.frame( x = x, y = y, right, left, top, bottom)
     list( 
@@ -73,8 +73,8 @@ map_empty <- function() {
 #' @export
 #' @rdname maps
 #' @examples
-#' map_base(family = 'Times') 
-map_base <- function(size = 2.5, family = 'Times', fontface = 'plain',printdt = FALSE) {
+#' map_base(family = 'sans') 
+map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = FALSE) {
   g = 
   map_empty() + 
   
@@ -97,11 +97,11 @@ map_base <- function(size = 2.5, family = 'Times', fontface = 'plain',printdt = 
 #' @param   n     a data.table returned by  nests()
 #' @param   title goes to ggtitle (should be the reference date)
 #' @examples
-#'  rdate = Sys.Date() - 1
-#'  n = nests(rdate) %>% nest_state( )
-#'  map_nests(n)  
-#'  map_nests(n) + print_ann() 
-map_nests <- function(n, size = 2.5, family = 'Times', fontface = 'plain', title  = paste('made on:', Sys.Date() ) )  {
+#'  n = nests(Sys.Date() - 1 )
+#'  ns = nest_state(n, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
+#'  map_nests(ns)  
+#'  map_nests(ns) + print_ann() 
+map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain', title  = paste('made on:', Sys.Date() ) )  {
 
     legend = nest_legend(n)
 
@@ -119,9 +119,9 @@ map_nests <- function(n, size = 2.5, family = 'Times', fontface = 'plain', title
     geom_point(data = nxy, pch = 19, size = size, aes(x = long, y = lat, color = nest_stage), na.rm = TRUE ) +
      scale_colour_manual(values = legend$col , labels = legend$labs ) +
     # last check
-    geom_text(data = nxy, aes(x = long, y = lat, label = lastCheck), hjust = 'right', nudge_x = -5,size = size, family = family, fontface = 'italic') +
+    geom_text(data = nxy, aes(x = long, y = lat, label = lastCheck), hjust = 'right', nudge_x = -5,size = size, family = family) +
     # nest stage age
-    geom_text(data = nxy,aes(x = long, y = lat, label = nest_stage_age), vjust = 'bottom', nudge_y = 5,size = size, family = family, fontface = 'italic')+
+    geom_text(data = nxy,aes(x = long, y = lat, label = AGE), vjust = 'bottom', nudge_y = 5,size = size, family = family)+
     # clutch | chicks
     geom_text(data =  nxy[!is.na(ECK)] ,aes(x = long, y = lat, label = ECK), vjust = 'top', nudge_y = -5,size = size, family = family) 
 

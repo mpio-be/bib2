@@ -55,6 +55,18 @@ Max <- function(x) {
      o
     }
 
+
+#' Min
+#' @export
+Min <- function(x) {
+     o = suppressWarnings(min(x, na.rm = TRUE) )
+     if(o %in% c(Inf, -Inf) )  o = 0
+     o
+    }
+
+
+
+
 #' noNApaste
 #' @export
 #' @examples

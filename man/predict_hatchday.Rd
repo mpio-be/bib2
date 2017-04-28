@@ -4,12 +4,40 @@
 \alias{predict_hatchday}
 \title{predict_hatchday}
 \usage{
-predict_hatchday()
+predict_hatchday(fm, dat = Breeding(), ci = 0.95, days_below_lwr = 1.5)
+}
+\arguments{
+\item{fm}{fitted model (eg. by predict_hatchday_model () )}
+
+\item{dat}{newdat for prediction}
+
+\item{ci}{lower CI}
+
+\item{days_below_lwr}{}
+}
+\value{
+lower CI of the prediction - days_below_lwr
 }
 \description{
 predict_hatchday
 }
 \examples{
-n = nests() 
-# predict_hatchday()
+  
+d = Breeding() 
+fm = predict_hatchday_model(d)
+d[, predHatch := predict_hatchday(fm, d,0.95, 1.5) ]
+# check prediction     
+d[, missed := difftime(hatchDate, predHatch, units= 'days') \%>\% as.numeric]
+d[, .N/nrow(d), by = missed < -1]
+
+# check incubation duration
+d[, incub := difftime(hatchDate, as.Date(firstEgg) + clutch, units= 'days')]
+d[, range(incub)]
+d[, quantile(incub)]     
+
+# check predicted incubation duration
+d[, pincub := difftime(predHatch, as.Date(firstEgg) + clutch, units= 'days')]
+d[, range(pincub)]
+d[, quantile(pincub)]
+plot(incub ~ pincub, d)
 }
