@@ -44,7 +44,7 @@ nest_state <-   function(x, nest_stages = NULL, hatchingModel) {
   # COMBINE SETS
     o = merge(m, stage_age, by = c('box', 'nest_stage'), all.x = TRUE)
     o = merge(o, eggs_chicks, by = 'box', all.x = TRUE)
-    o = merge(o, firstEgg, by = 'box', all.x = TRUE)
+    o = merge(o, firstEggDat, by = 'box', all.x = TRUE)
     
     o = merge(o, pred_hatch[, .(box, days_to_hatch)], by = 'box', all.x = TRUE)
     o[ !is.na(days_to_hatch),  AGE := Paste( c(nest_stage_age, days_to_hatch) ), by = box]
