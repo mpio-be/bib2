@@ -68,7 +68,7 @@
 			"file": "R/data_elements.R",
 			"settings":
 			{
-				"buffer_size": 3023,
+				"buffer_size": 3026,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -286,7 +286,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -302,8 +302,8 @@
 						"selection":
 						[
 							[
-								551,
-								551
+								55,
+								55
 							]
 						],
 						"settings":
@@ -10838,7 +10838,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -10847,15 +10847,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3023,
+						"buffer_size": 3026,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1421,
-								1421
+								2077,
+								2077
 							]
 						],
 						"settings":
@@ -21315,15 +21315,15 @@
 								{
 									"1":
 									[
-										2498,
-										2499
+										2103,
+										2104
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"Packages/BracketHighlighter/icons/round_bracket.png",
 										"brackethighlighter.default"
 									]
 								},
@@ -21331,8 +21331,8 @@
 								{
 									"1":
 									[
-										460,
-										461
+										2062,
+										2063
 									]
 								},
 								"unmatched":
@@ -21403,10 +21403,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 255.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -31974,7 +31974,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -42779,7 +42779,7 @@
 						"translation.y": 1224.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
