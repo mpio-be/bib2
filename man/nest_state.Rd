@@ -17,6 +17,8 @@ nest_state(x, nest_stages = NULL, hatchingModel)
 nest_state
 }
 \examples{
+ B = Breeding()
+hatchingModel = predict_hatchday_model(B, MASS::rlm)  
 nests() \%>\% nest_state()
 nests("2016-04-12") \%>\% nest_state()
 }

@@ -101,7 +101,7 @@ shinyServer(function(input, output, session) {
 
  # NESTS data
     output$nestsdata_show <- renderDataTable({
-        o = nests(input$date)
+        o = nests(input$date)[box == input$nestbox]
         setorder(o, date_time)
         o[,which(unlist(lapply(o, function(x)!all(is.na(x))))),with=FALSE]
         }, options = list(scrollX = TRUE) )
