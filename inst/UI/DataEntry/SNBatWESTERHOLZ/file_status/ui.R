@@ -1,34 +1,29 @@
 
 
-
-shinyUI(miniPage(
+shinyUI(fluidPage(
   useToastr(),
   useShinyjs(),
   extendShinyjs(text = "shinyjs.refresh = function() { location.reload(); }"),
 
-  gadgetTitleBar(  textOutput('title')    ,
-    left = miniTitleBarButton("saveButton", "Save", primary = TRUE),
-    right = miniTitleBarButton("refresh", "Start New", primary = FALSE)
-    ),
 
-   miniTabstripPanel(
+  fluidRow(
+    column(3,actionButton("saveButton", "Save")                ),
+    column(2,actionButton("refresh", "Refresh")              ),    
+    column(2,dateInput("pulldate", NULL ) ),
+    column(2,checkboxInput('ignore_checks', 'Ignore warnings') ),
+    column(2,actionButton("helpButton", "Columns definition")  )
 
-    miniTabPanel("Data",
+  ),
 
-        miniContentPanel(
-            rHandsontableOutput("table") ),
+  fluidRow(
+    rHandsontableOutput("table")
+  ), 
 
-        miniButtonBlock(
-            checkboxInput('ignore_checks', 'Ignore warnings'),
-            actionButton("helpButton", "Columns definition") ),
+  uiOutput("run_save"),
 
-        uiOutput("run_save"),
-
-        bsModal("help", "Columns definition", "helpButton", size = "large", tableOutput("column_comments"))
-        )
-    )
- ))
+  bsModal("help", "Columns definition", "helpButton", size = "large", tableOutput("column_comments"))
 
 
+) )
 
 

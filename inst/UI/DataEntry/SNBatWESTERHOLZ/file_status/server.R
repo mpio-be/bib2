@@ -1,7 +1,7 @@
 
 shinyServer( function(input, output,session) {
 
-  saved_session <<- FALSE
+ observe( on.exit( assign('input', reactiveValuesToList(input) , envir = .GlobalEnv)) )
 
   N <- reactiveValues(n = 0)
 
@@ -10,27 +10,16 @@ shinyServer( function(input, output,session) {
       })
 
   Save <- eventReactive(input$saveButton, {
-
-    return(hot_to_r(input$table))
-
-   })
+    hot_to_r(input$table)
+    })
 
   output$run_save <- renderUI({
-    x = Save() %>% data.table
-    x = cleaner(x)
-    x<<- x
-
+    x = Save() %>% data.table %>% cleaner
+    x <<- x 
     isolate(ignore_validators <- input$ignore_checks )
 
-    if(saved_session) {
-      msg = 'This set was already saved to the database. Press Start New to enter another set.'
-      toastr_error(msg)
-      stop(msg)
-    }
-
-    # inspector
-      cc = inspector(x)
-
+    cc = inspector(x)
+    print(cc)
 
       if(nrow(cc) > 0 & !ignore_validators) {
           toastr_error( boostrap_table(cc),
@@ -41,19 +30,9 @@ shinyServer( function(input, output,session) {
     # db update
       if(   nrow(cc) == 0 | (nrow(cc) > 0 & ignore_validators ) ) {
 
-        saved_set = update_table_from_user_input(x)
+        update_table_from_user_input(x)
 
-        if(saved_set) {
-          nSaved = nrow(x[!is.na(hour)])
-          toastr_success( paste(nSaved, "rows saved to database.") )
-          toastr_info('Before entering a new set press Start new.')
-
-          N$n <- nSaved
-
-          saved_session <<- TRUE
-          }
-
-            cat('-------')
+        cat('-------')
 
         }
 
@@ -69,10 +48,21 @@ shinyServer( function(input, output,session) {
 
 
   output$table  <- renderRHandsontable({
-    H = get_table_for_data_entry()
+
+    H = get_table_for_data_entry(input$pulldate)
+  
+    bgCols = if (nrow(H) == 1) 1 else c(1, 7, 8)
+
     rhandsontable(H) %>%
     hot_cols(columnSorting = FALSE) %>%
-    hot_rows(fixedRowsTop = 1) # TODO change editable cols
+    hot_rows(fixedRowsTop = 1) %>% 
+    hot_col(bgCols, readOnly = TRUE,
+    renderer = "function(instance, td, row, col, prop, value, cellProperties) {
+             Handsontable.renderers.TextRenderer.apply(this, arguments);
+             td.style.background = 'lightblue';}"
+       )
+
+
    })
 
    output$column_comments <- renderTable({
