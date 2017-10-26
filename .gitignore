@@ -3,4 +3,4 @@
 .RData
 .Ruserdata
 .sublime-workspace
-.sublime-workspace
+*.sublime-workspace

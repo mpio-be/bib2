@@ -5,15 +5,14 @@
 #' @docType 	package
 #' @name 		bib2
 #' @usage
-#' The user interface is installed at in at http://scidb.mpio.orn.mpg.de
+#' The user interface is available from http://scidb.mpio.orn.mpg.de
 #'
 
 .onLoad <- function(libname, pkgname){
     dcf <- read.dcf(file=system.file('DESCRIPTION', package=pkgname) )
     packageStartupMessage(paste('This is', pkgname, dcf[, 'Version'] ))
 
-    options(host.bib2      = '127.0.0.1')
-    # options(host.bib2      = '192.168.88.199') # local mysql server on VM
+    options(host.bib2      = 'scidb.mpio.orn.mpg.de')
     options(user.bib2      = 'bt')
     options(nest.stages   
         = c( 'U',         'LT' ,   'R' ,     'B'  ,    'BC' ,    'C' ,    'LIN'  ,    'E'  ,   'WE',    'Y',      'NOTA',  'WSP')  )
