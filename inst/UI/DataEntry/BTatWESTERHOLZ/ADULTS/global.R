@@ -7,7 +7,7 @@
     require, character.only = TRUE, quietly = TRUE)
 
   user          = 'bt'
-  host          = '127.0.0.1'
+  host          = scidbadmin::getSysOption('host')
   db            = 'FIELD_BTatWESTERHOLZ'
   table         =  'ADULTS'
   n_empty_lines = 20

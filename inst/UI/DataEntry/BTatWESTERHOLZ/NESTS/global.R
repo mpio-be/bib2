@@ -7,11 +7,11 @@
     require, character.only = TRUE, quietly = TRUE)
 
   user                 = 'bt'
-  host                 = '127.0.0.1'
-  db                    = 'FIELD_BTatWESTERHOLZ'
+  host                 = scidbadmin::getSysOption('host')
+  db                   = 'FIELD_BTatWESTERHOLZ'
   table                =  'NESTS'
   n_empty_lines        = 25
-   excludeColumns       = 'N_pk'
+   excludeColumns      = 'N_pk'
 
 # data
   H = emptyFrame(user, host, db, table, n = 10, excludeColumns, 
