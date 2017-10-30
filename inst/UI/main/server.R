@@ -112,8 +112,6 @@ shinyServer(function(input, output, session) {
         a[, Year := year(datetime_)]
         }, options = list(scrollX = TRUE) )
 
-
-
  # overnight map [ observeEvent: makes the dataset to .GlobalEnv when button is pressed; reactivePoll checks if the set was changed ]
     # compile the overnight set
     observeEvent(input$goOvernight, {
@@ -164,8 +162,8 @@ shinyServer(function(input, output, session) {
 
     toastr_warning('This will take a couple of minutes. Wait until the Download xlsx button is active.')
 
-    x1 = diagnose_pull(date=  format(input$date , "%Y.%m.%d") , shiny = TRUE)
-    x2 = diagnose_pull_v2(date=  format(input$date , "%Y.%m.%d") , shiny = TRUE)
+    x1 = diagnose_pull(date    =  format(input$date , "%Y.%m.%d") , shiny = TRUE)
+    x2 = diagnose_pull_v2(date =  format(input$date , "%Y.%m.%d") , shiny = TRUE)
 
     diag_xls <<- tempfile(fileext = '.xlsx')
 
@@ -184,22 +182,22 @@ shinyServer(function(input, output, session) {
     })
 
     output$diagnose_pull_download <- downloadHandler(
-    filename = 'snb_diagnose.xlsx',
-    content = function(file) {
-     file.copy(diag_xls, file)
+      filename = 'snb_diagnose.xlsx',
+      content = function(file) {
+       file.copy(diag_xls, file)
 
 
-    })
+      })
 
     shinyjs::disable("diagnose_pull_download") # disabled on page load
 
 
     output$snbPullDates <- renderTree({
-    x = data_dirs(p =  getOption('path.to.raw') )
-    x = split(x$dir, x$year)
-    lapply(x, function(i) eval(parse(text = paste('list(', paste(shQuote(i), "=''", collapse = ','), ')' ) )) )
+      x = data_dirs(p =  getOption('path.to.raw') )
+      x = split(x$dir, x$year)
+      lapply(x, function(i) eval(parse(text = paste('list(', paste(shQuote(i), "=''", collapse = ','), ')' ) )) )
 
-    })
+      })
 
 })
 
