@@ -7,7 +7,7 @@
 \alias{bib2-package}
 \title{Breding BIrd Planer (v2)}
 \usage{
-The user interface is installed at in at http://scidb.mpio.orn.mpg.de
+The user interface is available from http://scidb.mpio.orn.mpg.de
 }
 \description{
 Mapping and field work organiser
