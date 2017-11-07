@@ -9,7 +9,7 @@
   user          = 'bt'
   host          = scidbadmin::getSysOption('host')
   db            = 'FIELD_BTatWESTERHOLZ'
-  table         =  'ADULTS'
+  dbtable       =  'ADULTS'
   n_empty_lines = 20
   excludeColumns = 'ad_pk'
 

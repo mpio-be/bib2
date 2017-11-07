@@ -38,7 +38,10 @@ function(input, output,session) {
 
         con = dbcon(user = user,  host = host, db = db)
 
-        saved_set = dbWriteTable(con, table, x, append = TRUE, row.names = FALSE)
+        x[, ad_pk := NA] # TODO (add programatically)
+
+        saved_set = dbWriteTable(con, dbtable, x,  row.names = FALSE, append = TRUE) # 
+
 
         if(saved_set) {
           toastr_success( paste(nrow(x), "rows saved to database.") )
@@ -58,12 +61,12 @@ function(input, output,session) {
 
 
    # title
-    N <- reactiveValues(n = grand_n(table, db, user, host))
+    N <- reactiveValues(n = grand_n(dbtable, db, user, host))
 
     output$title <- renderText({
       observe({
       input$saveButton
-      N$n <- grand_n(table, db, user, host)
+      N$n <- grand_n(dbtable, db, user, host)
       })
 
       as.integer(N$n)
