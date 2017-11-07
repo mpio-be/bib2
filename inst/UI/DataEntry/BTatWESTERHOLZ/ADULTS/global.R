@@ -1,6 +1,6 @@
 
  #my_remote2local('FIELD_BTatWESTERHOLZ',  remoteUser = 'mihai', localUser = 'mihai')
-# shiny::runApp('inst/UI/DB/BTatWESTERHOLZ/ADULTS')
+# shiny::runApp('inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS')
 
 # settings
   sapply(c('sdb','shiny','shinyjs','rhandsontable','miniUI','shinyBS','shinytoastr','knitr', 'DataEntry'),
@@ -14,7 +14,7 @@
   excludeColumns = 'ad_pk'
 
 # data
-  H = emptyFrame(user, host, db, table, n = 10, excludeColumns, 
+  H = emptyFrame(user, host, db, table, n = 30, excludeColumns, 
         preFilled = list(
             date_time_caught = as.character(Sys.Date()) ) 
         )
