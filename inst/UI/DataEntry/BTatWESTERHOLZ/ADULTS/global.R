@@ -14,11 +14,11 @@
   excludeColumns = 'ad_pk'
 
 # data
-  H = emptyFrame(user, host, db, table, n = 30, excludeColumns, 
+  H = emptyFrame(user, host, db, dbtable, n = 30, excludeColumns, 
         preFilled = list(
             date_time_caught = as.character(Sys.Date()) ) 
         )
-  comments = column_comment(user, host, db, table,excludeColumns)
+  comments = column_comment(user, host, db, dbtable,excludeColumns)
 
 
 

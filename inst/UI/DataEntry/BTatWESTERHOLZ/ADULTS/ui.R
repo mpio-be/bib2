@@ -1,2 +1,2 @@
- shinyUI( DataEntry::DataEntryMaterialFloating(table))
+ shinyUI( DataEntry::DataEntryMaterialFloating(dbtable))
 
