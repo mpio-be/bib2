@@ -1,5 +1,5 @@
 
- #my_remote2local('FIELD_BTatWESTERHOLZ',  remoteUser = 'mihai', localUser = 'mihai')
+ # my_remote2local('FIELD_BTatWESTERHOLZ',  remoteUser = 'mihai', localUser = 'mihai')
 # shiny::runApp('inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS')
 
 # settings
@@ -8,6 +8,7 @@
 
   user          = 'bt'
   host          = scidbadmin::getSysOption('host')
+  host          = '127.0.0.1'
   db            = 'FIELD_BTatWESTERHOLZ'
   dbtable       =  'ADULTS'
   n_empty_lines = 20
@@ -23,10 +24,13 @@
 
 
   # validator parameters
-  measures = dbq(user = user, host = host, q = 'select tarsus, weight, P3 from BTatWESTERHOLZ.ADULTS')
-  measures = melt(measures)[!is.na(value)]
-  measures = measures[, .(lq = quantile(value, 0.005), uq = quantile(value, 0.995)), by = variable]
-  nchar = data.table(variable = c('ID', 'UL', 'LL', 'UR', 'LR', 'transponder', 'age', 'sex'), n = c(7, 1, 1, 1, 1, 6, 1, 1) )
+  measures     = dbq(user = user, host = host, q = 'select tarsus, weight, P3 from BTatWESTERHOLZ.ADULTS')
+  measures     = melt(measures)[!is.na(value)]
+  measures     = measures[, .(lq = quantile(value, 0.005), uq = quantile(value, 0.995)), by = variable]
+  nchar        = data.table(variable = c('ID', 'UL', 'LL', 'UR', 'LR', 'transponder', 'age', 'sex'), n = c(7, 1, 1, 1, 1, 6, 1, 1) )
+  transponders = dbq(user = user, host = host, q = "select * from COMMON.TRANSPONDERS_LIST")
+  preDefined   = data.table( variable = c('transponder'), set = c(list(transponders$transponder)))
+
 
 # inspector
   inspector <- function(x) {
@@ -37,9 +41,10 @@
     i4 = hhmm_validator(x[ , .(handling_start,handling_stop,release_time)])
     i5 = interval_validator(x[ , .(tarsus,P3, weight)], measures)
     i6 = nchar_validator(x[ , .(ID,UL,LL,UR,LR,transponder,age,sex)], nchar)
+    i7 = is.element_validator(x, preDefined)
 
 
-    o = list(i1, i2, i3, i4, i5, i6) %>% rbindlist
+    o = list(i1, i2, i3, i4, i5, i6, i7) %>% rbindlist
     o[, .(rowid = paste(rowid, collapse = ',')), by = .(variable, reason)]
 
     }

@@ -10,8 +10,9 @@ function(input, output,session) {
       })
 
   Save <- eventReactive(input$saveButton, {
-
     return(hot_to_r(input$table))
+
+    #### 
 
    })
 
@@ -38,16 +39,20 @@ function(input, output,session) {
 
         con = dbcon(user = user,  host = host, db = db)
 
-        x[, ad_pk := NA] # TODO (add programatically)
+
+        if('rowid' %in% names(x)) x[, rowid := NULL]
+
 
         saved_set = dbWriteTable(con, dbtable, x,  row.names = FALSE, append = TRUE) # 
 
 
         if(saved_set) {
+          toggleState(id = "saveButton")
+          
           toastr_success( paste(nrow(x), "rows saved to database.") )
           toastr_warning('Refreshing in 5 secs ...', progressBar = TRUE, timeOut = 5000) 
-          Sys.sleep(6)
-           shinyjs::js$refresh()
+          #Sys.sleep(6)
+          delay(5000, shinyjs::js$refresh() )
 
           }
 
