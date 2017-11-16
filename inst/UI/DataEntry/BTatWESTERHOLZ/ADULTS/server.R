@@ -37,22 +37,22 @@ function(input, output,session) {
     # db update
       if(   nrow(cc) == 0 | (nrow(cc) > 0 & ignore_validators ) ) {
 
-        con = dbcon(user = user,  host = host, db = db)
+      con = dbcon(user = user,  host = host, db = db)
 
+      if('rowid' %in% names(x)) x[, rowid := NULL]
 
-        if('rowid' %in% names(x)) x[, rowid := NULL]
+      st = sqlAppendTable(con, dbtable, x, row.names = FALSE)
+      saved_set = dbExecute(con, st)
 
-
-        saved_set = dbWriteTable(con, dbtable, x,  row.names = FALSE, append = TRUE) # 
-
-
-        if(saved_set) {
+      if(saved_set > 0) {
           toggleState(id = "saveButton")
           
           toastr_success( paste(nrow(x), "rows saved to database.") )
           toastr_warning('Refreshing in 5 secs ...', progressBar = TRUE, timeOut = 5000) 
-          #Sys.sleep(6)
-          delay(5000, shinyjs::js$refresh() )
+          Sys.sleep(5)
+          
+          rm(x)
+          shinyjs::js$refresh()
 
           }
 

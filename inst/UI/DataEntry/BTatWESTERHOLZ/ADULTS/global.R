@@ -6,16 +6,16 @@
   sapply(c('sdb','shiny','shinyjs','rhandsontable','miniUI','shinyBS','shinytoastr','knitr', 'DataEntry'),
     require, character.only = TRUE, quietly = TRUE)
 
-  user          = 'bt'
-  host          = scidbadmin::getSysOption('host')
-  # host          = '127.0.0.1'
-  db            = 'FIELD_BTatWESTERHOLZ'
-  dbtable       =  'ADULTS'
-  n_empty_lines = 20
-  excludeColumns = 'ad_pk'
+  user            = 'bt'
+  host            = scidbadmin::getSysOption('host')
+  # host            = '127.0.0.1'
+  db              = 'FIELD_BTatWESTERHOLZ'
+  dbtable         =  'ADULTS'
+  n_empty_lines   = 15
+  excludeColumns  = 'ad_pk'
 
 # data
-  H = emptyFrame(user, host, db, dbtable, n = 30, excludeColumns, 
+  H = emptyFrame(user, host, db, dbtable, n = n_empty_lines, excludeColumns, 
         preFilled = list(
             date_time_caught = as.character(Sys.Date()) ) 
         )
