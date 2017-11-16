@@ -51,7 +51,6 @@ function(input, output,session) {
           toastr_warning('Refreshing in 5 secs ...', progressBar = TRUE, timeOut = 5000) 
           Sys.sleep(5)
           
-          rm(x)
           shinyjs::js$refresh()
 
           }
