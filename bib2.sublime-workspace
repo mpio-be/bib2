@@ -85,7 +85,7 @@
 			"file": "inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS/server.R",
 			"settings":
 			{
-				"buffer_size": 2159,
+				"buffer_size": 2143,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -324,8 +324,8 @@
 						"selection":
 						[
 							[
-								554,
-								554
+								555,
+								555
 							]
 						],
 						"settings":
@@ -10903,27 +10903,12 @@
 							{
 								"close":
 								{
-									"1":
-									[
-										553,
-										554
-									]
 								},
 								"icon":
 								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/single_quote.png",
-										"region.greenish"
-									]
 								},
 								"open":
 								{
-									"1":
-									[
-										547,
-										548
-									]
 								},
 								"unmatched":
 								{
@@ -21674,13 +21659,15 @@
 								"bh_tag_close",
 								"bh_tag_content"
 							],
-							"syntax": "Packages/R-Box/syntax/R Extended.sublime-syntax"
+							"syntax": "Packages/R-Box/syntax/R Extended.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -21689,15 +21676,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2159,
+						"buffer_size": 2143,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1478,
-								1478
+								381,
+								381
 							]
 						],
 						"settings":
@@ -32277,24 +32264,24 @@
 								{
 									"1":
 									[
-										1477,
-										1478
+										1575,
+										1576
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/round_bracket.png",
-										"region.yellowish"
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"region.purplish"
 									]
 								},
 								"open":
 								{
 									"1":
 									[
-										1475,
-										1476
+										350,
+										351
 									]
 								},
 								"unmatched":
@@ -32367,7 +32354,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
