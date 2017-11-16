@@ -9,7 +9,7 @@
   user            = 'bt'
   host            = scidbadmin::getSysOption('host')
 
-  host            = '127.0.0.1'
+  # host            = '127.0.0.1'
 
   db              = 'FIELD_BTatWESTERHOLZ'
   dbtable         =  'ADULTS'
