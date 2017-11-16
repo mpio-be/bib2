@@ -38,13 +38,11 @@ function(input, output,session) {
       if(   nrow(cc) == 0 | (nrow(cc) > 0 & ignore_validators ) ) {
 
       con = dbcon(user = user,  host = host, db = db)
+    
+      saved_set = dbWriteTable(con, dbtable, x, append = TRUE, row.names = FALSE)
 
-      if('rowid' %in% names(x)) x[, rowid := NULL]
 
-      st = sqlAppendTable(con, dbtable, x, row.names = FALSE)
-      saved_set = dbExecute(con, st)
-
-      if(saved_set > 0) {
+      if(saved_set) {
           toggleState(id = "saveButton")
           
           toastr_success( paste(nrow(x), "rows saved to database.") )

@@ -67,7 +67,7 @@
 			"file": "inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS/global.R",
 			"settings":
 			{
-				"buffer_size": 2103,
+				"buffer_size": 2354,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -76,7 +76,7 @@
 			"file": "inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS/ui.R",
 			"settings":
 			{
-				"buffer_size": 1643,
+				"buffer_size": 1689,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -85,7 +85,7 @@
 			"file": "inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS/server.R",
 			"settings":
 			{
-				"buffer_size": 2143,
+				"buffer_size": 2075,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -171,12 +171,12 @@
 	],
 	"file_history":
 	[
+		"/home/mihai/ownCloud/NOTES/notes.todo",
 		"/home/mihai/github/bib2/DESCRIPTION",
+		"/home/mihai/github/bib2/inst/UI/DataEntry/BTatWESTERHOLZ/NESTS/global.R",
 		"/home/mihai/github/bib2/inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS/global.R",
 		"/home/mihai/github/bib2/inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS/server.R",
 		"/home/mihai/github/bib2/inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS/ui.R",
-		"/home/mihai/github/bib2/inst/UI/DataEntry/BTatWESTERHOLZ/NESTS/global.R",
-		"/home/mihai/ownCloud/NOTES/notes.todo",
 		"/home/mihai/github/bib2/notes.md",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/DataEntry/SNBatWESTERHOLZ/file_status/global.R",
 		"/home/mihai/ownCloud/PACKAGES/bib2/inst/UI/DataEntry/SNBatWESTERHOLZ/file_status/ui.R",
@@ -244,7 +244,7 @@
 	],
 	"find":
 	{
-		"height": 24.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -258,6 +258,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"forv",
 			"saved_set",
 			"saveButton",
 			"run_save",
@@ -308,7 +309,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -317,15 +318,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2103,
+						"buffer_size": 2354,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								555,
-								555
+								1101,
+								1106
 							]
 						],
 						"settings":
@@ -10980,7 +10981,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -10989,15 +10990,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1643,
+						"buffer_size": 1689,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								116,
-								123
+								197,
+								197
 							]
 						],
 						"settings":
@@ -21577,24 +21578,24 @@
 								{
 									"1":
 									[
-										124,
-										125
+										196,
+										197
 									]
 								},
 								"icon":
 								{
 									"1":
 									[
-										"Packages/BracketHighlighter/icons/single_quote.png",
-										"region.greenish"
+										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"region.yellowish"
 									]
 								},
 								"open":
 								{
 									"1":
 									[
-										109,
-										110
+										182,
+										183
 									]
 								},
 								"unmatched":
@@ -21676,15 +21677,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2143,
+						"buffer_size": 2075,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								381,
-								381
+								1148,
+								1148
 							]
 						],
 						"settings":
@@ -32264,8 +32265,8 @@
 								{
 									"1":
 									[
-										1575,
-										1576
+										1438,
+										1439
 									]
 								},
 								"icon":
@@ -32280,8 +32281,8 @@
 								{
 									"1":
 									[
-										350,
-										351
+										1147,
+										1148
 									]
 								},
 								"unmatched":
@@ -32351,10 +32352,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 528.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -32428,6 +32429,10 @@
 			[
 				"sdb",
 				"~/github/sdb/sdb.sublime-project"
+			],
+			[
+				"DAT",
+				"~/github/DataEntry/DataEntry.sublime-project"
 			],
 			[
 				"sc",

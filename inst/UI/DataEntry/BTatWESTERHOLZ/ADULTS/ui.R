@@ -4,7 +4,13 @@
 
   dashboardSidebar(width = 100, 
     'Total entries:', br(), 
-    textOutput('title')
+    textOutput('title'), 
+
+    hr(), 
+
+    paste('Host:', host)
+    
+
     )  ,
 
   dashboardBody(
