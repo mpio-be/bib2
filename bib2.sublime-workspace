@@ -67,7 +67,7 @@
 			"file": "inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS/global.R",
 			"settings":
 			{
-				"buffer_size": 2354,
+				"buffer_size": 2356,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -309,7 +309,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -318,15 +318,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2354,
+						"buffer_size": 2356,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1101,
-								1106
+								505,
+								505
 							]
 						],
 						"settings":
@@ -10904,12 +10904,27 @@
 							{
 								"close":
 								{
+									"1":
+									[
+										504,
+										505
+									]
 								},
 								"icon":
 								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/single_quote.png",
+										"region.greenish"
+									]
 								},
 								"open":
 								{
+									"1":
+									[
+										497,
+										498
+									]
 								},
 								"unmatched":
 								{
@@ -10981,7 +10996,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -21668,7 +21683,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -32352,10 +32367,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 528.0,
+						"translation.y": 96.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
