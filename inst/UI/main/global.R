@@ -13,7 +13,7 @@
 
 # prediction data & model
  B = Breeding()
- hatchingModel = predict_hatchday_model(B, MASS::rlm)  
+ hatchingModel = predict_hatchday_model(B[year_ < 2017], MASS::rlm)  
 
   
  

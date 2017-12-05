@@ -5,7 +5,7 @@
 #' x = Breeding()
 Breeding <- function() {
     idbq("select year_,box,IDfemale,firstEgg,clutch, laying_gap, hatchDate FROM BTatWESTERHOLZ.BREEDING 
-    WHERE secondClutch IS NULL and firstEgg is not NULL and hatchDate is not NULL and laying_gap < 4
+    WHERE secondClutch = 0  and firstEgg is not NULL and hatchDate is not NULL and laying_gap < 4
         order by year_, firstEgg")
     }
 
