@@ -185,7 +185,7 @@ shinyServer(function(input, output, session) {
 
 
     output$snbPullDates <- renderTree({
-      x = data_dirs(p =  getOption('path.to.raw') )
+      x = SNB2::data_dirs(p =  getOption('path.to.raw_v2') )
       x = split(x$dir, x$year)
       lapply(x, function(i) eval(parse(text = paste('list(', paste(shQuote(i), "=''", collapse = ','), ')' ) )) )
 
