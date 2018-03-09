@@ -33,13 +33,17 @@ nest_state <-   function(x, nest_stages = NULL, hatchingModel) {
 
 
   # firstEgg, Max clutch size
-    firstEggDat = x[nest_stage == 'E', .(firstEgg = Min(date_time) %>% as.Date %>% as.POSIXct, clutch = Max(eggs)  ), by = box]
+    firstEggDat = x[nest_stage == 'E', .(firstEgg = Min(date_time) , clutch = Max(eggs)  ), by = box]
+
+    if(nrow(firstEggDat) > 0) {
+      firstEggDat[, firstEgg := firstEgg %>% as.Date %>% as.POSIXct]
 
   # predicted hatching
-    pred_hatch = copy(firstEggDat)
-    pred_hatch[, predHatchDay  :=  predict_hatchday(hatchingModel, firstEggDat  ,0.95, 1.5) ]
-    pred_hatch[, days_to_hatch := 1 + (difftime(predHatchDay, attr(x, 'refdate'), units = 'days') %>% as.integer) ]  
-    pred_hatch = pred_hatch[, .(box, days_to_hatch)]
+      pred_hatch = copy(firstEggDat)
+      pred_hatch[, predHatchDay  :=  predict_hatchday(hatchingModel, firstEggDat  ,0.95, 1.5) ]
+      pred_hatch[, days_to_hatch := 1 + (difftime(predHatchDay, attr(x, 'refdate'), units = 'days') %>% as.integer) ]  
+      pred_hatch = pred_hatch[, .(box, days_to_hatch)]
+      } else pred_hatch = data.table(box = numeric(0),days_to_hatch = numeric(0) )
 
   # COMBINE SETS
     o = merge(m, stage_age, by = c('box', 'nest_stage'), all.x = TRUE)

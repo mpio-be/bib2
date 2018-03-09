@@ -5,9 +5,9 @@
 #' @export
 #' @examples
 #' date_ = Sys.Date()
-#' F = phenology()
+#' F = phenology('LIN')
 #' predFirstEggData = predict_firstEgg_data(F, date_ )
-#' predFirstEgg = predict_firstEgg(predFirstEggData, yday(date_) )[, date_ := as.POSIXct(date_) ]
+#' predFirstEgg = predict_firstEgg(predFirstEggData, yday(date_), year(date_) )[, date_ := as.POSIXct(date_) ]
 #' 
 #' ggplot(predFirstEggData, aes(y = first_Egg , x = first_Lining, x) ) + 
 #'  geom_point() + 
@@ -35,6 +35,9 @@ predict_firstEgg <- function(dat, v, refyear = year(Sys.Date()) ) {
 predict_firstEgg_data <- function (F, refdate = Sys.Date()) {
     refyear = year(refdate)
     z = F[, .(yday(min(date_))), by = .(year_, variable)]
+
+    # if( nrow(z[variable == 'firstLining']) ==0 ) stop("The prediction of the first egg is based on the first lining! ")
+
     z = dcast(z, year_ ~ variable, value.var = "V1")
     z[, `:=`(first_Lining, dayofyear2date(firstLining, refyear))]
     z[, `:=`(first_Egg, dayofyear2date(firstEgg, refyear))]

@@ -1,8 +1,8 @@
 
-# shiny::runApp('inst/UI/main')
+# shiny::runApp('inst/UI/main', launch.browser = TRUE)
 
 # settings
-    sapply(c('sdb', 'scidbadmin', 'bib2','SNB2', 'knitr', 'ggplot2', 'ggthemes','digest',
+    sapply(c('sdb', 'scidbadmin', 'bib2','SNB2', 'knitr', 'ggplot2', 'ggthemes','digest','ggrepel',
                   'shiny','shinyjs','shinydashboard','shinyBS','shinytoastr', 'shinyTree', 'shinyAce', 'MASS'),
       function(x) suppressPackageStartupMessages( require(x, character.only = TRUE, quietly = TRUE) ))
     options(stringsAsFactors = FALSE)
@@ -13,7 +13,7 @@
 
 # prediction data & model
  B = Breeding()
- hatchingModel = predict_hatchday_model(B[year_ < 2017], MASS::rlm)  
+ hatchingModel = predict_hatchday_model(B, MASS::rlm)  
 
   
  

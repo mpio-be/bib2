@@ -2,8 +2,8 @@
 
 shinyUI(
 
-dashboardPage(skin = 'green',
-  dashboardHeader(title = 'Westerholz'),
+dashboardPage(skin = 'purple',
+  dashboardHeader(title = paste('Westerholz',year(Sys.Date()),  '🐣') ),
 
   dashboardSidebar(
     sidebarMenu(id = 'menubar',
@@ -19,8 +19,7 @@ dashboardPage(skin = 'green',
 
       menuItem("Data entry",  icon = icon("table"),
         menuSubItem('ADULTS', href = '/bib2/DataEntry/BTatWESTERHOLZ/ADULTS', newtab = TRUE),
-        menuSubItem('NESTS',  href = '/bib2/DataEntry/BTatWESTERHOLZ/NESTS', newtab = TRUE),
-        menuSubItem('SNB ',   href = '/bib2/DataEntry/SNBatWESTERHOLZ/file_status', newtab = TRUE)
+        menuSubItem('NESTS',  href = '/bib2/DataEntry/BTatWESTERHOLZ/NESTS', newtab = TRUE)
         ),
 
       menuItem("SNB",  icon = icon("tablet"), tabName  = 'SNB_tab' ),
@@ -42,9 +41,10 @@ dashboardPage(skin = 'green',
 
   tabItems(
     tabItem(tabName = "board_tab",
-        box(title = 'Laying date estimation', 
-          plotOutput('predict_first_egg') 
-          ) ),
+        box(title = 'Laying date estimation', plotOutput('predict_first_egg') ) ,
+        box(title = 'Phenology', plotOutput('phenology') ) 
+
+        ),
 
     tabItem(tabName = "custom_tab",
       shiny::tags$style(type = "text/css", "#custom_script {height: calc(81vh - 1px) !important;}"),

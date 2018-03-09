@@ -58,18 +58,47 @@ nests <-   function(refdate = Sys.Date() ) {
    }
 
 
+#' nest_state
+#' @export
+#' @param x             a data.table as returned by nests()
+#' @param nesr_stages   character vector
+#' @param hatchingModel a model to use for prediction
+
 #' phenology
 #' @export
+#' @param  minimum_stage (one of "LT", "B", "C", "LIN", "firstEgg","hatchDate","fledgeDate") default to "C"
 #' @examples
 #' phenology()
-phenology <-  function() {
+phenology <-  function(minimum_stage = 'C') {
 
- x = idbq("SELECT n.year_,n.box, date_C firstCup ,date_LIN firstLining,  firstEgg,hatchDate,fledgeDate 
-    from BTatWESTERHOLZ.NESTS n left join BTatWESTERHOLZ.BREEDING b
-        on n.box = b.box and n.year_ = b.year_")
+    s = data.table(
+        # def by the input of this function
+        stage_code  = c("LT", "B", "C", "LIN", "firstEgg","hatchDate","fledgeDate"), 
+         # def by db
+        stage       =  c("date_LT", "date_B", "date_C", "date_LIN", "firstEgg","hatchDate","fledgeDate"),
+        # def by the output of this function
+        stage_name  =  c("firstLittle", "firstBottom", "firstCup", "firstLining", "firstEgg","hatchDate","fledgeDate"), 
+        stage_id    = 1:7
+        )
+    if(!missing(minimum_stage))
+    ss= s[ stage_id >= s[stage_code == minimum_stage]$stage_id] else ss = s
 
- melt(x, id.vars  = c('year_', 'box'), na.rm = TRUE, value.name = 'date_')
+    n = idbq('select year_, box,  date_LT, date_B,date_C, date_LIN from BTatWESTERHOLZ.NESTS')
+    b = idbq('select year_, box, firstEgg,hatchDate,fledgeDate  from BTatWESTERHOLZ.BREEDING')
+
+    d = merge(n, b, all.x = TRUE, all.y = TRUE, by = c('year_', 'box') )
+    
+    d = melt(d, id.vars  = c('year_', 'box'), na.rm = TRUE, value.name = 'date_')
+
+
+    d = merge(d, ss[, .(stage,stage_name)], by.x = 'variable', by.y = 'stage')
+    d[, variable := NULL]
+    setnames(d, 'stage_name', 'variable') # not to break upstream functions
+
+    d
 
    
  }
+
+
 

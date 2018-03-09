@@ -4,8 +4,11 @@ shinyServer(function(input, output, session) {
   observe( on.exit( assign('input', reactiveValuesToList(input) , envir = .GlobalEnv)) )
   overnightdata <<- data.table(long = integer(0), lat = integer(0), sleeping_bird = character(0))
 
+  autoInv_1h <- reactiveTimer(1000*60*60) #
+
  # main board
     output$predict_first_egg <- renderPlot({
+      autoInv_1h()
       if(length(input$date) > 0 ) {
 
         firstLining = nests(input$date)[nest_stage == "LIN", min(date_time)] 
@@ -17,7 +20,7 @@ shinyServer(function(input, output, session) {
         if ( length(reldays) > 0) {
          lword = if(reldays < 0) 'since' else 'to'
          Title = paste( abs(reldays) , 'days', lword , 'the estimated first egg.')
-         } else Title = NULL
+         } else Title = "Waiting for the first lining ... "
 
         ggplot(predFirstEggData, aes(y = first_Egg , x = first_Lining, x) ) + 
            geom_point() + 
@@ -25,6 +28,12 @@ shinyServer(function(input, output, session) {
            geom_pointrange(data = predFirstEgg, aes(x = firstLining, y = fit, ymin = lwr, ymax = upr ), col = 2) + 
            ggtitle(Title)
         }   
+
+    })
+    
+    output$phenology <- renderPlot({
+     
+      plot_phenology_firstDates ()
 
     })
 
@@ -35,7 +44,13 @@ shinyServer(function(input, output, session) {
       css = isolate(eval(parse(text=input$custom_script)))
       nd = nests(input$date) 
 
-      map_nests(nest_state(nd, input$nest_stages)  , size = input$font_size, title = paste('Reference:', input$date) )   + customGeoms
+      if(nrow(nd) == 0) { 
+        toastr_error("There are no nests yet!", preventDuplicates = TRUE)
+        stop("This section works only when there are data in the NESTS table!")
+        }
+
+
+      map_nests(nest_state(nd, input$nest_stages, hatchingModel)  , size = input$font_size, title = paste('Reference:', input$date) )   + customGeoms
 
       })
 
@@ -76,12 +91,18 @@ shinyServer(function(input, output, session) {
         if(nrow(nd) ==0)  stop( toastr_warning( paste('There are no data on', input$date ) ) )
  
         if( input$stage_age_type == 'Equal with' ) {
-          N = nest_state(nd, input$nest_stages, hatchingModel)[nest_stage_age %in% (input$stage_age_equal %>% as.numeric) ] %>%
-          .[days_to_hatch < input$days_to_hatch | is.na(days_to_hatch)]
+
+          N = nest_state(nd, input$nest_stages, hatchingModel)
+          N = N[nest_stage_age %in% (input$stage_age_equal %>% as.numeric) ]
+          N = N[days_to_hatch < input$days_to_hatch | is.na(days_to_hatch)]
+          
           }
+
+
         if( input$stage_age_type == 'Greater or equal than' ) {
-          N = nest_state(nd, input$nest_stages, hatchingModel)[nest_stage_age >= input$stage_age_greater] %>%
-          .[days_to_hatch < input$days_to_hatch | is.na(days_to_hatch)]
+          N = nest_state(nd, input$nest_stages, hatchingModel)
+          N = N[nest_stage_age >= input$stage_age_greater]
+          N = N[days_to_hatch < input$days_to_hatch | is.na(days_to_hatch)]
           }
 
         m <<- map_nests(N , size = input$font_size, title = paste('Reference:', input$date) )  

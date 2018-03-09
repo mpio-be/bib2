@@ -24,7 +24,7 @@
 
 
   # validator parameters
-    nest_stages = c('U', 'LT','R','B','BC','C','LIN','E','WE','Y','NOTA','WSP')
+    nest_stages = c('NOTA','WSP', 'U', 'LT','R','B','BC','C','LIN','E','Y')
     nest_failed_reasons = c('R', 'P', 'D', 'H', 'U')
     authors = dbq(user = user, host = host, q = paste0('SELECT initials from ', db, '.AUTHORS UNION 
                           SELECT distinct initials from BTatWESTERHOLZ.AUTHORS') )$initials
