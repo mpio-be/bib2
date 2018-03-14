@@ -12,7 +12,7 @@ Depends:
     ggthemes,
     data.table,
     devtools,
-    Remotes: mpio-be/sdb
+Remotes: mpio-be/sdb
 Suggests:
     shiny (>= 0.8.0),
     rhandsontable (>= 0.3.4.01),
