@@ -1,5 +1,5 @@
 Package: bib2
-Version: 2018.1
+Version: 2018.2
 Author: Mihai Valcu
 Maintainer: Mihai Valcu <valcu@orn.mpg.de>
 Title: BIrd Breeding, field work planner
@@ -12,7 +12,6 @@ Depends:
     ggthemes,
     data.table,
     devtools,
-Remotes: mpio-be/sdb
 Suggests:
     shiny (>= 0.8.0),
     rhandsontable (>= 0.3.4.01),
@@ -23,6 +22,8 @@ Suggests:
     shinyTree,
     dygraphs,
     openxlsx
+Remotes: 
+    mpio-be/sdb
 VignetteBuilder: knitr
 LazyData: true
 RoxygenNote: 6.0.1
