@@ -3,6 +3,7 @@ Version: 2018.1
 Author: Mihai Valcu
 Maintainer: Mihai Valcu <valcu@orn.mpg.de>
 Title: BIrd Breeding, field work planner
+Description: Nest-box field work organizer (mapping and data entry).
 Depends:
     R (>= 3.0.0),
     magrittr,
@@ -11,6 +12,7 @@ Depends:
     ggthemes,
     data.table,
     devtools,
+    Remotes: mpio-be/sdb
 Suggests:
     shiny (>= 0.8.0),
     rhandsontable (>= 0.3.4.01),
@@ -21,7 +23,6 @@ Suggests:
     shinyTree,
     dygraphs,
     openxlsx
-Description: System management
 VignetteBuilder: knitr
 LazyData: true
 RoxygenNote: 6.0.1
