@@ -12,6 +12,7 @@ Depends:
     ggthemes,
     data.table,
     devtools,
+    sdb
 Suggests:
     shiny (>= 0.8.0),
     rhandsontable (>= 0.3.4.01),
