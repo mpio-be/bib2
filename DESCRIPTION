@@ -25,6 +25,7 @@ Suggests:
     openxlsx
 Remotes: 
     mpio-be/sdb
+    mpio-be/DataEntry
 VignetteBuilder: knitr
 LazyData: true
 RoxygenNote: 6.0.1
