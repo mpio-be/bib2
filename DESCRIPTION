@@ -1,9 +1,9 @@
 Package: bib2
 Version: 2018.2
-Author: Mihai Valcu
-Maintainer: Mihai Valcu <valcu@orn.mpg.de>
 Title: BIrd Breeding, field work planner
 Description: Nest-box field work organizer (mapping and data entry).
+Author: Mihai Valcu
+Maintainer: Mihai Valcu <valcu@orn.mpg.de>
 Depends:
     R (>= 3.0.0),
     magrittr,
