@@ -12,7 +12,7 @@
     dcf <- read.dcf(file=system.file('DESCRIPTION', package=pkgname) )
     packageStartupMessage(paste('This is', pkgname, dcf[, 'Version'] ))
 
-    options(host.bib2      = scidbadmin::getSysOption('host')  )
+    options(host.bib2      =  sdb::probeDB(TRUE)  ) # FALSE sets to '127.0.0.1'
     options(user.bib2      = 'bt')
     options(nest.stages   
         = c( 'U',         'LT' ,   'R' ,     'B'  ,    'BC' ,    'C' ,    'LIN'  ,    'E'  ,   'WE',    'Y',      'NOTA',  'WSP')  )
