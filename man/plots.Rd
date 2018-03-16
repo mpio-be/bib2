@@ -5,8 +5,10 @@
 \alias{plot_phenology_firstDates}
 \title{plots}
 \usage{
-plot_phenology_firstDates(refdate = Sys.Date(),
-  x = phenology_firstDates(refdate))
+plot_phenology_firstDates(...)
+}
+\arguments{
+\item{...}{goes to phenology()}
 }
 \examples{
   all_phenology = phenology()

@@ -14,9 +14,9 @@ predict_firstEgg
 }
 \examples{
 date_ = Sys.Date()
-F = phenology()
+F = phenology('LIN')
 predFirstEggData = predict_firstEgg_data(F, date_ )
-predFirstEgg = predict_firstEgg(predFirstEggData, yday(date_) )[, date_ := as.POSIXct(date_) ]
+predFirstEgg = predict_firstEgg(predFirstEggData, yday(date_), year(date_) )[, date_ := as.POSIXct(date_) ]
 
 ggplot(predFirstEggData, aes(y = first_Egg , x = first_Lining, x) ) + 
  geom_point() + 

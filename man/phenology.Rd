@@ -2,12 +2,22 @@
 % Please edit documentation in R/db_queries.R
 \name{phenology}
 \alias{phenology}
-\title{phenology}
+\title{nest_state}
 \usage{
-phenology()
+phenology(minimum_stage = "C")
+}
+\arguments{
+\item{minimum_stage}{(one of "LT", "B", "C", "LIN", "firstEgg","hatchDate","fledgeDate") default to "C"}
+
+\item{x}{a data.table as returned by nests()}
+
+\item{nesr_stages}{character vector}
+
+\item{hatchingModel}{a model to use for prediction
+phenology}
 }
 \description{
-phenology
+nest_state
 }
 \examples{
 phenology()
