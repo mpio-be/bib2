@@ -6,13 +6,14 @@ Author: Mihai Valcu
 Maintainer: Mihai Valcu <valcu@orn.mpg.de>
 Depends:
     R (>= 3.0.0),
+    sdb,
+    DataEntry,
     magrittr,
     rgdal,
     ggplot2,
     ggthemes,
     data.table,
     devtools,
-    sdb
 Suggests:
     shiny (>= 0.8.0),
     rhandsontable (>= 0.3.4.01),
