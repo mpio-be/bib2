@@ -2,8 +2,8 @@
 # shiny::runApp('inst/UI/main', launch.browser = TRUE)
 
 # settings
-    sapply(c('sdb', 'scidbadmin', 'bib2','SNB2', 'knitr', 'ggplot2', 'ggthemes','digest','ggrepel',
-                  'shiny','shinyjs','shinydashboard','shinyBS','shinytoastr', 'shinyTree', 'shinyAce', 'MASS'),
+    sapply(c('bib2','SNB2', 'knitr', 'ggplot2', 'ggthemes','digest','ggrepel', 'MASS',
+             'shiny','shinyjs','shinydashboard','shinyBS','shinytoastr', 'shinyTree', 'shinyAce'),
       function(x) suppressPackageStartupMessages( require(x, character.only = TRUE, quietly = TRUE) ))
     options(stringsAsFactors = FALSE)
 
