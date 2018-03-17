@@ -4,7 +4,7 @@
 #' @examples
 #' x = Breeding()
 Breeding <- function() {
-    idbq("select year_,box,IDfemale,firstEgg,clutch, laying_gap, hatchDate FROM BTatWESTERHOLZ.BREEDING 
+    bibq("select year_,box,IDfemale,firstEgg,clutch, laying_gap, hatchDate FROM BTatWESTERHOLZ.BREEDING 
     WHERE secondClutch = 0  and firstEgg is not NULL and hatchDate is not NULL and laying_gap < 4
         order by year_, firstEgg")
     }
@@ -15,11 +15,11 @@ Breeding <- function() {
 #' @examples
 #' x = allAdults()
 allAdults <- function() {
-    a = idbq("SELECT a.ID, capture_date_time datetime_, age, weight, s.sex FROM BTatWESTERHOLZ.ADULTS a 
+    a = bibq("SELECT a.ID, capture_date_time datetime_, age, weight, s.sex FROM BTatWESTERHOLZ.ADULTS a 
         LEFT JOIN BTatWESTERHOLZ.SEX s 
             ON a.ID = s.ID ")
 
-    x = idbq("SELECT a.ID, date_time_caught  datetime_, age, weight, s.sex FROM ADULTS a 
+    x = bibq("SELECT a.ID, date_time_caught  datetime_, age, weight, s.sex FROM ADULTS a 
         LEFT JOIN BTatWESTERHOLZ.SEX s 
             ON a.ID = s.ID ")
       rbind(a, x)
@@ -30,7 +30,7 @@ allAdults <- function() {
 #' @examples
 #' x = adults
 adults <-   function(refdate = Sys.Date(), ...) {
-    x = idbq("SELECT upper(a.ID) ID,  lower(FUNCTIONS.combo(UL,LL, UR, LR)) combo,  date_time_caught  datetime_, age, weight, tarsus, a.sex, s.sex gsex 
+    x = bibq("SELECT upper(a.ID) ID,  lower(FUNCTIONS.combo(UL,LL, UR, LR)) combo,  date_time_caught  datetime_, age, weight, tarsus, a.sex, s.sex gsex 
                         FROM ADULTS a 
                             LEFT JOIN BTatWESTERHOLZ.SEX s 
                                 ON a.ID = s.ID ", ...)
@@ -49,7 +49,7 @@ nests <-   function(refdate = Sys.Date() ) {
     sql = paste("SELECT * FROM NESTS  
                     WHERE nest_stage is not  NULL and date_time is not NULL and date_time <=", shQuote(refdate))
 
-    x = idbq(sql, year = year(refdate)  )
+    x = bibq(sql, year = year(refdate)  )
 
     setattr(x, 'refdate', refdate)
     x
@@ -83,8 +83,8 @@ phenology <-  function(minimum_stage = 'C') {
     if(!missing(minimum_stage))
     ss= s[ stage_id >= s[stage_code == minimum_stage]$stage_id] else ss = s
 
-    n = idbq('select year_, box,  date_LT, date_B,date_C, date_LIN from BTatWESTERHOLZ.NESTS')
-    b = idbq('select year_, box, firstEgg,hatchDate,fledgeDate  from BTatWESTERHOLZ.BREEDING')
+    n = bibq('select year_, box,  date_LT, date_B,date_C, date_LIN from BTatWESTERHOLZ.NESTS')
+    b = bibq('select year_, box, firstEgg,hatchDate,fledgeDate  from BTatWESTERHOLZ.BREEDING')
 
     d = merge(n, b, all.x = TRUE, all.y = TRUE, by = c('year_', 'box') )
     

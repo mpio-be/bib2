@@ -10,7 +10,7 @@ yy2dbnam <- function(year) {
 
 #' query function
 #' @export
-idbq <- function(query, year = year(Sys.Date()), db = yy2dbnam(year) , host = getOption('host.bib2') , user = getOption('user.bib2') ) {
+bibq <- function(query, year = year(Sys.Date()), db = yy2dbnam(year) , host = getOption('host.bib2') , user = getOption('user.bib2') ) {
     require(sdb)
     if(missing(year))
     year = format(Sys.Date(), format = "%Y")

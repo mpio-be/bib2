@@ -3,11 +3,11 @@
 # shiny::runApp('inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS')
 
 # settings
-  sapply(c('sdb','shiny','shinyjs','rhandsontable','miniUI','shinyBS','shinytoastr','knitr', 'DataEntry'),
+  sapply(c('bib2','shiny','shinyjs','rhandsontable','miniUI','shinyBS','shinytoastr','knitr', 'DataEntry'),
     require, character.only = TRUE, quietly = TRUE)
 
   user            = 'bt'
-  host            =  sdb::probeDB(TRUE) # FALSE sets to '127.0.0.1'
+  host            =  getOption('host.bib2')
 
 
   db              = 'FIELD_BTatWESTERHOLZ'

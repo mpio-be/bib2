@@ -12,9 +12,9 @@ Depends:
     rgdal,
     ggplot2,
     ggthemes,
-    data.table,
-    devtools,
+    data.table
 Suggests:
+    devtools,
     shiny (>= 0.8.0),
     rhandsontable (>= 0.3.4.01),
     shinydashboard,
@@ -22,7 +22,6 @@ Suggests:
     shinyjs,
     shinytoastr,
     shinyTree,
-    dygraphs,
     openxlsx
 Remotes: 
     mpio-be/sdb,
