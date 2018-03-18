@@ -3,7 +3,7 @@
 # shiny::runApp('inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS')
 
 # settings
-  sapply(c('bib2','shiny','shinyjs','rhandsontable','miniUI','shinyBS','shinytoastr','knitr', 'DataEntry'),
+  sapply(c('bib2','shiny','shinyjs','rhandsontable','miniUI','shinyBS','shinytoastr','knitr', 'DataEntry', 'data.table', 'shinydashboard'),
     require, character.only = TRUE, quietly = TRUE)
 
   user            = 'bt'

@@ -1,7 +1,8 @@
+#######################
 
-shinyServer( function(input, output,session) {
+function(input, output,session) {
 
-  saved_session <<- FALSE
+  observe( on.exit( assign('input', reactiveValuesToList(input) , envir = .GlobalEnv)) )
 
 
   observeEvent(input$refresh, {
@@ -9,8 +10,9 @@ shinyServer( function(input, output,session) {
       })
 
   Save <- eventReactive(input$saveButton, {
-
     return(hot_to_r(input$table))
+
+    #### 
 
    })
 
@@ -18,15 +20,9 @@ shinyServer( function(input, output,session) {
     x = Save() %>% data.table
     x = cleaner(x)
 
-    x<<- x
+    # x<<- x
 
     isolate(ignore_validators <- input$ignore_checks )
-
-    if(saved_session) {
-      msg = 'This set was already saved to the database. Press Start New to enter another set.'
-      toastr_error(msg)
-      stop(msg)
-    }
 
     # inspector
       cc = inspector(x)
@@ -41,14 +37,20 @@ shinyServer( function(input, output,session) {
     # db update
       if(   nrow(cc) == 0 | (nrow(cc) > 0 & ignore_validators ) ) {
 
-        con = dbcon(user = user,  host = host)
-        dbq(con, paste('USE', db) )
-        saved_set = dbWriteTable(con, table, x, append = TRUE, row.names = FALSE)
+      con = dbcon(user = user,  host = host, db = db)
+    
+      saved_set = dbWriteTable(con, dbtable, x, append = TRUE, row.names = FALSE)
 
-        if(saved_set) {
+
+      if(saved_set) {
+          toggleState(id = "saveButton")
+          
           toastr_success( paste(nrow(x), "rows saved to database.") )
-          toastr_info('Before entering a new set press Start new.')
-          saved_session <<- TRUE
+          toastr_warning('Refreshing in 5 secs ...', progressBar = TRUE, timeOut = 5000) 
+          Sys.sleep(5)
+          
+          shinyjs::js$refresh()
+
           }
 
         dbDisconnect(con)
@@ -61,33 +63,34 @@ shinyServer( function(input, output,session) {
 
 
    # title
-    N <- reactiveValues(n = grand_n(table, db, user, host))
+    N <- reactiveValues(n = grand_n(dbtable, db, user, host))
 
     output$title <- renderText({
       observe({
       input$saveButton
-      N$n <- grand_n(table, db, user, host)
+      N$n <- grand_n(dbtable, db, user, host)
       })
 
-      paste( paste(table, db, sep = '.'),  '[Total entries:', N$n, ']' )
+      as.integer(N$n)
 
       })
-
-
 
   output$table  <- renderRHandsontable({
     rhandsontable(H) %>%
       hot_cols(columnSorting = FALSE, manualColumnResize = TRUE) %>%
-      hot_rows(fixedRowsTop = 1)  %>%
+      hot_rows(fixedRowsTop = 1) %>%
       hot_col(col = "nest_stage", type = "dropdown", source = nest_stages )
 
-   })
 
-   output$column_comments <- renderTable({
+
+  })
+
+
+
+  output$column_comments <- renderTable({
       comments
   })
 
+ }
 
-
-  })
 

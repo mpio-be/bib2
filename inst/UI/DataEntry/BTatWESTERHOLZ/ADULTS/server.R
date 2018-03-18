@@ -18,15 +18,15 @@ function(input, output,session) {
 
   output$run_save <- renderUI({
     x = Save() %>% data.table
-    x = cleaner(x)
+    x<<- x
+    cleaner(x)
 
-    # x<<- x
 
     isolate(ignore_validators <- input$ignore_checks )
 
     # inspector
       cc = inspector(x)
-      #cc<<- cc
+      cc<<- cc
 
       if(nrow(cc) > 0 & !ignore_validators) {
           toastr_error( boostrap_table(cc),

@@ -1,16 +1,15 @@
-# TODO
 
  # my_remote2local('FIELD_BTatWESTERHOLZ', remoteUser = 'mihai', localUser = 'mihai')
- # shiny::runApp('inst/UI/DB/BTatWESTERHOLZ/NESTS')
+ # shiny::runApp('inst/UI/DataEntry/BTatWESTERHOLZ/NESTS')
 
 # settings
-  sapply(c('sdb','shiny','shinyjs','rhandsontable','miniUI','shinyBS','shinytoastr','knitr', 'DataEntry'),
+  sapply(c('sdb', 'DataEntry'),
     require, character.only = TRUE, quietly = TRUE)
 
   user                 = 'bt'
-  host                 =  sdb::probeDB(TRUE) # FALSE sets to '127.0.0.1'
+  host                 =  getOption('host.bib2') 
   db                   = 'FIELD_BTatWESTERHOLZ'
-  table                =  'NESTS'
+  dbtable              =  'NESTS'
   n_empty_lines        = 25
    excludeColumns      = 'N_pk'
 
