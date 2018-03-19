@@ -1,5 +1,5 @@
 Package: bib2
-Version: 2018.3
+Version: 2018.4
 Title: BIrd Breeding, field work planner
 Description: Nest-box field work organizer (mapping and data entry).
 Author: Mihai Valcu
@@ -11,18 +11,14 @@ Depends:
     magrittr,
     rgdal,
     ggplot2,
-    ggthemes,
     data.table
-Suggests:
+Suggests: 
     devtools,
     shiny (>= 0.8.0),
-    rhandsontable (>= 0.3.4.01),
-    shinydashboard,
-    shinyBS,
-    shinyjs,
-    shinytoastr,
+    ggthemes,
     shinyTree,
-    openxlsx
+    openxlsx,
+    testthat
 Remotes: 
     mpio-be/sdb,
     mpio-be/DataEntry

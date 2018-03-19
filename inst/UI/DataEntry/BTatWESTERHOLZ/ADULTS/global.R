@@ -1,9 +1,12 @@
-
- # my_remote2local('FIELD_BTatWESTERHOLZ',  remoteUser = 'mihai', localUser = 'mihai')
-# shiny::runApp('inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS')
+# ==========================================================================
+# ADULTS table Data Entry
+# sdb::my_remote2local('FIELD_BTatWESTERHOLZ',  remoteUser = 'mihai', localUser = 'mihai')
+# shiny::runApp('inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS', launch.browser = TRUE)
+# 
+# ==========================================================================
 
 # settings
-  sapply(c('bib2','shiny','shinyjs','rhandsontable','miniUI','shinyBS','shinytoastr','knitr', 'DataEntry', 'data.table', 'shinydashboard'),
+  sapply(c('bib2','DataEntry', 'data.table', 'shinyjs', 'shinyBS'),
     require, character.only = TRUE, quietly = TRUE)
 
   user            = 'bt'
@@ -11,16 +14,16 @@
 
 
   db              = 'FIELD_BTatWESTERHOLZ'
-  dbtable         =  'ADULTS'
+  tableName       =  'ADULTS'
   n_empty_lines   =  20
   excludeColumns  = 'ad_pk'
 
 # data
-  H = emptyFrame(user, host, db, dbtable, n = n_empty_lines, excludeColumns, 
+  H = emptyFrame(user, host, db, tableName, n = n_empty_lines, excludeColumns, 
         preFilled = list(
             date_time_caught = format(Sys.Date(), "%Y-%m-%d %H:%M") ) )
   
-  comments = column_comment(user, host, db, dbtable,excludeColumns)
+  comments = column_comment(user, host, db, tableName,excludeColumns)
 
 
   # validator parameters
@@ -55,3 +58,18 @@
 
     }
 
+
+# table summary function
+    table_smry <- function() {
+      x = bibq('select ID, transponder,  author, sex, age from ADULTS where ID is not NULL')
+
+      data.table(
+          N_entries = nrow(x), 
+          N_unique_IDs = length(unique(x$ID))
+
+
+             )
+
+
+
+    }
