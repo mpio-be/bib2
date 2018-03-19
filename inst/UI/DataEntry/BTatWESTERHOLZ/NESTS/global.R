@@ -1,25 +1,29 @@
+# ==========================================================================
+# NESTS table Data Entry
+# sdb::my_remote2local('FIELD_BTatWESTERHOLZ',  remoteUser = 'mihai', localUser = 'mihai')
+# shiny::runApp('inst/UI/DataEntry/BTatWESTERHOLZ/NESTS', launch.browser = TRUE)
+# 
+# ==========================================================================
 
- # my_remote2local('FIELD_BTatWESTERHOLZ', remoteUser = 'mihai', localUser = 'mihai')
- # shiny::runApp('inst/UI/DataEntry/BTatWESTERHOLZ/NESTS')
 
 # settings
-  sapply(c('sdb', 'DataEntry'),
+  sapply(c('bib2','DataEntry', 'data.table', 'shinyjs', 'shinyBS'),
     require, character.only = TRUE, quietly = TRUE)
 
   user                 = 'bt'
   host                 =  getOption('host.bib2') 
   db                   = 'FIELD_BTatWESTERHOLZ'
-  dbtable              =  'NESTS'
-  n_empty_lines        = 25
+  tableName              =  'NESTS'
+  n_empty_lines        = 30
    excludeColumns      = 'N_pk'
 
 # data
-  H = emptyFrame(user, host, db, table, n = 10, excludeColumns, 
+  H = emptyFrame(user, host, db, tableName, n = 10, excludeColumns, 
         preFilled = list(
             date_time = as.character(Sys.Date()) ) 
         )
   H[, box := as.integer(box)]
-  comments = column_comment(user, host, db, table,excludeColumns)
+  comments = column_comment(user, host, db, tableName,excludeColumns)
 
 
   # validator parameters
@@ -56,3 +60,16 @@
     o[, .(rowid = paste(rowid, collapse = ',')), by = .(variable, reason)]
     }
 
+
+# table summary function
+    table_smry <- function() {
+      x = bibq('select * FROM NESTS')
+
+      data.table(
+          N_entries = nrow(x)
+
+             )
+
+
+
+    }

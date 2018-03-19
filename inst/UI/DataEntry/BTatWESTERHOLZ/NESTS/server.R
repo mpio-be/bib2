@@ -18,7 +18,7 @@ function(input, output,session) {
 
   output$run_save <- renderUI({
     x = Save() %>% data.table
-    x = cleaner(x)
+    cleaner(x)
 
     # x<<- x
 
@@ -30,7 +30,7 @@ function(input, output,session) {
 
       if(nrow(cc) > 0 & !ignore_validators) {
           toastr_error( boostrap_table(cc),
-            title = HTML('<p>Data entry errors. Check <q>Ignore warnings</q> to by-pass this filter and save the data as it is.<br> WRITE IN THE COMMENTS WHY DID YOU IGNORE WARNINGS!</p>') ,
+            title = HTML('<p>Data entry errors. Check <q>Ignore warnings</q> to by-pass this filter and save the data as it is.<br> Write in the comments why did you ignore warnings!</p>') ,
             timeOut = 100000, closeButton = TRUE, position = 'top-full-width')
        }
 
@@ -39,14 +39,14 @@ function(input, output,session) {
 
       con = dbcon(user = user,  host = host, db = db)
     
-      saved_set = dbWriteTable(con, dbtable, x, append = TRUE, row.names = FALSE)
+      saved_set = dbWriteTable(con, tableName, x, append = TRUE, row.names = FALSE)
 
 
       if(saved_set) {
           toggleState(id = "saveButton")
           
-          toastr_success( paste(nrow(x), "rows saved to database.") )
-          toastr_warning('Refreshing in 5 secs ...', progressBar = TRUE, timeOut = 5000) 
+          toastr_success( paste(nrow(x), "rows saved to database.") , position = "top-center")
+          toastr_warning('Refreshing in 5 secs ...', progressBar = TRUE, timeOut = 5000, position = "top-center") 
           Sys.sleep(5)
           
           shinyjs::js$refresh()
@@ -62,34 +62,39 @@ function(input, output,session) {
     })
 
 
-   # title
-    N <- reactiveValues(n = grand_n(dbtable, db, user, host))
-
-    output$title <- renderText({
-      observe({
-      input$saveButton
-      N$n <- grand_n(dbtable, db, user, host)
-      })
-
-      as.integer(N$n)
-
-      })
-
+   # HOT TABLE 
   output$table  <- renderRHandsontable({
     rhandsontable(H) %>%
       hot_cols(columnSorting = FALSE, manualColumnResize = TRUE) %>%
       hot_rows(fixedRowsTop = 1) %>%
-      hot_col(col = "nest_stage", type = "dropdown", source = nest_stages )
+      hot_col(col = "nest_stage", type = "dropdown", source = nest_stages ) %>%
+      hot_col(col = "author", type = "dropdown", source = authors )
 
 
 
   })
 
 
-
+ # columns definitions
   output$column_comments <- renderTable({
       comments
   })
+
+
+
+  # table summary
+  getDataSummary <- eventReactive(input$tableInfoButton, {
+
+    table_smry()
+
+   })
+
+  output$data_summary <- renderTable({
+
+      getDataSummary()
+
+      })
+
 
  }
 
