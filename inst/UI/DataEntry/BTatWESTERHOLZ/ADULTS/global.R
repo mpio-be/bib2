@@ -1,6 +1,6 @@
 # ==========================================================================
 # ADULTS table Data Entry
-# sdb::my_remote2local('FIELD_BTatWESTERHOLZ',  remoteUser = 'mihai', localUser = 'mihai')
+# my_remote2local('FIELD_BTatWESTERHOLZ',  remoteUser = 'mihai', localUser = 'mihai')
 # shiny::runApp('inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS', launch.browser = TRUE)
 # 
 # ==========================================================================

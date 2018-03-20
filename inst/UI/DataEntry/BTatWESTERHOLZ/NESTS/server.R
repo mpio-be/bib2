@@ -75,26 +75,24 @@ function(input, output,session) {
   })
 
 
- # columns definitions
+  # MODALS
+  # column definitions
   output$column_comments <- renderTable({
       comments
   })
 
-
-
-  # table summary
+  # DATA summary
   getDataSummary <- eventReactive(input$tableInfoButton, {
-
     table_smry()
-
    })
-
   output$data_summary <- renderTable({
+    getDataSummary()
+    })
 
-      getDataSummary()
-
-      })
-
+  # CHEATSHEET
+  output$cheatsheet_show <- renderUI({
+      includeMarkdown(system.file('cheatsheet.md', package = "DataEntry"))
+    })
 
  }
 
