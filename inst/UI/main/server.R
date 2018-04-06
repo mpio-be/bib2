@@ -88,6 +88,9 @@ shinyServer(function(input, output, session) {
     output$nestsmap_show <- renderPlot({
       if(length(input$date) > 0 ) { # to avoid the split moment when the date  is changed
         nd = nests(input$date)  
+
+
+
         if(nrow(nd) ==0)  stop( toastr_warning( paste('There are no data on', input$date ) ) )
  
         if( input$stage_age_type == 'Equal with' ) {
@@ -95,7 +98,6 @@ shinyServer(function(input, output, session) {
           N = nest_state(nd, input$nest_stages, hatchingModel)
           N = N[nest_stage_age %in% (input$stage_age_equal %>% as.numeric) ]
           N = N[days_to_hatch < input$days_to_hatch | is.na(days_to_hatch)]
-          
           }
 
 
@@ -104,6 +106,8 @@ shinyServer(function(input, output, session) {
           N = N[nest_stage_age >= input$stage_age_greater]
           N = N[days_to_hatch < input$days_to_hatch | is.na(days_to_hatch)]
           }
+
+        # n <<- N     
 
         m <<- map_nests(N , size = input$font_size, title = paste('Reference:', input$date) )  
         m

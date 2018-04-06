@@ -25,12 +25,14 @@ map_base(size = 2.5, family = "sans", fontface = "plain",
   printdt = FALSE)
 
 map_nests(n, size = 2.5, family = "sans", fontface = "plain",
-  title = paste("made on:", Sys.Date()))
+  title = paste("made on:", Sys.Date()), notes = "")
 }
 \arguments{
 \item{n}{a data.table returned by  nests()}
 
 \item{title}{goes to ggtitle (should be the reference date)}
+
+\item{notes}{below legend annotations}
 }
 \value{
 a list of geoms defining the legend around the box
@@ -41,5 +43,5 @@ map_base(family = 'sans')
  n = nests(Sys.Date() - 1 )
  ns = nest_state(n, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
  map_nests(ns)  
- map_nests(ns) + print_ann() 
+ m = map_nests(ns) + print_ann() 
 }

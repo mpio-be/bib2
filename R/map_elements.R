@@ -96,18 +96,19 @@ map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = F
 #' @rdname maps
 #' @param   n     a data.table returned by  nests()
 #' @param   title goes to ggtitle (should be the reference date)
+#' @param   notes below legend annotations
 #' @examples
 #'  n = nests(Sys.Date() - 1 )
 #'  ns = nest_state(n, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
 #'  map_nests(ns)  
-#'  map_nests(ns) + print_ann() 
-map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain', title  = paste('made on:', Sys.Date() ) )  {
+#'  m = map_nests(ns) + print_ann() 
+map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain', 
+                      title  = paste('made on:', Sys.Date() ),  notes = '')  {
 
     legend = nest_legend(n)
 
     nxy = merge(n, boxesxy, by= 'box')
 
-  g = 
     # frame
     map_empty()+
       theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + ggtitle(title) + map_legend() + 
@@ -123,11 +124,15 @@ map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain', title 
     # nest stage age
     geom_text(data = nxy,aes(x = long, y = lat, label = AGE), vjust = 'bottom', nudge_y = 5,size = size, family = family)+
     # clutch | chicks
-    geom_text(data =  nxy[!is.na(ECK)] ,aes(x = long, y = lat, label = ECK), vjust = 'top', nudge_y = -5,size = size, family = family) 
+    geom_text(data =  nxy[!is.na(ECK)] ,aes(x = long, y = lat, label = ECK), vjust = 'top', nudge_y = -5,size = size, family = family) + 
+
+    guides( color = guide_legend(title = NULL, ncol = 3)) + 
+    
+    annotate('text', x = 0, y = 650, label= paste(l, collapse = '\n') ) 
 
      
     
-    g
+    
   
   }
 
