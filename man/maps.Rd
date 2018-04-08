@@ -32,7 +32,7 @@ map_nests(n, size = 2.5, family = "sans", fontface = "plain",
 
 \item{title}{goes to ggtitle (should be the reference date)}
 
-\item{notes}{below legend annotations}
+\item{notes}{notes under legend annotations}
 }
 \value{
 a list of geoms defining the legend around the box

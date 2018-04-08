@@ -83,7 +83,10 @@ dashboardPage(skin = 'purple',
         conditionalPanel(condition = "input.stage_age_type=='Greater or equal than'",
           numericInput("stage_age_greater", "Stage age ⋝", 0 , min = 0) ), 
 
-          numericInput("days_to_hatch", "Days to hatch ⋝", 0 , min = 0, max = 0, value = 30),
+        numericInput("days_to_hatch", "Days to hatch ⋝", 0 , min = 0, max = 0, value = 30),
+
+        textAreaInput('notes', 'Notes', value = ""), 
+
 
         downloadButton('nestsmap_pdf',label = 'Download PDF')
         )   

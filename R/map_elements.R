@@ -96,7 +96,7 @@ map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = F
 #' @rdname maps
 #' @param   n     a data.table returned by  nests()
 #' @param   title goes to ggtitle (should be the reference date)
-#' @param   notes below legend annotations
+#' @param   notes notes under legend annotations
 #' @examples
 #'  n = nests(Sys.Date() - 1 )
 #'  ns = nest_state(n, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
@@ -128,7 +128,8 @@ map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain',
 
     guides( color = guide_legend(title = NULL, ncol = 3)) + 
     
-    annotate('text', x = 0, y = 650, label= paste(l, collapse = '\n') ) 
+    annotate('text', x = 0, y = 650, hjust = 'left',  vjust = 'top',
+     label= notes) 
 
      
     
