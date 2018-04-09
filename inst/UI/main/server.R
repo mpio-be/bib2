@@ -110,7 +110,7 @@ shinyServer(function(input, output, session) {
         # n <<- N     
 
         m <<- map_nests(N , size = input$font_size, title = paste('Reference:', input$date), 
-                  notes = input$notes )  
+                  notes = input$notes, ny = 720 )  
         m
         }
       

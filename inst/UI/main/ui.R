@@ -85,7 +85,7 @@ dashboardPage(skin = 'purple',
 
         numericInput("days_to_hatch", "Days to hatch ⋝", 0 , min = 0, max = 0, value = 30),
 
-        textAreaInput('notes', 'Notes', value = ""), 
+        textAreaInput('notes', 'Notes', value = "", width = '100%', height = '300px'), 
 
 
         downloadButton('nestsmap_pdf',label = 'Download PDF')

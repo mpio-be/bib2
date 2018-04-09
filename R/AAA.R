@@ -28,9 +28,9 @@
     # Set nest.* options
 
     options(nest.stages   
-        = c( 'U',         'LT' ,   'R' ,     'B'  ,    'BC' ,    'C' ,    'LIN'  ,    'E'  ,   'WE',    'Y',      'NOTA',  'WSP')  )
+        = c( 'U',         'LT' ,   'R' ,     'B'  ,    'BC' ,    'C' ,    'LIN'  ,    'E'  , 'Y',      'NOTA',  'WSP')  )
     options(nest.stages.col   
-        = c('#EEE9BF','#8DB6CD','#82A9CD','#E4AF95','#4CBB17','#4CBB17','#7570b3','#FFD700','#EE7600','#EE0000','#E5E5E5','#FF3399') )
+        = c('#EEE9BF','#8DB6CD','#82A9CD','#E4AF95','#4CBB17','#4CBB17','#7570b3','#FFD700', '#EE0000','#E5E5E5','#FF3399') )
 
     }
 

@@ -31,15 +31,27 @@ plot_phenology_firstDates <- function(...) {
   zz[, Max_lab := format(Max, "%d-%b") ]
   zz[, Min_lab := format(Min, "%d-%b") ]
 
+  # this year
+  n = nests()[, .(minDate = min(date_time)), by = nest_stage]
+  n = n[nest_stage %in% c("LT",  "B", "C", "LIN", "E",  "Y")]
+  n[, year := factor(year(minDate)) ]
+
+  n[, variable := factor(nest_stage, 
+    levels = c("LT",  "B", "C", "LIN", "E",  "Y")%>% rev,
+    labels = c("LITTLE", "BOTTOM", "CUP",  "LINING","LAYING", "HATCHING")%>% rev
+    )]
 
   # g = 
 
-  ggplot(zz, aes(x = variable )) +
-    geom_errorbar(aes(ymin =  Min, ymax = Max) , size = .2, alpha = .6, col = 'red',  width = 0.2 ) + 
-    geom_text_repel(aes(y =  Min, label =  Max_lab ) ) + 
-    geom_text_repel(aes(y =  Max, label =  Min_lab ) ) + 
+  ggplot() +
+    geom_errorbar(  data =zz, aes(x = variable, ymin =  Min, ymax = Max) , size = .5, alpha = .9, col = 'blue',  width = 0.2 ) + 
+    geom_text_repel(data =zz, aes(x = variable, y =  Min, label =  Min_lab ) ) + 
+    geom_text_repel(data =zz, aes(x = variable, y =  Max, label =  Max_lab ) ) + 
+    geom_point(     data = n, aes(x = variable, y = minDate, color = year), size = 3) + 
+
     xlab(NULL) + ylab(NULL)+
     ggtitle("First and last events across years")+
+    theme_classic() + theme(legend.position=c(.9,.9))+
 
     coord_flip() 
 

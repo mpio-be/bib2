@@ -25,8 +25,8 @@ theme_bib2  <- function() {
 #' @rdname maps
 #' @return a list of geoms defining the legend around the box
 map_legend <- function(size = 2.5, right = 'box', left = 'checked days ago', 
-                        top = 'stage age|days to hatch', bottom = 'eggs|chicks', 
-                        x = 543 , y = 735 ) {
+    top = 'stage age|days to hatch', bottom = 'eggs|chicks', 
+    x = 543 , y = 735 ) {
     isp = data.frame( x = x, y = y, right, left, top, bottom)
     list( 
     geom_point(data = isp, aes(x = x, y = y), pch = 19, size = size*.5) , 
@@ -97,13 +97,18 @@ map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = F
 #' @param   n     a data.table returned by  nests()
 #' @param   title goes to ggtitle (should be the reference date)
 #' @param   notes notes under legend annotations
+#' @param   nx    notes x location
+#' @param   ny    notes y location
 #' @examples
-#'  n = nests(Sys.Date() - 1 )
-#'  ns = nest_state(n, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
-#'  map_nests(ns)  
-#'  m = map_nests(ns) + print_ann() 
+#'  x = nests(Sys.Date() - 1 )
+#'  notes = c('note 1: this is note 1\nnote 99: this is note 99\nnote 9999+1: this is note 9999+1')
+#'  n = nest_state(x, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
+#'  map_nests(n)  
+#'  map_nests(n, notes = notes) + print_ann() 
+#'
+#' 
 map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain', 
-                      title  = paste('made on:', Sys.Date() ),  notes = '')  {
+                      title  = paste('made on:', Sys.Date() ),  notes = '', nx = -20, ny = 650)  {
 
     legend = nest_legend(n)
 
@@ -128,11 +133,9 @@ map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain',
 
     guides( color = guide_legend(title = NULL, ncol = 3)) + 
     
-    annotate('text', x = 0, y = 650, hjust = 'left',  vjust = 'top',
+    annotate('text', size = size+1, x = nx, y = ny, hjust = 'left',  vjust = 'top',
      label= notes) 
-
-     
-    
+  
     
   
   }
