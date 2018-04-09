@@ -16,6 +16,6 @@
  hatchingModel = predict_hatchday_model(B, MASS::rlm)  
 
   
- options(host.bib2 = 'scidb.mpio.orn.mpg.de')
+ # options(host.bib2 = 'scidb.mpio.orn.mpg.de')
 
 
