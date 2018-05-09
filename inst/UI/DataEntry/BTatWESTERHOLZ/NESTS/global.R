@@ -14,7 +14,7 @@
   host                 =  getOption('host.bib2') 
   db                   = 'FIELD_BTatWESTERHOLZ'
   tableName              =  'NESTS'
-  n_empty_lines        = 30
+  n_empty_lines        = 60
    excludeColumns      = 'N_pk'
 
 # data
