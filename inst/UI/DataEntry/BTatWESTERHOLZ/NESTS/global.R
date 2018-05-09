@@ -18,7 +18,7 @@
    excludeColumns      = 'N_pk'
 
 # data
-  H = emptyFrame(user, host, db, tableName, n = 10, excludeColumns, 
+  H = emptyFrame(user, host, db, tableName, n = n_empty_lines, excludeColumns, 
         preFilled = list(
             date_time = as.character(Sys.Date()) ) 
         )

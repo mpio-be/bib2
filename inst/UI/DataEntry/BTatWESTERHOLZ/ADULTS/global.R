@@ -15,7 +15,7 @@
 
   db              = 'FIELD_BTatWESTERHOLZ'
   tableName       =  'ADULTS'
-  n_empty_lines   =  20
+  n_empty_lines   =  30
   excludeColumns  = 'ad_pk'
 
 # data
