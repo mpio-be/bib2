@@ -1,9 +1,9 @@
 
 
-#' find database name from year
+#' find database name from year; and if FIELD database has been updated (after September usually)
 #' @export
 yy2dbnam <- function(year) {
-    if(year == format(Sys.Date(), format = "%Y") )
+    if(year == format(Sys.Date(), format = "%Y")  & format(Sys.Date(), format = "%m") > 9 )
        db = 'FIELD_BTatWESTERHOLZ' else
        paste('FIELD', year, 'BTatWESTERHOLZ', sep = "_")
     }
