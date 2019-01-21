@@ -18,6 +18,7 @@ Suggests:
     ggthemes,
     shinyTree,
     openxlsx,
+    xlsx,
     testthat
 Remotes: 
     mpio-be/sdb,
