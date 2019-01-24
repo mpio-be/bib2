@@ -143,7 +143,7 @@ shinyServer(function(input, output, session) {
     observeEvent(input$goOvernight, {
       toastr_info('Wait a bit the dataset is compiling ...', progressBar = TRUE)
 
-      x = try(SNB::overnight(buffer = 2, date = as.Date(input$date)  ), silent = TRUE)
+      x = try(SNB2::overnight(buffer = 2, date = as.Date(input$date)  ), silent = TRUE)
       # x =   data.table(box = sample(1:277, 1) , transp = 'xxx' )
 
       if(!inherits(x, 'try-error') && nrow(x) > 0 ) {
