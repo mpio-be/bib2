@@ -75,6 +75,9 @@ dashboardPage(skin = 'purple',
       fluidRow( 
         Box(width = 10, plotOutput('nestsmap_show')  ),
         Box(width = 2,
+        
+        checkboxInput('experiment', 'Show experiments', value =  TRUE), 
+
         selectInput("nest_stages", "Nest stages:" , getOption('nest.stages'), getOption('nest.stages'), multiple = TRUE ),
         selectInput("stage_age_type", "Stages selection" , c('Equal with', "Greater or equal than"), selected = "Greater or equal than"),
         
