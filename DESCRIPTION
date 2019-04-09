@@ -7,7 +7,6 @@ Maintainer: Mihai Valcu <valcu@orn.mpg.de>
 Depends:
     R (>= 3.0.0),
     sdb,
-    DataEntry,
     magrittr,
     rgdal,
     ggplot2,

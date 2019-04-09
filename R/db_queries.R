@@ -4,10 +4,10 @@
 #' @examples
 #' x = Breeding()
 Breeding <- function() {
-		bibq("select year_,box,IDfemale,firstEgg,clutch, laying_gap, hatchDate FROM BTatWESTERHOLZ.BREEDING 
-		WHERE secondClutch = 0  and firstEgg is not NULL and hatchDate is not NULL and laying_gap < 4
-				order by year_, firstEgg")
-		}
+	bibq("select year_,box,IDfemale,firstEgg,clutch, laying_gap, hatchDate FROM BTatWESTERHOLZ.BREEDING 
+	WHERE secondClutch = 0  and firstEgg is not NULL and hatchDate is not NULL and laying_gap < 4
+			order by year_, firstEgg")
+	}
 
 
 #' allAdults
@@ -15,30 +15,30 @@ Breeding <- function() {
 #' @examples
 #' x = allAdults()
 allAdults <- function() {
-		a = bibq("SELECT a.ID, capture_date_time datetime_, age, weight, s.sex FROM BTatWESTERHOLZ.ADULTS a 
-				LEFT JOIN BTatWESTERHOLZ.SEX s 
-						ON a.ID = s.ID ")
+	a = bibq("SELECT a.ID, capture_date_time datetime_, age, weight, s.sex FROM BTatWESTERHOLZ.ADULTS a 
+			LEFT JOIN BTatWESTERHOLZ.SEX s 
+					ON a.ID = s.ID ")
 
-		x = bibq("SELECT a.ID, date_time_caught  datetime_, age, weight, s.sex FROM ADULTS a 
-				LEFT JOIN BTatWESTERHOLZ.SEX s 
-						ON a.ID = s.ID ")
-			rbind(a, x)
-		}
+	x = bibq("SELECT a.ID, date_time_caught  datetime_, age, weight, s.sex FROM ADULTS a 
+			LEFT JOIN BTatWESTERHOLZ.SEX s 
+					ON a.ID = s.ID ")
+		rbind(a, x)
+	}
 
 #' adults
 #' @export
 #' @examples
 #' x = adults
 adults <-   function(refdate = Sys.Date(), ...) {
-		x = bibq("SELECT upper(a.ID) ID,  lower(FUNCTIONS.combo(UL,LL, UR, LR)) combo,  date_time_caught  datetime_, age, weight, tarsus, a.sex, s.sex gsex 
-												FROM ADULTS a 
-														LEFT JOIN BTatWESTERHOLZ.SEX s 
-																ON a.ID = s.ID ", ...)
-		suppressWarnings( x[!is.na(gsex), sex := gsex] )
-		x[, gsex := NULL]
-				x[ round(as.Date(datetime_))  <= round(as.Date(refdate))  ]
+	x = bibq("SELECT upper(a.ID) ID,  lower(FUNCTIONS.combo(UL,LL, UR, LR)) combo,  date_time_caught  datetime_, age, weight, tarsus, a.sex, s.sex gsex 
+				FROM ADULTS a 
+						LEFT JOIN BTatWESTERHOLZ.SEX s 
+								ON a.ID = s.ID ", ...)
+	suppressWarnings( x[!is.na(gsex), sex := gsex] )
+	x[, gsex := NULL]
+			x[ round(as.Date(datetime_))  <= round(as.Date(refdate))  ]
 
-		}
+	}
 
 #' nests
 #' @export
@@ -46,16 +46,16 @@ adults <-   function(refdate = Sys.Date(), ...) {
 #' nests() %>% head
 nests <-   function(refdate = Sys.Date() ) {
 		
-		sql = paste("SELECT * FROM NESTS  
-										WHERE nest_stage is not  NULL and date_time is not NULL and date_time <=", shQuote(refdate))
+	sql = paste("SELECT * FROM NESTS  
+					WHERE nest_stage is not  NULL and date_time is not NULL and date_time <=", shQuote(refdate))
 
-		x = bibq(sql, year = year(refdate)  )
+	x = bibq(sql, year = year(refdate)  )
 
-		setattr(x, 'refdate', refdate)
-		x
-	 
+	setattr(x, 'refdate', refdate)
+	x
 
-	 }
+
+	}
 
 
 #' nest_state
