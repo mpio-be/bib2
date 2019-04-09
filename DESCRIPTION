@@ -1,5 +1,5 @@
 Package: bib2
-Version: 2019.0.1
+Version: 2019.0.2
 Title: BIrd Breeding, field work planner
 Description: Nest-box field work organizer (mapping and data entry).
 Author: Mihai Valcu
@@ -24,4 +24,4 @@ Remotes:
     mpio-be/DataEntry
 VignetteBuilder: knitr
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1

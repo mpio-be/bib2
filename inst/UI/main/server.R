@@ -107,10 +107,20 @@ shinyServer(function(input, output, session) {
           N = N[days_to_hatch < input$days_to_hatch | is.na(days_to_hatch)]
           }
 
-        # n <<- N     
 
         m <<- map_nests(N , size = input$font_size, title = paste('Reference:', input$date), 
                   notes = input$notes, ny = 720 )  
+        
+        if(input$experiment) {
+
+          gg = map_experiment(input$experiment_id)
+          o = try(m + gg(), silent = TRUE)
+
+          if( inherits(o, 'try-error')) o = m + ggtitle( paste('Experiment', id, 'cannot be shown. Review the EXPERIMENTS table!'))
+
+          m <<- o
+        }
+
         m
         }
       

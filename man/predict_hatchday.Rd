@@ -4,7 +4,8 @@
 \alias{predict_hatchday}
 \title{predict_hatchday}
 \usage{
-predict_hatchday(fm, dat = Breeding(), ci = 0.95, days_below_lwr = 1.5)
+predict_hatchday(fm, dat = Breeding(), ci = 0.95,
+  days_below_lwr = 1.5)
 }
 \arguments{
 \item{fm}{fitted model (eg. by predict_hatchday_model () )}

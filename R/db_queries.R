@@ -101,27 +101,6 @@ phenology <-  function(minimum_stage = 'C') {
 	}
 
 
-#' experiments
-#' @export
-#' @param  id the id(s) of the experiments. Default to all visible =1 in the experiments table.
-#' @return a DT with box and date_time column. 
-#' 
-#' @examples
-#' experiments()
-
-experiments <- function(id) {
-
-x = bibq('SELECT * FROM EXPERIMENTS WHERE visible = 1')
-
-
-
-
-}
-
-
-
-
-
 
 
 #' RINGS_FOR_RADO

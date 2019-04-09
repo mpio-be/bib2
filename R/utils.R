@@ -20,7 +20,7 @@ bibq <- function(query, year = year(Sys.Date()), db = yy2dbnam(year) , host = ge
     con = dbcon(user = user, host = host, db = db)
     on.exit(  closeCon (con)  )
 
-    dbq(con, query, enhance = TRUE)
+    dbq(con, query, enhance = FALSE)
 
     }
 

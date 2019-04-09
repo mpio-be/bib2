@@ -78,6 +78,9 @@ dashboardPage(skin = 'purple',
         
         checkboxInput('experiment', 'Show experiments', value =  TRUE), 
 
+        conditionalPanel(condition = "input.experiment==true",  
+          selectInput("experiment_id", "Experiment ID:",1:5, multiple = FALSE) ),
+
         selectInput("nest_stages", "Nest stages:" , getOption('nest.stages'), getOption('nest.stages'), multiple = TRUE ),
         selectInput("stage_age_type", "Stages selection" , c('Equal with', "Greater or equal than"), selected = "Greater or equal than"),
         

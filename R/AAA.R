@@ -13,15 +13,10 @@
     packageStartupMessage(paste('This is', pkgname, dcf[, 'Version'] ))
 
 
-    # Do I run on scidbadmin?
-    is.scidbadmin = grepl("192.168.2.124", system('hostname -I', intern = TRUE) )
-
     # Set DB host & user
-    db_host = if(is.scidbadmin) 'scidb.mpio.orn.mpg.de' else '127.0.0.1'
+    db_host = 'scidb.mpio.orn.mpg.de'
     options(host  = db_host )
-
     options(host.bib2      =  db_host ) 
-    
     options(user.bib2      = 'bt')
     
 

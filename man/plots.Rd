@@ -10,6 +10,9 @@ plot_phenology_firstDates(...)
 \arguments{
 \item{...}{goes to phenology()}
 }
+\description{
+plots
+}
 \examples{
   all_phenology = phenology()
 plot_phenology_firstDates()

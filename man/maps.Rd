@@ -8,6 +8,7 @@
 \alias{map_empty}
 \alias{map_base}
 \alias{map_nests}
+\alias{map_experiment}
 \title{maps}
 \usage{
 theme_bib2()
@@ -25,7 +26,10 @@ map_base(size = 2.5, family = "sans", fontface = "plain",
   printdt = FALSE)
 
 map_nests(n, size = 2.5, family = "sans", fontface = "plain",
-  title = paste("made on:", Sys.Date()), notes = "", nx = -20, ny = 650)
+  title = paste("made on:", Sys.Date()), notes = "", nx = -20,
+  ny = 650)
+
+map_experiment(exp_id)
 }
 \arguments{
 \item{n}{a data.table returned by  nests()}
@@ -37,9 +41,16 @@ map_nests(n, size = 2.5, family = "sans", fontface = "plain",
 \item{nx}{notes x location}
 
 \item{ny}{notes y location}
+
+\item{exp_id}{the id of the experiment as defined in the experiments table.}
 }
 \value{
 a list of geoms defining the legend around the box
+
+a list of geoms to append to map_nests()
+}
+\description{
+maps
 }
 \examples{
 map_empty() 
@@ -50,5 +61,7 @@ map_base(family = 'sans')
  map_nests(n)  
  map_nests(n, notes = notes) + print_ann() 
 
+
+ x = map_experiment()
 
 }
