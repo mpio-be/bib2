@@ -1,6 +1,5 @@
 # ==========================================================================
 # NESTS table Data Entry
-# sdb::my_remote2local('FIELD_BTatWESTERHOLZ',  remoteUser = 'mihai', localUser = 'mihai')
 # shiny::runApp('inst/UI/DataEntry/BTatWESTERHOLZ/NESTS', launch.browser = TRUE)
 # 
 # ==========================================================================
@@ -10,20 +9,21 @@
   sapply(c('bib2','DataEntry', 'data.table', 'shinyjs', 'shinyBS'),
     require, character.only = TRUE, quietly = TRUE)
 
-  user                 = 'bt'
-  host                 =  getOption('host.bib2') 
-  db                   = 'FIELD_BTatWESTERHOLZ'
-  tableName              =  'NESTS'
-  n_empty_lines        = 60
-   excludeColumns      = 'N_pk'
+  user            = 'bt'
+  host            =  getOption('host.bib2') 
+  pwd             = sdb::getCredentials(user, db, host )$pwd
+  db              = 'FIELD_BTatWESTERHOLZ'
+  tableName       =  'NESTS'
+  n_empty_lines   = 60
+   excludeColumns = 'N_pk'
 
 # data
-  H = emptyFrame(user, host, db, tableName, n = n_empty_lines, excludeColumns, 
+  H = emptyFrame(user, host, db, pwd, tableName, n = n_empty_lines, excludeColumns, 
         preFilled = list(
             date_time = as.character(Sys.Date()) ) 
         )
   H[, box := as.integer(box)]
-  comments = column_comment(user, host, db, tableName,excludeColumns)
+  comments = column_comment(user, host, db, pwd, tableName,excludeColumns)
 
 
   # validator parameters
@@ -34,7 +34,7 @@
 
 
 # inspector [ runs on the handsontable output]
-  inspector <- function(x) {
+  inspector.NESTS <- function(x) {
 
     v1 = is.na_validator(x[, .(date_time, author, box, nest_stage)])
     v2 = POSIXct_validator(x[ , .(date_time)] )

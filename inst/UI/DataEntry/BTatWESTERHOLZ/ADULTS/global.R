@@ -1,6 +1,5 @@
 # ==========================================================================
 # ADULTS table Data Entry
-# my_remote2local('FIELD_BTatWESTERHOLZ',  remoteUser = 'mihai', localUser = 'mihai')
 # shiny::runApp('inst/UI/DataEntry/BTatWESTERHOLZ/ADULTS', launch.browser = TRUE)
 # 
 # ==========================================================================
@@ -11,7 +10,7 @@
 
   user            = 'bt'
   host            =  getOption('host.bib2')
-
+  pwd             = sdb::getCredentials(user, db, host )$pwd
 
   db              = 'FIELD_BTatWESTERHOLZ'
   tableName       =  'ADULTS'
@@ -19,11 +18,11 @@
   excludeColumns  = 'ad_pk'
 
 # data
-  H = emptyFrame(user, host, db, tableName, n = n_empty_lines, excludeColumns, 
+  H = emptyFrame(user, host, db, pwd, tableName, n = n_empty_lines, excludeColumns, 
         preFilled = list(
             date_time_caught = format(Sys.Date(), "%Y-%m-%d %H:%M") ) )
   
-  comments = column_comment(user, host, db, tableName,excludeColumns)
+  comments = column_comment(user, host, db, pwd, tableName,excludeColumns)
 
 
   # validator parameters
@@ -38,7 +37,7 @@
 
 
 # inspector
-  inspector <- function(forv) {
+  inspector.ADULTS <- function(forv) {
     z = copy(forv)
 
     i1 = is.na_validator(z[, .(date_time_caught, author)])

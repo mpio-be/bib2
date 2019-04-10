@@ -10,14 +10,13 @@ function(input, output,session) {
       })
 
   Save <- eventReactive(input$saveButton, {
-    return(hot_to_r(input$table))
-
-    #### 
-
+    o = hot_to_r(input$table) %>% data.table
+    class(o) = c(class(o), tableName)
+    o
    })
 
   output$run_save <- renderUI({
-    x = Save() %>% data.table
+    x = Save() 
     # x<<- x
     cleaner(x)
 
