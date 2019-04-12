@@ -33,7 +33,7 @@ nest_state <-   function(x, nest_stages = NULL, hatchingModel) {
 
 
   # firstEgg, Max clutch size
-    firstEggDat = x[nest_stage == 'E', .(firstEgg = Min(date_time) , clutch = Max(eggs)  ), by = box]
+    firstEggDat = x[nest_stage == 'E', .(firstEgg = Min(date_time) , clutch = Max(eggs) %>% as.integer  ), by = box]
 
     if(nrow(firstEggDat) > 0) {
       firstEggDat[, firstEgg := firstEgg %>% as.Date %>% as.POSIXct]
