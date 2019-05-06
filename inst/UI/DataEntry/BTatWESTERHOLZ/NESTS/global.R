@@ -9,31 +9,46 @@
   sapply(c('bib2','DataEntry', 'data.table', 'shinyjs', 'shinyBS'),
     require, character.only = TRUE, quietly = TRUE)
 
-  user            = 'bt'
   host            =  getOption('host.bib2') 
-  pwd             = sdb::getCredentials(user, db, host )$pwd
   db              = 'FIELD_BTatWESTERHOLZ'
+  user            = 'bt'
+  pwd             = sdb::getCredentials(user, db, host )$pwd
+  
   tableName       =  'NESTS'
+  excludeColumns = 'N_pk'
   n_empty_lines   = 60
-   excludeColumns = 'N_pk'
 
-# data
-  H = emptyFrame(user, host, db, pwd, tableName, n = n_empty_lines, excludeColumns, 
-        preFilled = list(
-            date_time = as.character(Sys.Date()) ) 
-        )
-  H[, box := as.integer(box)]
-  comments = column_comment(user, host, db, pwd, tableName,excludeColumns)
+# table summary function
+    describeTable <- function() {
+      x = bibq('select * FROM NESTS')
+
+      data.table(
+          N_entries = nrow(x)
+
+             )
+    }
+
+comments = column_comment(user, host, db, pwd, tableName,excludeColumns)
 
 
-  # validator parameters
-    nest_stages = c('NOTA','WSP', 'U', 'LT','R','B','BC','C','LIN','E','Y')
+# Define UI table  
+  nest_stages = c('NOTA','WSP', 'U', 'LT','R','B','BC','C','LIN','E','Y')
+  authors = dbq(user = user, host = host, q = paste0('SELECT initials from ', db, '.AUTHORS UNION 
+                        SELECT distinct initials from BTatWESTERHOLZ.AUTHORS') )$initials
+
+  uitable = emptyFrame(user, host, db, pwd, tableName, n = n_empty_lines, excludeColumns, 
+    preFilled = list( date_time = as.character(Sys.Date()) ) ) %>% 
+    rhandsontable %>% 
+    hot_cols(columnSorting = FALSE, manualColumnResize = TRUE) %>%
+    hot_rows(fixedRowsTop = 1) %>%
+    hot_col(col = "nest_stage", type = "dropdown", source = nest_stages ) %>%
+    hot_col(col = "author", type = "dropdown", source = authors )
+
+
+# validator parameters
     nest_failed_reasons = c('R', 'P', 'D', 'H', 'U')
-    authors = dbq(user = user, host = host, q = paste0('SELECT initials from ', db, '.AUTHORS UNION 
-                          SELECT distinct initials from BTatWESTERHOLZ.AUTHORS') )$initials
 
-
-# inspector [ runs on the handsontable output]
+# inspector 
   inspector.NESTS <- function(x) {
 
     v1 = is.na_validator(x[, .(date_time, author, box, nest_stage)])
@@ -61,15 +76,3 @@
     }
 
 
-# table summary function
-    table_smry <- function() {
-      x = bibq('select * FROM NESTS')
-
-      data.table(
-          N_entries = nrow(x)
-
-             )
-
-
-
-    }
