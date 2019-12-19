@@ -1,1 +1,1 @@
-ui_vnavbar()
+dropDownNavPage(tableName = tableName)

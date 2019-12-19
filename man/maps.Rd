@@ -13,21 +13,39 @@
 \usage{
 theme_bib2()
 
-map_legend(size = 2.5, right = "box", left = "checked days ago",
-  top = "stage age|days to hatch", bottom = "eggs|chicks", x = 543,
-  y = 735)
+map_legend(
+  size = 2.5,
+  right = "box",
+  left = "checked days ago",
+  top = "stage age|days to hatch",
+  bottom = "eggs|chicks",
+  x = 543,
+  y = 735
+)
 
-print_ann(color = "grey", x = Inf, y = Inf, vjust = "bottom",
-  hjust = "top", angle = 90)
+print_ann(
+  color = "grey",
+  x = Inf,
+  y = Inf,
+  vjust = "bottom",
+  hjust = "top",
+  angle = 90
+)
 
 map_empty()
 
-map_base(size = 2.5, family = "sans", fontface = "plain",
-  printdt = FALSE)
+map_base(size = 2.5, family = "sans", fontface = "plain", printdt = FALSE)
 
-map_nests(n, size = 2.5, family = "sans", fontface = "plain",
-  title = paste("made on:", Sys.Date()), notes = "", nx = -20,
-  ny = 650)
+map_nests(
+  n,
+  size = 2.5,
+  family = "sans",
+  fontface = "plain",
+  title = paste("made on:", Sys.Date()),
+  notes = "",
+  nx = -20,
+  ny = 650
+)
 
 map_experiment(exp_id)
 }
@@ -56,7 +74,7 @@ maps
 map_empty() 
 map_base(family = 'sans') 
  x = nests(Sys.Date() - 1 )
- notes = c('note 1: this is note 1\\nnote 99: this is note 99\\nnote 9999+1: this is note 9999+1')
+ notes = c('note 1: this is note 1\nnote 99: this is note 99\nnote 9999+1: this is note 9999+1')
  n = nest_state(x, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
  map_nests(n)  
  map_nests(n, notes = notes) + print_ann() 

@@ -4,8 +4,13 @@
 \alias{bibq}
 \title{query function}
 \usage{
-bibq(query, year = year(Sys.Date()), db = yy2dbnam(year),
-  host = getOption("host.bib2"), user = getOption("user.bib2"))
+bibq(
+  query,
+  year = year(Sys.Date()),
+  db = yy2dbnam(year),
+  host = getOption("host.bib2"),
+  user = getOption("user.bib2")
+)
 }
 \description{
 query function

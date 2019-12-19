@@ -4,9 +4,11 @@
 \alias{RINGS_FOR_RADO}
 \title{RINGS_FOR_RADO}
 \usage{
-RINGS_FOR_RADO(seasons = c(2018), new_ring = data.table(ID =
-  c("B4H1627"), date_time = c("2014-11-08 10:02:00")),
-  not_banded_by_us = c("TN90629"))
+RINGS_FOR_RADO(
+  seasons = c(2018),
+  new_ring = data.table(ID = c("B4H1627"), date_time = c("2014-11-08 10:02:00")),
+  not_banded_by_us = c("TN90629")
+)
 }
 \arguments{
 \item{seasons}{season(s) from which the data is required. Can be vector or number. 
