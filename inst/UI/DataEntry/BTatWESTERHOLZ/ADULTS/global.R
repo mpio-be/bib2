@@ -5,7 +5,7 @@
 
 
 tableName       =  'ADULTS'
-excludeColumns  = c('ad_pk', 'recapture', 'nov')
+excludeColumns  = c('ad_pk', 'nov')
 n_empty_lines   =  30
 
 
