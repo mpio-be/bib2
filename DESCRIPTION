@@ -21,7 +21,7 @@ Suggests:
     testthat
 Remotes: 
     mpio-be/sdb,
-    mpio-be/DataEntry
+    mpio-be/DataEntry,
     mpio-be/DataEntry.validation
 VignetteBuilder: knitr
 LazyData: true
