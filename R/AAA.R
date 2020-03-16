@@ -14,7 +14,7 @@
 
 
     # Set DB host & user
-    db_host = 'scidb.mpio.orn.mpg.de'
+    db_host = '127.0.0.1'
     options(host  = db_host )
     options(host.bib2      =  db_host ) 
     options(user.bib2      = 'bt')
