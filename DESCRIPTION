@@ -5,7 +5,7 @@ Description: Nest-box field work organizer (mapping and data entry).
 Author: Mihai Valcu
 Maintainer: Mihai Valcu <valcu@orn.mpg.de>
 Depends:
-    R (>= 3.0.0),
+    R (>= 3.5.0),
     sdb,
     magrittr,
     rgdal,
@@ -22,6 +22,7 @@ Suggests:
 Remotes: 
     mpio-be/sdb,
     mpio-be/DataEntry
+    mpio-be/DataEntry.validation
 VignetteBuilder: knitr
 LazyData: true
 RoxygenNote: 7.0.2

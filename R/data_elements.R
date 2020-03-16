@@ -12,7 +12,7 @@
 #' nests() %>% nest_state(hatchingModel =hatchingModel)
 #' nests("2016-04-12") %>% nest_state(hatchingModel =hatchingModel)
 nest_state <-   function(x, nest_stages = NULL, hatchingModel) {
-    x[, lastCheck := max(date_time), by = box]
+  x[, lastCheck := max(date_time), by = box]
 
   # last nest stage & last check (days ago) [MAIN FRAME]
     m = x[ lastCheck == date_time , .(box,date_time, nest_stage)]

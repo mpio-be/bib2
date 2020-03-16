@@ -108,33 +108,34 @@ map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = F
 #'
 #' 
 map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain', 
-											title  = paste('made on:', Sys.Date() ),  notes = '', nx = -20, ny = 650)  {
 
-		legend = nest_legend(n)
+	title  = paste('made on:', Sys.Date() ),  notes = '', nx = -20, ny = 650)  {
 
-		nxy = merge(n, boxesxy, by= 'box')
+	legend = nest_legend(n)
 
-		# frame
-		map_empty()+
-			theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + ggtitle(title) + map_legend() + 
-		# boxes
-		geom_point(data = boxesxy, color = 'grey', pch = 21, size = size, aes(x = long, y = lat) ) + 
-		geom_text( data = boxesxy, hjust = 'left', nudge_x = 5, family  = family, fontface = fontface, size = size, aes(x = long, y = lat, label = box) )+ 
-		
-		# nest stage  
-		geom_point(data = nxy, pch = 19, size = size, aes(x = long, y = lat, color = nest_stage), na.rm = TRUE ) +
-		 scale_colour_manual(values = legend$col , labels = legend$labs ) +
-		# last check
-		geom_text(data = nxy, aes(x = long, y = lat, label = lastCheck), hjust = 'right', nudge_x = -5,size = size, family = family) +
-		# nest stage age
-		geom_text(data = nxy,aes(x = long, y = lat, label = AGE), vjust = 'bottom', nudge_y = 5,size = size, family = family)+
-		# clutch | chicks
-		geom_text(data =  nxy[!is.na(ECK)] ,aes(x = long, y = lat, label = ECK), vjust = 'top', nudge_y = -5,size = size, family = family) + 
+	nxy = merge(n, boxesxy, by= 'box')
 
-		guides( color = guide_legend(title = NULL, ncol = 3)) + 
-		
-		annotate('text', size = size+1, x = nx, y = ny, hjust = 'left',  vjust = 'top',
-		 label= notes) 
+	# frame
+	map_empty()+
+		theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + ggtitle(title) + map_legend() + 
+	# boxes
+	geom_point(data = boxesxy, color = 'grey', pch = 21, size = size, aes(x = long, y = lat) ) + 
+	geom_text( data = boxesxy, hjust = 'left', nudge_x = 5, family  = family, fontface = fontface, size = size, aes(x = long, y = lat, label = box) )+ 
+	
+	# nest stage  
+	geom_point(data = nxy, pch = 19, size = size, aes(x = long, y = lat, color = nest_stage), na.rm = TRUE ) +
+	 scale_colour_manual(values = legend$col , labels = legend$labs ) +
+	# last check
+	geom_text(data = nxy, aes(x = long, y = lat, label = lastCheck), hjust = 'right', nudge_x = -5,size = size, family = family) +
+	# nest stage age
+	geom_text(data = nxy,aes(x = long, y = lat, label = AGE), vjust = 'bottom', nudge_y = 5,size = size, family = family)+
+	# clutch | chicks
+	geom_text(data =  nxy[!is.na(ECK)] ,aes(x = long, y = lat, label = ECK), vjust = 'top', nudge_y = -5,size = size, family = family) + 
+
+	guides( color = guide_legend(title = NULL, ncol = 3)) + 
+	
+	annotate('text', size = size+1, x = nx, y = ny, hjust = 'left',  vjust = 'top',
+	 label= notes) 
 	
 		
 	
@@ -150,12 +151,8 @@ map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain',
 #' 
 map_experiment <- function(exp_id) {
 
-
 	x = bibq( paste('SELECT * FROM EXPERIMENTS WHERE ID = ', exp_id) )
 
 	eval(parse( text= paste('function(){', x$R_script, '}' )))
-
-
-
 
 	}
