@@ -48,7 +48,7 @@ plot_phenology_firstDates <- function(...) {
     )]
 
   ggplot() +
-    geom_density_ridges(data = z, aes(x = min_day, y = variable), scale = 1, alpha = 0.5,col = 'grey') +
+    ggridges::geom_density_ridges(data = z, aes(x = min_day, y = variable), scale = 1, alpha = 0.5,col = 'grey') +
     geom_text(data =zz, aes(y = variable, x =  Min, label =  Min_lab ),angle = 90,hjust = -0.1 ) + 
     geom_text(data =zz, aes(y = variable, x =  Max, label =  Max_lab ),angle = 90,hjust = -0.1 ) + 
     geom_point(     data = n, aes(y = variable, x = minDate, color = year), size = 3) + 
