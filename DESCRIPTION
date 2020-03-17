@@ -1,5 +1,5 @@
 Package: bib2
-Version: 2020.0.2
+Version: 2020.0.3
 Title: BIrd Breeding, field work planner
 Description: Nest-box field work organizer (mapping and data entry).
 Author: Mihai Valcu
@@ -14,8 +14,8 @@ Depends:
 Suggests: 
     devtools,
     shiny (>= 0.8.0),
-    ggthemes,
     shinyTree,
+    ggthemes,
     openxlsx,
     xlsx,
     testthat

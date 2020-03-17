@@ -2,36 +2,66 @@
 
 shinyUI(
 
-dashboardPage(skin = 'purple',
-  dashboardHeader(title = paste('Westerholz',year(Sys.Date()),  '🐣') ),
+dashboardPage(skin = 'green',
+  dashboardHeader(title = paste('Westerholz',year(Sys.Date()),  '...🐤') ),
 
   dashboardSidebar(
     sidebarMenu(id = 'menubar',
+    
+
+       a('• DATA ENTRY', style="color:#e9390f;  font-family: 'Lucida Console', Monaco, monospace;") ,
+
+      menuItem('ADULTS'  ,icon = icon("pencil", lib = "glyphicon"),
+          href = '/bib2/DataEntry/BTatWESTERHOLZ/ADULTS', newtab = TRUE),
+      
+      menuItem('NESTS',icon = icon("pencil", lib = "glyphicon"),
+          href = '/bib2/DataEntry/BTatWESTERHOLZ/NESTS', newtab = TRUE),
+        
+
+      hr(), 
+
+      menuItem("Main board",  tabName  = "board_tab",     icon = icon("dashboard") ),
+
       dateInput("date", "Date:", value = Sys.Date(), min = '2007-01-01', max =  Sys.Date() + 6 ),
 
-      menuItem("Main board",        tabName  = "board_tab",     icon = icon("dashboard") ),
+       a('• MAPPING', style="color:#fd9d06;  font-family: 'Lucida Console', Monaco, monospace;"),
+
+
       menuItem("Base map",          tabName  = "basemap_tab",   icon = icon("map-o") ),
       menuItem("Nests map",         tabName  = "nestsmap_tab",  icon = icon("map") ),
-      menuItem("Nests data viewer", tabName  = "nestsdata_tab", icon = icon("binoculars") ),
-      menuItem("Adult data viewer", tabName  = "adultdata_tab", icon = icon("binoculars") ),
-      menuItem("Overnight map",     tabName  = "overnight_tab", icon = icon("map") ),
-      menuItem("Custom map",        tabName  = "custom_tab",    icon = icon("wrench") ),
-
-      menuItem("Data entry",  icon = icon("table"),
-        menuSubItem('ADULTS', href = '/bib2/DataEntry/BTatWESTERHOLZ/ADULTS', newtab = TRUE),
-        menuSubItem('NESTS',  href = '/bib2/DataEntry/BTatWESTERHOLZ/NESTS', newtab = TRUE)
-        ),
-
-      menuItem("SNB",  icon = icon("tablet"), tabName  = 'SNB_tab' ),
-
+      
+  
       conditionalPanel(
         condition = "input.menubar == 'basemap_tab' | input.menubar == 'nestsmap_tab' | input.menubar == 'overnight_tab' | input.menubar == 'custom_tab'",
         sliderInput("font_size", "Text and symbol size:", min = 1, max = 7,step = 0.2, value = 4)
         ), 
+
+
+      a('• DATA VIEWERS', style="color:#80dc95;  font-family: 'Lucida Console', Monaco, monospace;"),
+
+      menuItem("Nests data viewer", tabName  = "nestsdata_tab", icon = icon("binoculars") ),
+      menuItem("Adult data viewer", tabName  = "adultdata_tab", icon = icon("binoculars") ),
+
+
       conditionalPanel(
         condition = "input.menubar == 'nestsdata_tab'", 
       numericInput("nestbox", "Nestbox:",value = 1, min = 1, max = 277)
-      )
+      ), 
+
+
+       # footer
+       p(
+        paste(
+        "<a href='https://github.com/mpio-be/bib2' target='_blank'>'bib2 v.'", packageVersion('bib2'), "</a>") %>% HTML, 
+       
+          style="position:fixed;
+                font-style: oblique;
+                bottom:0;
+                right:0;
+                left:0;
+                padding:1px;
+                box-sizing:border-box;")
+
 
   )),
 
@@ -45,23 +75,6 @@ dashboardPage(skin = 'purple',
         box(title = 'Phenology', plotOutput('phenology') ) 
 
         ),
-
-    tabItem(tabName = "custom_tab",
-      shiny::tags$style(type = "text/css", "#custom_script {height: calc(81vh - 1px) !important;}"),
-      shiny::tags$style(type = "text/css", "#custom_show {height: calc(85vh - 1px) !important;}"),
-      fluidRow( 
-        Box(width = 4, 
-          actionButton("update_custom_map", "Update map"), 
-
-          aceEditor("custom_script",theme = 'merbivore' , mode = "r", wordWrap = TRUE, 
-            value = paste(readLines(system.file('custom_script.R', package = 'bib2') , warn = FALSE), collapse = '\n') )
-
-           ) , 
-
-        Box(width = 8,
-          absDownloadButton('custom_pdf'),
-          plotOutput('custom_show') )
-      )),
 
     tabItem(tabName = "basemap_tab",
       shiny::tags$style(type = "text/css", "#basemap_show {height: calc(93vh - 1px) !important;}"),
@@ -99,32 +112,14 @@ dashboardPage(skin = 'purple',
       )), 
         
     tabItem(tabName = "nestsdata_tab",
-      dataTableOutput('nestsdata_show')
+      DT::dataTableOutput('nestsdata_show')
       ),    
 
     tabItem(tabName = "adultdata_tab",
-      dataTableOutput('adultdata_show')
-      ),
+      DT::dataTableOutput('adultdata_show')
+      )
 
-    tabItem(tabName = "overnight_tab",
-      shiny::tags$style(type = "text/css", "#overnight_show {height: calc(93vh - 1px) !important;}"),
-      plotOutput('overnight_show'),
 
-      absolutePanel(right = "0%", top="10%", width = "20%",draggable = TRUE,style = "opacity: 0.9",
-        actionButton("goOvernight", "Compile dataset"),
-        downloadButton('overnight_pdf',label = 'Download PDF')
-      )),
-
-    tabItem(tabName = "SNB_tab",
-      Box(title = "SNB txt files diagnostics", solidHeader = TRUE,
-        actionButton("diagnose_pull_compile", "Compile diagnostic"),
-        downloadButton('diagnose_pull_download',label =  'Download xlsx')
-        ),
-
-      Box(title = "Pull dates", solidHeader = TRUE,
-        shinyTree('snbPullDates')
-        )
-     )
 
 ))))
 

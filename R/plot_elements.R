@@ -32,7 +32,9 @@ plot_phenology_firstDates <- function(...) {
   zz[, Min_lab := format(Min, "%d-%b") ]
 
   # this year
-  n = nests()[, .(minDate = min(date_time)), by = nest_stage]
+  n = nests()
+  n[, date_time := as.POSIXct(date_time)]
+  n = n[, .(minDate = min(date_time)), by = nest_stage]
   n = n[nest_stage %in% c("LT",  "B", "C", "LIN", "E",  "Y")]
   n[, year := factor(year(minDate)) ]
 

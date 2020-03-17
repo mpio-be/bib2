@@ -9,9 +9,6 @@
 #'
 
 .onLoad <- function(libname, pkgname){
-    dcf <- read.dcf(file=system.file('DESCRIPTION', package=pkgname) )
-    packageStartupMessage(paste('This is', pkgname, dcf[, 'Version'] ))
-
 
     # Set DB host & user
     db_host = '127.0.0.1'
