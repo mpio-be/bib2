@@ -11,9 +11,16 @@ NULL
 plot_phenology_firstDates <- function(...) {
 
   x =phenology(...)  
+  x[, day := as.POSIXct(date_) %>% yday %>% dayofyear2date]
+  x[, variable := factor(variable, 
+    levels = c("firstLittle", "firstBottom", "firstCup",  "firstLining","firstEgg","hatchDate", "fledgeDate")%>% rev,
+    labels = c("LITTLE", "BOTTOM", "CUP",  "LINING","LAYING", "HATCHING", "FLEDGING")%>% rev
+    )]
 
+ 
   z = x[, .(minDate = min(date_) ), .(variable, year_)][, id := 1:.N]
   z[, min_yday := yday(minDate)]
+  z[, min_day := dayofyear2date(min_yday)]
 
   zz = z[, .(Min = min(min_yday), Max = max(min_yday)), by = variable]
   zz = merge(zz, z[, .(year_, variable, min_yday)], by.x = c('variable', 'Min'), by.y = c('variable', 'min_yday') )
@@ -21,10 +28,7 @@ plot_phenology_firstDates <- function(...) {
        by.x = c('variable', 'Max'), by.y = c('variable', 'min_yday'), suffixes = c('min', 'max') )
   zz = unique(zz, by = c("Min", "Max", "variable"))
 
-  zz[, variable := factor(variable, 
-    levels = c("firstLittle", "firstBottom", "firstCup",  "firstLining","firstEgg","hatchDate", "fledgeDate")%>% rev,
-    labels = c("LITTLE", "BOTTOM", "CUP",  "LINING","LAYING", "HATCHING", "FLEDGING")%>% rev
-    )]
+ 
 
   zz[, Max := dayofyear2date(Max)]
   zz[, Min := dayofyear2date(Min)]
@@ -43,19 +47,15 @@ plot_phenology_firstDates <- function(...) {
     labels = c("LITTLE", "BOTTOM", "CUP",  "LINING","LAYING", "HATCHING")%>% rev
     )]
 
-  # g = 
-
   ggplot() +
-    geom_errorbar(  data =zz, aes(x = variable, ymin =  Min, ymax = Max) , size = .5, alpha = .9, col = 'blue',  width = 0.2 ) + 
-    geom_text_repel(data =zz, aes(x = variable, y =  Min, label =  Min_lab ) ) + 
-    geom_text_repel(data =zz, aes(x = variable, y =  Max, label =  Max_lab ) ) + 
-    geom_point(     data = n, aes(x = variable, y = minDate, color = year), size = 3) + 
+    geom_density_ridges(data = z, aes(x = min_day, y = variable), scale = 1, alpha = 0.5,col = 'grey') +
+    geom_text(data =zz, aes(y = variable, x =  Min, label =  Min_lab ),angle = 90,hjust = -0.1 ) + 
+    geom_text(data =zz, aes(y = variable, x =  Max, label =  Max_lab ),angle = 90,hjust = -0.1 ) + 
+    geom_point(     data = n, aes(y = variable, x = minDate, color = year), size = 3) + 
 
     xlab(NULL) + ylab(NULL)+
-    ggtitle("First and last events across years")+
-    theme_classic() + theme(legend.position=c(.9,.9))+
-
-    coord_flip() 
+    ggtitle("First events distribution\nacross years")+
+    theme_classic() + theme(legend.position=c(.85,.9))  
 
 
 

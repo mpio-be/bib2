@@ -16,6 +16,7 @@ Suggests:
     shiny (>= 0.8.0),
     shinyTree,
     ggthemes,
+    ggridges,
     openxlsx,
     xlsx,
     testthat
