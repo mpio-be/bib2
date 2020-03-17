@@ -11,6 +11,8 @@
 
 
 
+
+
 # global sets
   F = phenology()
 
@@ -19,6 +21,10 @@
  hatchingModel = predict_hatchday_model(B, MASS::rlm)  
 
   
- options(host.bib2 = 'scidb.mpio.orn.mpg.de')
-
+package = 'bib2'
+tags    = shiny::tags
+host    = getOption('host.bib2')
+db      = 'FIELD_BTatWESTERHOLZ'
+user    = 'bt'
+pwd     = sdb::getCredentials(user, db, host )$pwd
 
