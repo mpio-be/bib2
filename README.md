@@ -4,8 +4,6 @@ bib2
 ------------
  Nest-box field work organizer (mapping and data entry). Nests locations are known.
 
- The user interface is available from http://scidb.mpio.orn.mpg.de dashboard.
-
 
 Installation
 ------------
