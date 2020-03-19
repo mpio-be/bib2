@@ -7,7 +7,6 @@ dashboardPage(skin = 'green',
 
   dashboardSidebar(
     sidebarMenu(id = 'menubar',
-    
 
        a('• DATA ENTRY', style="color:#e9390f;  font-family: 'Lucida Console', Monaco, monospace;") ,
 
@@ -17,6 +16,9 @@ dashboardPage(skin = 'green',
       menuItem('NESTS',icon = icon("pencil", lib = "glyphicon"),
           href = '/bib2/DataEntry/BTatWESTERHOLZ/NESTS', newtab = TRUE),
         
+      menuItem('DATA EDITOR',icon = icon("edit", lib = "glyphicon"),
+          href = 'http://behavioural-ecology.orn.mpg.de/db_ui/Westerholz.php?db=FIELD_BTatWESTERHOLZ', 
+          newtab = TRUE),
 
       hr(), 
 
