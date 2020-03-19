@@ -20,6 +20,13 @@ dashboardPage(skin = 'green',
           href = 'http://behavioural-ecology.orn.mpg.de/db_ui/Westerholz.php?db=FIELD_BTatWESTERHOLZ', 
           newtab = TRUE),
 
+      menuItem('SHARED NOTES',icon = icon("duplicate", lib = "glyphicon"),
+          href = 'https://owncloud.gwdg.de/index.php/s/nWIb4V57wtsFg4I', 
+          newtab = TRUE),
+
+
+
+
       hr(), 
 
       menuItem("Main board",  tabName  = "board_tab",     icon = icon("dashboard") ),
