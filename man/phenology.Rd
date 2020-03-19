@@ -20,5 +20,7 @@ phenology}
 nest_state
 }
 \examples{
+\donttest{
 phenology()
+}
 }

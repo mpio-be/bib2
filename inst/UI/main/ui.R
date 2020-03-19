@@ -61,7 +61,7 @@ dashboardPage(skin = 'green',
        # footer
        p(
         paste(
-        "<a href='https://github.com/mpio-be/bib2' target='_blank'>'bib2 v.'", packageVersion('bib2'), "</a>") %>% HTML, 
+        "<a href='https://github.com/mpio-be/bib2' target='_blank'>bib2 v.", packageVersion('bib2'), "</a>") %>% HTML, 
        
           style="position:fixed;
                 font-style: oblique;
@@ -99,9 +99,12 @@ dashboardPage(skin = 'green',
         Box(width = 2,
         
         checkboxInput('experiment', 'Show experiments', value =  TRUE), 
+        tippy_this('experiment', 'see EXPERIMENTS table'),
 
         conditionalPanel(condition = "input.experiment==true",  
           selectInput("experiment_id", "Experiment ID:",1:5, multiple = FALSE) ),
+
+
 
         selectInput("nest_stages", "Nest stages:" , getOption('nest.stages'), getOption('nest.stages'), multiple = TRUE ),
         selectInput("stage_age_type", "Stages selection" , c('Equal with', "Greater or equal than"), selected = "Greater or equal than"),
@@ -114,6 +117,7 @@ dashboardPage(skin = 'green',
         numericInput("days_to_hatch", "Days to hatch ⋝", 0 , min = 0, max = 0, value = 30),
 
         textAreaInput('notes', 'Notes', value = "", width = '100%', height = '300px'), 
+        tippy_this('notes', 'Any notes you write here will be seen on right side of the map.'),
 
 
         downloadButton('nestsmap_pdf',label = 'Download PDF')

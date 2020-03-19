@@ -14,16 +14,17 @@ Depends:
 Suggests: 
     devtools,
     shiny (>= 0.8.0),
-    shinyTree,
+    tippy,
     ggthemes,
     ggridges,
-    openxlsx,
-    xlsx,
-    testthat
+    testthat,
+    knitr,
+    openxlsx
 Remotes: 
     mpio-be/sdb,
     mpio-be/DataEntry,
     mpio-be/DataEntry.validation
+License: GPL (>= 2)    
 VignetteBuilder: knitr
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0

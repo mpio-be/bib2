@@ -22,7 +22,7 @@ lower CI of the prediction - days_below_lwr
 predict_hatchday
 }
 \examples{
-  
+  \donttest{
 d = Breeding() 
 fm = predict_hatchday_model(d)
 d[, predHatch := predict_hatchday(fm, d,0.95, 1.5) ]
@@ -40,4 +40,5 @@ d[, pincub := difftime(predHatch, as.Date(firstEgg) + clutch, units= 'days')]
 d[, range(pincub)]
 d[, quantile(pincub)]
 plot(incub ~ pincub, d)
+}
 }

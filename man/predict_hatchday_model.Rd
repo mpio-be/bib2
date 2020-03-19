@@ -10,5 +10,7 @@ predict_hatchday_model(x, model = lm)
 predict_hatchday_model
 }
 \examples{
+\donttest{
 predict_hatchday_model( Breeding() )
+}
 }

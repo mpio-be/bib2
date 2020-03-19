@@ -71,15 +71,21 @@ a list of geoms to append to map_nests()
 maps
 }
 \examples{
+\donttest{
 map_empty() 
+}
+\donttest{
 map_base(family = 'sans') 
+}
+\donttest{
  x = nests(Sys.Date() - 1 )
  notes = c('note 1: this is note 1\nnote 99: this is note 99\nnote 9999+1: this is note 9999+1')
  n = nest_state(x, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
  map_nests(n)  
  map_nests(n, notes = notes) + print_ann() 
+}
 
-
+\donttest{
  x = map_experiment()
-
+}
 }

@@ -4,6 +4,7 @@
 #' predict_firstEgg
 #' @export
 #' @examples
+#' \donttest{
 #' date_ = Sys.Date()
 #' F = phenology('LIN')
 #' predFirstEggData = predict_firstEgg_data(F, date_ )
@@ -14,6 +15,7 @@
 #'  geom_smooth(method = 'lm') + geom_text(aes(label = year_), vjust= 'bottom') + 
 #'  geom_pointrange(data = predFirstEgg, aes(x = date_, y = fit, ymin = lwr, ymax = upr ), col = 2) + 
 #'  ggtitle(paste(predFirstEgg[, difftime(fit, date_, units = 'days')%>% round], 'days till first egg.'))
+#' }
 predict_firstEgg <- function(dat, v, refyear = year(Sys.Date()) ) {
 
     v = data.frame(firstLining = v) 
@@ -48,7 +50,9 @@ predict_firstEgg_data <- function (F, refdate = Sys.Date()) {
 #' predict_hatchday_model
 #' @export
 #' @examples
+#' \donttest{
 #' predict_hatchday_model( Breeding() )
+#' }
 predict_hatchday_model <- function(x, model = lm) {
   x = Breeding()
 
@@ -67,7 +71,7 @@ predict_hatchday_model <- function(x, model = lm) {
 #' @return lower CI of the prediction - days_below_lwr
 #' @export
 #' @examples
-#'   
+#'   \donttest{
 #' d = Breeding() 
 #' fm = predict_hatchday_model(d)
 #' d[, predHatch := predict_hatchday(fm, d,0.95, 1.5) ]
@@ -85,6 +89,7 @@ predict_hatchday_model <- function(x, model = lm) {
 #' d[, range(pincub)]
 #' d[, quantile(pincub)]
 #' plot(incub ~ pincub, d)
+#' }
 
 predict_hatchday <- function(fm, dat = Breeding(), ci = 0.95, days_below_lwr = 1.5 ) {
    x = copy(dat)

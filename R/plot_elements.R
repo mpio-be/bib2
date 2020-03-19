@@ -6,8 +6,10 @@ NULL
 #' @param   ... goes to phenology()
 #' @rdname plots
 #' @examples
+#' \donttest{
 #'   all_phenology = phenology()
-#' plot_phenology_firstDates()
+#'   plot_phenology_firstDates()
+#' }
 plot_phenology_firstDates <- function(...) {
 
   x =phenology(...)  

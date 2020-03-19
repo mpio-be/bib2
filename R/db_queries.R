@@ -2,7 +2,9 @@
 #' allAdults
 #' @export
 #' @examples
+#' \donttest{
 #' x = Breeding()
+#' }
 Breeding <- function() {
 	bibq("select year_,box,IDfemale,firstEgg,clutch, laying_gap, hatchDate FROM BTatWESTERHOLZ.BREEDING 
 	WHERE secondClutch = 0  and firstEgg is not NULL and hatchDate is not NULL and laying_gap < 4
@@ -13,7 +15,9 @@ Breeding <- function() {
 #' allAdults
 #' @export
 #' @examples
+#' \donttest{
 #' x = allAdults()
+#' }
 allAdults <- function() {
 	a = bibq("SELECT a.ID, capture_date_time datetime_, age, weight, s.sex FROM BTatWESTERHOLZ.ADULTS a 
 			LEFT JOIN BTatWESTERHOLZ.SEX s 
@@ -28,7 +32,9 @@ allAdults <- function() {
 #' adults
 #' @export
 #' @examples
+#' \donttest{
 #' x = adults
+#' }
 adults <-   function(refdate = Sys.Date(), ...) {
 	x = bibq("SELECT upper(a.ID) ID,  lower(FUNCTIONS.combo(UL,LL, UR, LR)) combo,  date_time_caught  datetime_, age, weight, tarsus, a.sex, s.sex gsex 
 				FROM ADULTS a 
@@ -43,7 +49,9 @@ adults <-   function(refdate = Sys.Date(), ...) {
 #' nests
 #' @export
 #' @examples
+#' \donttest{
 #' nests() %>% head
+#' }
 nests <-   function(refdate = Sys.Date() ) {
 		
 	sql = paste("SELECT * FROM NESTS  
@@ -68,7 +76,9 @@ nests <-   function(refdate = Sys.Date() ) {
 #' @export
 #' @param  minimum_stage (one of "LT", "B", "C", "LIN", "firstEgg","hatchDate","fledgeDate") default to "C"
 #' @examples
+#' \donttest{
 #' phenology()
+#' }
 phenology <-  function(minimum_stage = 'C') {
 
 	s = data.table(
@@ -112,7 +122,9 @@ phenology <-  function(minimum_stage = 'C') {
 #' 													there is any chance that the bird was caught in between somewhere else
 #' @param not_banded_by_us  band numbers of birds that were banded elsewhere should be provided as a vector
 #' @examples
+#' \donttest{
 #' path = RINGS_FOR_RADO(seasons = 2018)
+#' }
 RINGS_FOR_RADO = function(seasons = c(2018),new_ring = data.table(ID = c('B4H1627'), date_time = c("2014-11-08 10:02:00")),not_banded_by_us = c("TN90629") ) {
 
 	#dependencies
@@ -278,18 +290,18 @@ RINGS_FOR_RADO = function(seasons = c(2018),new_ring = data.table(ID = c('B4H162
 
 	# export to excel; this automatically creates the different sheets required by Radolfszell!
 
-		wb = createWorkbook()
-		worksheet1 = createSheet(wb, sheetName = 'BERINGUNG')
-		worksheet2 = createSheet(wb, sheetName = 'FUND')
-		worksheet3 = createSheet(wb, sheetName = 'GEOTAB')
+		wb = openxlsx::createWorkbook()
+		worksheet1 = openxlsx::createSheet(wb, sheetName = 'BERINGUNG')
+		worksheet2 = openxlsx::createSheet(wb, sheetName = 'FUND')
+		worksheet3 = openxlsx::createSheet(wb, sheetName = 'GEOTAB')
 
-		addDataFrame(sheet1, worksheet1)
-		addDataFrame(sheet2, worksheet2)
-		addDataFrame(sheet3, worksheet3)
+		openxlsx::addDataFrame(sheet1, worksheet1)
+		openxlsx::addDataFrame(sheet2, worksheet2)
+		openxlsx::addDataFrame(sheet3, worksheet3)
 
 
 		p = tempfile(pattern = "RINGS", fileext = ".xlsx") #create temporary path
-		saveWorkbook(wb, file = p)
+		openxlsx::saveWorkbook(wb, file = p)
 
 
 		p #return temporary path in order to find the file

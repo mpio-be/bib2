@@ -13,6 +13,7 @@ predict_firstEgg_data(F, refdate = Sys.Date())
 predict_firstEgg
 }
 \examples{
+\donttest{
 date_ = Sys.Date()
 F = phenology('LIN')
 predFirstEggData = predict_firstEgg_data(F, date_ )
@@ -23,4 +24,5 @@ ggplot(predFirstEggData, aes(y = first_Egg , x = first_Lining, x) ) +
  geom_smooth(method = 'lm') + geom_text(aes(label = year_), vjust= 'bottom') + 
  geom_pointrange(data = predFirstEgg, aes(x = date_, y = fit, ymin = lwr, ymax = upr ), col = 2) + 
  ggtitle(paste(predFirstEgg[, difftime(fit, date_, units = 'days')\%>\% round], 'days till first egg.'))
+}
 }

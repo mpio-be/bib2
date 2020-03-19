@@ -10,5 +10,7 @@ nests(refdate = Sys.Date())
 nests
 }
 \examples{
+\donttest{
 nests() \%>\% head
+}
 }

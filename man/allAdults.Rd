@@ -10,5 +10,7 @@ allAdults()
 allAdults
 }
 \examples{
+\donttest{
 x = allAdults()
+}
 }

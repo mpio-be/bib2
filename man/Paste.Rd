@@ -10,5 +10,7 @@ Paste(x)
 noNApaste
 }
 \examples{
+\donttest{
 x = c(NA, 1)
+}
 }

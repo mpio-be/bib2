@@ -54,7 +54,9 @@ print_ann <- function(color = 'grey',  x = Inf, y = Inf, vjust = 'bottom', hjust
 #' @export
 #' @rdname maps
 #' @examples
+#' \donttest{
 #' map_empty() 
+#' }
 map_empty <- function() {
 
 	ggplot() +
@@ -73,7 +75,9 @@ map_empty <- function() {
 #' @export
 #' @rdname maps
 #' @examples
+#' \donttest{
 #' map_base(family = 'sans') 
+#' }
 map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = FALSE) {
 	g = 
 	map_empty() + 
@@ -100,12 +104,13 @@ map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = F
 #' @param   nx    notes x location
 #' @param   ny    notes y location
 #' @examples
+#' \donttest{
 #'  x = nests(Sys.Date() - 1 )
 #'  notes = c('note 1: this is note 1\nnote 99: this is note 99\nnote 9999+1: this is note 9999+1')
 #'  n = nest_state(x, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
 #'  map_nests(n)  
 #'  map_nests(n, notes = notes) + print_ann() 
-#'
+#'}
 #' 
 map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain', 
 
@@ -147,8 +152,9 @@ map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain',
 #' @param   exp_id   the id of the experiment as defined in the experiments table.
 #' @return  a list of geoms to append to map_nests()
 #' @examples
+#' \donttest{
 #'  x = map_experiment()
-#' 
+#' }
 map_experiment <- function(exp_id) {
 
 	x = bibq( paste('SELECT * FROM EXPERIMENTS WHERE ID = ', exp_id) )
@@ -156,3 +162,6 @@ map_experiment <- function(exp_id) {
 	eval(parse( text= paste('function(){', x$R_script, '}' )))
 
 	}
+
+
+	

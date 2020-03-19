@@ -24,5 +24,7 @@ there is any chance that the bird was caught in between somewhere else}
 RINGS_FOR_RADO
 }
 \examples{
+\donttest{
 path = RINGS_FOR_RADO(seasons = 2018)
+}
 }

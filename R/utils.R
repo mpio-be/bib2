@@ -38,7 +38,9 @@ infuture <- function(x) {
 #' dayofyear2date
 #' @export
 #' @examples
+#' \donttest{
 #' dayofyear2date(1)
+#' }
 dayofyear2date <- function(dayofyear, year) {
   if(missing(year)) year = data.table::year(Sys.Date())
   ans = as.Date(dayofyear - 1, origin = paste(year, "01-01", sep = "-"))
@@ -70,7 +72,9 @@ Min <- function(x) {
 #' noNApaste
 #' @export
 #' @examples
+#' \donttest{
 #' x = c(NA, 1)
+#' }
 Paste <- function(x) {
     x[is.na(x)] = ''
      paste(x, collapse = "|")

@@ -10,5 +10,7 @@ adults(refdate = Sys.Date(), ...)
 adults
 }
 \examples{
+\donttest{
 x = adults
+}
 }

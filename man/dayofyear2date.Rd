@@ -10,5 +10,7 @@ dayofyear2date(dayofyear, year)
 dayofyear2date
 }
 \examples{
+\donttest{
 dayofyear2date(1)
+}
 }

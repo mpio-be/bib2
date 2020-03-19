@@ -14,6 +14,8 @@ plot_phenology_firstDates(...)
 plots
 }
 \examples{
+\donttest{
   all_phenology = phenology()
-plot_phenology_firstDates()
+  plot_phenology_firstDates()
+}
 }

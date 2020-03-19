@@ -17,6 +17,8 @@ Legend
 Nest stages, frequencies and late/early score
 }
 \examples{
+\donttest{
 n = nests(Sys.Date() ) \%>\% nest_state()
 nest_legend(n)
+}
 }

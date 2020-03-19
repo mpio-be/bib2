@@ -5,7 +5,7 @@
     sapply(c('bib2', 'MASS',
              'magrittr', 'stringr', 'knitr', 'glue'  , 
              'ggplot2', 'ggthemes','digest','ggrepel',
-             'shiny','shinyjs','shinydashboard','shinyBS','shinytoastr', 'shinyTree', 'shinyAce'),
+             'shiny','shinyjs','shinydashboard','shinyBS','shinytoastr', 'tippy'),
       function(x) suppressPackageStartupMessages( require(x, character.only = TRUE, quietly = TRUE) ))
     options(stringsAsFactors = FALSE)
 

@@ -10,5 +10,7 @@ Breeding()
 allAdults
 }
 \examples{
+\donttest{
 x = Breeding()
+}
 }

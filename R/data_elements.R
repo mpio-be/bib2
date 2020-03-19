@@ -6,11 +6,12 @@
 #' @param x             a data.table as returned by nests()
 #' @param nesr_stages   character vector
 #' @param hatchingModel a model to use for prediction
-#' @examples
+#' @examples \donttest{
 #'  B = Breeding()
 #' hatchingModel = predict_hatchday_model(B, MASS::rlm)  
 #' nests() %>% nest_state(hatchingModel =hatchingModel)
 #' nests("2016-04-12") %>% nest_state(hatchingModel =hatchingModel)
+#' }
 nest_state <-   function(x, nest_stages = NULL, hatchingModel) {
   x[, lastCheck := max(date_time), by = box]
 
@@ -70,8 +71,10 @@ nest_state <-   function(x, nest_stages = NULL, hatchingModel) {
 #' @param N   a  data.table returned by allNests()
 #' @export
 #' @examples
+#' \donttest{
 #' n = nests(Sys.Date() ) %>% nest_state()
 #' nest_legend(n)
+#' }
 nest_legend <- function(n) {
   x = data.table( col = getOption('nest.stages.col'), nest_stage = getOption('nest.stages') )
   ld =  n[, .N, by = nest_stage]
