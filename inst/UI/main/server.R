@@ -13,20 +13,33 @@ shinyServer(function(input, output, session) {
 
         firstLining = nests(input$date)[nest_stage == "LIN", min(date_time)] 
         predFirstEggData = predict_firstEgg_data(F, input$date )
-        predFirstEgg = predict_firstEgg(predFirstEggData, yday(firstLining), year(input$date) )[, firstLining := firstLining]
+        predFirstEgg = predict_firstEgg(predFirstEggData, yday(firstLining), year(input$date) )[, firstLining := as.POSIXct(firstLining) ]
         predFirstEgg = predFirstEgg[!is.na(fit)]
         
         reldays = predFirstEgg[, difftime(fit, input$date, units = 'days')%>% as.integer ]
         if ( length(reldays) > 0) {
          lword = if(reldays < 0) 'since' else 'to'
          Title = paste( abs(reldays) , 'days', lword , 'the estimated first egg.')
-         } else Title = "Waiting for the first lining ... "
+         Subtitle = paste('(anytime between', 
+                    format(predFirstEgg$lwr, "%d-%b"), '&', 
+                    format(predFirstEgg$upr, "%d-%b"), ') '
+                    )
 
-        ggplot(predFirstEggData, aes(y = first_Egg , x = first_Lining, x) ) + 
+
+         } else { 
+          Title = "Waiting for the first lining ... "
+          Subtitle = ''
+          }
+
+        ggplot(predFirstEggData, aes(y = first_Egg , x = first_Lining ) ) + 
            geom_point() + 
-           geom_smooth(method = 'lm') + geom_text(aes(label = year_), vjust= 'bottom') + 
-           geom_pointrange(data = predFirstEgg, aes(x = firstLining, y = fit, ymin = lwr, ymax = upr ), col = 2) + 
-           ggtitle(Title)
+           geom_smooth(method = 'lm') + 
+           ggrepel::geom_text_repel(aes(label = year_), vjust= 'bottom') + 
+           geom_pointrange(data = predFirstEgg, aes(x = firstLining, y = fit, ymin = lwr, ymax = upr ), col = 2 ) + 
+           scale_x_datetime(date_labels = "%d-%b") +
+           ggtitle(Title, Subtitle)
+
+
         }   
 
     })
