@@ -51,6 +51,18 @@ dashboardPage(skin = 'green',
       menuItem("Nests data viewer", tabName  = "nestsdata_tab", icon = icon("binoculars") ),
       menuItem("Adult data viewer", tabName  = "adultdata_tab", icon = icon("binoculars") ),
 
+      menuItem('FILES',icon = icon("paperclip", lib = "glyphicon"),
+          href = 'http://behavioural-ecology.orn.mpg.de/files/', 
+          newtab = TRUE),
+
+
+
+
+
+
+
+
+
 
       conditionalPanel(
         condition = "input.menubar == 'nestsdata_tab'", 
