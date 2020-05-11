@@ -111,9 +111,7 @@ shinyServer(function(input, output, session) {
         if(input$experiment) {
 
           gg = map_experiment(input$experiment_id)
-          o = try(m + gg(), silent = TRUE)
-
-          if( inherits(o, 'try-error')) o = m + ggtitle( paste('Experiment', id, 'cannot be shown. Review the EXPERIMENTS table!'))
+          o = m + gg()
 
           m <<- o
         }

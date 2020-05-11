@@ -172,14 +172,18 @@ map_experiment <- function(exp_id) {
     x = bibq( paste('SELECT * FROM EXPERIMENTS 
         WHERE ID = ', exp_id) )$R_script
 
+    fallback = glue('function() {{ 
+                list(ggtitle("Experiment {exp_id} cannot be shown.Review the EXPERIMENTS table!")) }}')
+
     if( length(x)>0 && nchar(x) > 0) {
         f = glue('function() {{ {x} }}')
     } else
-        f = glue('function() {{ 
-                list(ggtitle("Experiment {exp_id} cannot be shown.Review the EXPERIMENTS table!")) }}')
+        f = fallback
 
-    eval(parse( text= f ) )
+    o = try( eval(parse( text= f ) ), silent = TRUE)
+    if(inherits (o, 'try-error')) o = fallback
 
+    o
 
 
 
