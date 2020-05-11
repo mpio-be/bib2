@@ -109,7 +109,10 @@ shinyServer(function(input, output, session) {
                   notes = input$notes, ny = 720 )  
         
         if(input$experiment) {
-          o = m + map_experiment(input$experiment_id)
+
+          gg = map_experiment(input$experiment_id)
+          o = m + gg()
+
           m <<- o
         }
 

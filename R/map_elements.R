@@ -181,7 +181,7 @@ map_experiment <- function(exp_id) {
         f = fallback
 
     o = try( eval(parse( text= f ) ), silent = TRUE)
-    if(inherits (o, 'try-error')) o = fallback
+    if(inherits (o, 'try-error')) o = eval(parse( text= fallback ) )
 
     o
 
