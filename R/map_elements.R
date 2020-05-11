@@ -153,13 +153,16 @@ map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain',
 #' @return  a list of geoms to append to map_nests()
 #' @examples
 #' \donttest{
-#'  x = map_experiment()
+#'  x = map_experiment(1)
 #' }
 map_experiment <- function(exp_id) {
 
 	x = bibq( paste('SELECT * FROM EXPERIMENTS WHERE ID = ', exp_id) )
 
 	eval(parse( text= paste('function(){', x$R_script, '}' )))
+
+	
+
 
 	}
 
