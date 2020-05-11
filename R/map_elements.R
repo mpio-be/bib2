@@ -165,18 +165,23 @@ map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain',
 #' @return  a list of geoms to append to map_nests()
 #' @examples
 #' \donttest{
-#'  x = map_experiment(1)
+#'  x = map_experiment(2)
 #' }
 map_experiment <- function(exp_id) {
 
     x = bibq( paste('SELECT * FROM EXPERIMENTS 
         WHERE ID = ', exp_id) )$R_script
 
+    x = stringr::str_replace_all(x, '\r\n', '\n')
+
     fallback = glue('function() {{ 
                 list(ggtitle("Experiment {exp_id} cannot be shown.Review the EXPERIMENTS table!")) }}')
 
     if( length(x)>0 && nchar(x) > 0) {
-        f = glue('function() {{ {x} }}')
+        f = glue('function() {{ 
+                    {x} 
+                
+                }}' )
     } else
         f = fallback
 
