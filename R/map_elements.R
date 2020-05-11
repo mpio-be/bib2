@@ -174,7 +174,9 @@ map_experiment <- function(exp_id) {
 
     if( length(x)>0 && nchar(x) > 0) {
         f = glue('function() {{ {x} }}')
-    }
+    } else
+        f = glue('function() {{ 
+                list(ggtitle("Experiment {exp_id} cannot be shown.Review the EXPERIMENTS table!")) }}')
 
     eval(parse( text= f ) )
 
