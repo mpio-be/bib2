@@ -31,8 +31,6 @@
     35  58
     36  66
     38  39
-    36  66
-    38  39
     41  42
     43  45
     44  26
@@ -151,6 +149,9 @@
       
 
 # new xy
-    d = merge(boxesxy, x, by.x = 'box', by.y = 'o', all.x = TRUE, sort = FALSE)
-    d = merge(boxesxy, d, by.x = 'box', by.y = 'm', all.x = TRUE, sort = FALSE, suffixes = c('_o', '_m'))
+    boxesxy2 = merge(boxesxy, x, by.x = 'box', by.y = 'o', sort = FALSE)[, .(box=  m, long, lat)]
+    boxesxy2 = merge(boxesxy, m, by = 'box', all.x  = TRUE, sort = FALSE, suffixes = c('', '_new'))
+  
+    boxesxy2[ !is.na(long_new), ':=' (long = long_new, lat = lat_new) ][, ':=' (long_new = NULL, lat_new = NULL)]
 
+    usethis::use_data(boxesxy2)    
