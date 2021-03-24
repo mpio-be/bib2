@@ -3,10 +3,8 @@
 # as a part of an experiment boxes were rr-arranged in 2021
 # this file defines that layout
 
-
-
 # PACKAGES, SETTINGS
-  sapply(c('data.table', 'sdb', 'magrittr','stringr','here','glue', 'bib2') ,
+  sapply(c('data.table', 'sdb', 'magrittr','stringr','here','glue', 'bib2', 'sf', 'ggplot2', 'ggrepel') ,
   require, character.only = TRUE, quietly = TRUE)
 
 # new layout (o = original location, m = moved location)
@@ -15,7 +13,7 @@
     4   3
     6   5
     7   8
-    10  10
+    9   10
     11  25
     12  13
     14  15
@@ -34,6 +32,7 @@
     41  42
     43  45
     44  26
+    46  57
     48  54
     49  50
     52  82
@@ -61,6 +60,7 @@
     103 104
     106 107
     108 109
+    111 110
     112 113
     116 115
     120 119
@@ -134,7 +134,7 @@
     254 253
     255 237
     256 257
-    257 259
+    258 259
     261 260
     262 249
     263 264
@@ -146,12 +146,19 @@
     274 275
     276 170
     277 47')
-      
 
 # new xy
     boxesxy2 = merge(boxesxy, x, by.x = 'box', by.y = 'o', sort = FALSE)[, .(box=  m, long, lat)]
-    boxesxy2 = merge(boxesxy, m, by = 'box', all.x  = TRUE, sort = FALSE, suffixes = c('', '_new'))
+    boxesxy2 = merge(boxesxy, boxesxy2, by = 'box', all.x  = TRUE, sort = FALSE, suffixes = c('', '_new'))
   
-    boxesxy2[ !is.na(long_new), ':=' (long = long_new, lat = lat_new) ][, ':=' (long_new = NULL, lat_new = NULL)]
+    boxesxy2[ !is.na(long_new), ':=' (long = long_new, lat = lat_new+10) ][, ':=' (long_new = NULL, lat_new = NULL)]
 
-    usethis::use_data(boxesxy2)    
+    boxesxy2 = boxesxy2[box != 97]
+
+    # usethis::use_data(boxesxy2, overwrite = TRUE)    
+
+# test 
+    s = st_as_sf(boxesxy2, coords = c('long', 'lat'))
+
+    ggplot(s) + geom_sf_text(aes(label = box))
+
