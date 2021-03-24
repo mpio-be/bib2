@@ -25,17 +25,17 @@ theme_bib2  <- function() {
 #' @rdname maps
 #' @return a list of geoms defining the legend around the box
 map_legend <- function(size = 2.5, right = 'box', left = 'checked days ago', 
-        top = 'stage age|days to hatch', bottom = 'eggs|chicks', 
-        x = 543 , y = 735 ) {
-        isp = data.frame( x = x, y = y, right, left, top, bottom)
-        list( 
-        geom_point(data = isp, aes(x = x, y = y), pch = 19, size = size*.5) , 
-        geom_text(data  = isp, aes(x = x, y = y, label = right), hjust = 'left', nudge_x = 5) ,
-        geom_text(data  = isp, aes(x = x, y = y, label = left), hjust = 'right', nudge_x = -5)  ,
-        geom_text(data  = isp, aes(x = x, y = y, label = top), vjust = 'bottom', nudge_y = 7)  ,
-        geom_text(data  = isp, aes(x = x, y = y, label = bottom), vjust = 'top', nudge_y = -7) )
+    top = 'stage age|days to hatch', bottom = 'eggs|chicks', 
+    x = 543 , y = 735 ) {
+    isp = data.frame( x = x, y = y, right, left, top, bottom)
+    list( 
+    geom_point(data = isp, aes(x = x, y = y), pch = 19, size = size*.5) , 
+    geom_text(data  = isp, aes(x = x, y = y, label = right), hjust = 'left', nudge_x = 5) ,
+    geom_text(data  = isp, aes(x = x, y = y, label = left), hjust = 'right', nudge_x = -5)  ,
+    geom_text(data  = isp, aes(x = x, y = y, label = top), vjust = 'bottom', nudge_y = 7)  ,
+    geom_text(data  = isp, aes(x = x, y = y, label = bottom), vjust = 'top', nudge_y = -7) )
 
-     }
+    }
 
 
 #' @export

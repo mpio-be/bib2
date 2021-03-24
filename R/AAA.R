@@ -1,6 +1,6 @@
 
 
-#' @title 		Breding BIrd Planer (v2)
+#' @title 		Breeding BIrd Planer (v2)
 #' @description Mapping and field work organiser
 #' @docType 	package
 #' @name 		bib2

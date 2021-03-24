@@ -1,3 +1,10 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-.travis.yml
+^README\.Rmd$
+^README\.html$
+^\.github$
+^.*\.sublime-project$
+^.*\.sublime-workspace$
+raw
+^doc$
+^Meta$
