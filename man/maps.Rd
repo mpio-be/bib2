@@ -2,14 +2,18 @@
 % Please edit documentation in R/map_elements.R
 \name{maps}
 \alias{maps}
+\alias{spboxes}
 \alias{theme_bib2}
 \alias{map_legend}
 \alias{print_ann}
+\alias{map_empty}
 \alias{map_base}
 \alias{map_nests}
 \alias{map_experiment}
 \title{maps}
 \usage{
+spboxes(refdate = Sys.Date())
+
 theme_bib2()
 
 map_legend(
@@ -31,7 +35,15 @@ print_ann(
   angle = 90
 )
 
-map_base(size = 2.5, family = "sans", fontface = "plain", printdt = FALSE)
+map_empty()
+
+map_base(
+  size = 2.5,
+  family = "sans",
+  fontface = "plain",
+  printdt = FALSE,
+  xy = spboxes()
+)
 
 map_nests(
   n,
@@ -47,6 +59,8 @@ map_nests(
 map_experiment(exp_id)
 }
 \arguments{
+\item{xy}{boxes}
+
 \item{n}{a data.table returned by  nests()}
 
 \item{title}{goes to ggtitle (should be the reference date)}
@@ -68,6 +82,9 @@ a list of geoms to append to map_nests()
 maps
 }
 \examples{
+\donttest{
+map_empty() 
+}
 \donttest{
 map_base(family = 'sans') 
 }

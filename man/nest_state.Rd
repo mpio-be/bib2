@@ -9,9 +9,9 @@ nest_state(x, nest_stages = NULL, hatchingModel)
 \arguments{
 \item{x}{a data.table as returned by nests()}
 
-\item{hatchingModel}{a model to use for prediction}
+\item{nest_stages}{character vector}
 
-\item{nesr_stages}{character vector}
+\item{hatchingModel}{a model to use for prediction}
 }
 \description{
 nest_state

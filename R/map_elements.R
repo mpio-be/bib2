@@ -130,23 +130,25 @@ map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = F
 #' 
 map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain', 
                       title  = paste('made on:', Sys.Date() ),  
-                      notes = '', nx = -20, ny = 650, xy = spboxes() )  {
+                      notes = '', nx = -20, ny = 650 )  {
 
     legend = nest_legend(n)
     
+    xy = spboxes(n$date_time[1] %>% as.Date()) 
 
     nxy = merge(n, xy, by= 'box')
 
     # frame
-    map_base(xy = xy) + 
+    map_empty() + 
         theme( legend.justification = c(0, 1),
             legend.position = c(0,1) ) + 
         ggtitle(title) + map_legend() + 
-    # boxes
-   # geom_point(data = xy, color = 'grey', pch = 21, size = size, 
-   #     aes(x = long, y = lat) ) + 
-   # geom_text( data = xy, hjust = 'left', nudge_x = 5, family  = family, fontface = fontface, size = size, 
-   #     aes(x = long, y = lat, label = box) )+ 
+   
+   # boxes
+   geom_point(data = xy, color = 'grey', pch = 21, size = size, 
+        aes(x = long, y = lat) ) + 
+   geom_text( data = xy, hjust = 'left', nudge_x = 5, family  = family, fontface = fontface, size = size, 
+        aes(x = long, y = lat, label = box) )+ 
     
     # nest stage  
     geom_point(data = nxy, pch = 19, size = size, 
