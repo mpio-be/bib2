@@ -4,7 +4,7 @@
 \name{bib2}
 \alias{bib2}
 \alias{.onLoad}
-\title{Breding BIrd Planer (v2)}
+\title{Breeding BIrd Planer (v2)}
 \usage{
 The user interface is available from http://scidb.mpio.orn.mpg.de
 }

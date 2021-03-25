@@ -90,6 +90,7 @@
     163 164
     165 166
     167 168
+    176 177
     178 179
     180 174
     181 197
@@ -151,14 +152,24 @@
     boxesxy2 = merge(boxesxy, x, by.x = 'box', by.y = 'o', sort = FALSE)[, .(box=  m, long, lat)]
     boxesxy2 = merge(boxesxy, boxesxy2, by = 'box', all.x  = TRUE, sort = FALSE, suffixes = c('', '_new'))
   
-    boxesxy2[ !is.na(long_new), ':=' (long = long_new, lat = lat_new+10) ][, ':=' (long_new = NULL, lat_new = NULL)]
+    boxesxy2[ !is.na(long_new), ':=' (long = long_new, lat = lat_new+20) ][, ':=' (long_new = NULL, lat_new = NULL)]
 
     boxesxy2 = boxesxy2[box != 97]
 
-    # usethis::use_data(boxesxy2, overwrite = TRUE)    
+    usethis::use_data(boxesxy2, overwrite = TRUE)    
 
 # test 
+    boxesxy2[, p :=  fcase(lat < 200, 'a', lat >= 200 & lat < 400, 'b', default = 'c' )]
     s = st_as_sf(boxesxy2, coords = c('long', 'lat'))
 
-    ggplot(s) + geom_sf_text(aes(label = box))
+    ggplot(s) + geom_sf_text(aes(label = box, color = p))
+
+    require(ggforce)
+
+    ggplot(s) + geom_sf_text(aes(label = box)) + 
+    facet_wrap_paginate(~ p, ncol = 1, nrow = 1, page = 3)
+
+
+
+
 

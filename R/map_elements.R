@@ -4,6 +4,16 @@ NULL
 
 #' @export
 #' @rdname maps
+spboxes <- function(refdate = Sys.Date() ) {
+    if(year(refdate) > 2020 ) o = boxesxy2 else 
+    o = boxesxy
+    o
+    }
+
+
+
+#' @export
+#' @rdname maps
 theme_bib2  <- function() {
     theme(
         axis.line        = element_blank(),
@@ -51,6 +61,7 @@ print_ann <- function(color = 'grey',  x = Inf, y = Inf, vjust = 'bottom', hjust
             aes(x = x, y = y, label = annlabel)  ) 
     }
 
+
 #' @export
 #' @rdname maps
 #' @examples
@@ -60,12 +71,13 @@ print_ann <- function(color = 'grey',  x = Inf, y = Inf, vjust = 'bottom', hjust
 map_empty <- function() {
 
     ggplot() +
-        geom_polygon(data = map_layers[nam == 'buildings'] , aes(x=long, y=lat, group=group), size = .2, fill = 'grey97', col = 'grey97' ) +
-        geom_path(data =  map_layers[nam == 'streets'],         aes(x=long, y=lat, group=group) , size = .2, col = 'grey60' ) +
+        # geom_polygon(data = map_layers[nam == 'buildings'] , aes(x=long, y=lat, group=group), size = .2, fill = 'grey97', col = 'grey97' ) +
+        # geom_path(data =  map_layers[nam == 'streets'],         aes(x=long, y=lat, group=group) , size = .2, col = 'grey60' ) +
 
         coord_equal(ratio=1) +
-        scale_x_continuous(expand = c(0,0), limits =  map_layers[nam == 'streets', c( min(long), max(long) )]  ) +
-        scale_y_continuous(expand = c(0,0)) +
+        # scale_x_continuous(expand = c(0,0), limits =  map_layers[nam == 'streets', c( min(long), max(long) )]  ) +
+        scale_x_continuous( expand = c(0,0) ) +
+        scale_y_continuous( expand = c(0,0) ) +
 
         theme_bib2()
 
@@ -78,20 +90,23 @@ map_empty <- function() {
 #' \donttest{
 #' map_base(family = 'sans') 
 #' }
-map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = FALSE) {
+map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = FALSE, xy = spboxes() ) {
+
     g = 
     map_empty() + 
     
-    geom_point(data = boxesxy, color = 'grey', pch = 21, size = size,
+    geom_point(data = xy, color = 'grey', pch = 21, size = size,
         aes(x = long, y = lat) ) + 
 
-    geom_text(data = boxesxy,family  = family, fontface = fontface, size= size, nudge_x = 10,
+    geom_text(data = xy,family  = family, fontface = fontface, size= size, nudge_x = 10,
         aes(x = long, y = lat, label = box) ) + 
 
     theme( legend.justification = c(0, 1),legend.position = c(0,1) ) + 
     if(printdt) print_ann() else NULL
 
-    g  
+
+    g         
+
     }
 
 
@@ -103,6 +118,7 @@ map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = F
 #' @param   notes notes under legend annotations
 #' @param   nx    notes x location
 #' @param   ny    notes y location
+#' @param   xy    boxes 
 #' @examples
 #' \donttest{
 #'  x = nests(Sys.Date() - 1 )
@@ -110,26 +126,27 @@ map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = F
 #'  n = nest_state(x, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
 #'  map_nests(n)  
 #'  map_nests(n, notes = notes) + print_ann() 
-#'}
+#' }
 #' 
 map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain', 
-
-    title  = paste('made on:', Sys.Date() ),  notes = '', nx = -20, ny = 650)  {
+                      title  = paste('made on:', Sys.Date() ),  
+                      notes = '', nx = -20, ny = 650, xy = spboxes() )  {
 
     legend = nest_legend(n)
+    
 
-    nxy = merge(n, boxesxy, by= 'box')
+    nxy = merge(n, xy, by= 'box')
 
     # frame
-    map_empty()+
+    map_base(xy = xy) + 
         theme( legend.justification = c(0, 1),
             legend.position = c(0,1) ) + 
         ggtitle(title) + map_legend() + 
     # boxes
-    geom_point(data = boxesxy, color = 'grey', pch = 21, size = size, 
-        aes(x = long, y = lat) ) + 
-    geom_text( data = boxesxy, hjust = 'left', nudge_x = 5, family  = family, fontface = fontface, size = size, 
-        aes(x = long, y = lat, label = box) )+ 
+   # geom_point(data = xy, color = 'grey', pch = 21, size = size, 
+   #     aes(x = long, y = lat) ) + 
+   # geom_text( data = xy, hjust = 'left', nudge_x = 5, family  = family, fontface = fontface, size = size, 
+   #     aes(x = long, y = lat, label = box) )+ 
     
     # nest stage  
     geom_point(data = nxy, pch = 19, size = size, 

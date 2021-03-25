@@ -5,7 +5,6 @@
 \alias{theme_bib2}
 \alias{map_legend}
 \alias{print_ann}
-\alias{map_empty}
 \alias{map_base}
 \alias{map_nests}
 \alias{map_experiment}
@@ -31,8 +30,6 @@ print_ann(
   hjust = "top",
   angle = 90
 )
-
-map_empty()
 
 map_base(size = 2.5, family = "sans", fontface = "plain", printdt = FALSE)
 
@@ -72,9 +69,6 @@ maps
 }
 \examples{
 \donttest{
-map_empty() 
-}
-\donttest{
 map_base(family = 'sans') 
 }
 \donttest{
@@ -86,6 +80,6 @@ map_base(family = 'sans')
 }
 
 \donttest{
- x = map_experiment()
+ x = map_experiment(2)
 }
 }

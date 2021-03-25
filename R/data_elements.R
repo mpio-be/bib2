@@ -4,7 +4,7 @@
 #' nest_state
 #' @export
 #' @param x             a data.table as returned by nests()
-#' @param nesr_stages   character vector
+#' @param nest_stages   character vector
 #' @param hatchingModel a model to use for prediction
 #' @examples \donttest{
 #'  B = Breeding()
