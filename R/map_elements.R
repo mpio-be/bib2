@@ -41,9 +41,10 @@ map_legend <- function(size = 2.5, right = 'box', left = 'checked days ago',
     list( 
     geom_point(data = isp, aes(x = x, y = y), pch = 19, size = size*.5) , 
     geom_text(data  = isp, aes(x = x, y = y, label = right), hjust = 'left', nudge_x = 5) ,
-    geom_text(data  = isp, aes(x = x, y = y, label = left), hjust = 'right', nudge_x = -5)  ,
-    geom_text(data  = isp, aes(x = x, y = y, label = top), vjust = 'bottom', nudge_y = 7)  ,
-    geom_text(data  = isp, aes(x = x, y = y, label = bottom), vjust = 'top', nudge_y = -7) )
+    geom_text(data  = isp, aes(x = x, y = y, label = left), hjust = 'right', nudge_x = -5) 
+    # geom_text(data  = isp, aes(x = x, y = y, label = top), vjust = 'bottom', nudge_y = 7)  ,
+    # geom_text(data  = isp, aes(x = x, y = y, label = bottom), vjust = 'top', nudge_y = -7) 
+    )
 
     }
 
@@ -120,7 +121,7 @@ map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = F
 #' @param   ny    notes y location
 #' @param   xy    boxes 
 #' @examples
-#' \donttest{
+#' \dontrun{
 #'  x = nests(Sys.Date() - 1 )
 #'  notes = c('note 1: this is note 1\nnote 99: this is note 99\nnote 9999+1: this is note 9999+1')
 #'  n = nest_state(x, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
@@ -154,18 +155,21 @@ map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain',
     geom_point(data = nxy, pch = 19, size = size, 
         aes(x = long, y = lat, color = nest_stage), na.rm = TRUE ) +
      scale_colour_manual(values = legend$col , labels = legend$labs ) +
+    
     # last check
     geom_text(data = nxy, 
         aes(x = long, y = lat, label = lastCheck), 
         hjust = 'right', nudge_x = -5,size = size, family = family) +
+    
     # nest stage age
-    geom_text(data = nxy,
-        aes(x = long, y = lat, label = AGE), vjust = 'bottom', nudge_y = 5,
-        size = size, family = family)+
+    # geom_text(data = nxy,
+    #     aes(x = long, y = lat, label = AGE), vjust = 'bottom', nudge_y = 5,
+    #     size = size, family = family)+
+    
     # clutch | chicks
-    geom_text(data =  nxy[!is.na(ECK)] ,
-        aes(x = long, y = lat, label = ECK), vjust = 'top', nudge_y = -5,
-        size = size, family = family) + 
+    # geom_text(data =  nxy[!is.na(ECK)] ,
+    #     aes(x = long, y = lat, label = ECK), vjust = 'top', nudge_y = -5,
+    #     size = size, family = family) + 
 
     guides( color = guide_legend(title = NULL, ncol = 3)) + 
     

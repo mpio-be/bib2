@@ -20,7 +20,8 @@ Suggests:
     ggridges,
     testthat,
     knitr,
-    openxlsx
+    openxlsx,
+    rmarkdown
 Remotes: 
     mpio-be/sdb,
     mpio-be/DataEntry,
