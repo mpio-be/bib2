@@ -132,7 +132,8 @@ dashboardPage(skin = 'green',
         tippy_this('notes', 'Any notes you write here will be seen on right side of the map.'),
 
 
-        downloadButton('nestsmap_pdf',label = 'Download PDF')
+        downloadButton('nestsmap_pdf',   label = 'Download PDF'),
+        downloadButton('neststable_xlsx',label = 'Download XLSX'),
         )   
       )), 
         

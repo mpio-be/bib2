@@ -88,7 +88,7 @@ map_empty()
 \donttest{
 map_base(family = 'sans') 
 }
-\donttest{
+\dontrun{
  x = nests(Sys.Date() - 1 )
  notes = c('note 1: this is note 1\nnote 99: this is note 99\nnote 9999+1: this is note 9999+1')
  n = nest_state(x, hatchingModel = predict_hatchday_model(Breeding(), rlm) )

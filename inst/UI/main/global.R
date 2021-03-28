@@ -1,7 +1,7 @@
 
 # shiny::runApp('inst/UI/main', launch.browser = TRUE)
 
-# settings
+# SETTINGS
     sapply(c('bib2', 'MASS',
              'magrittr', 'stringr', 'knitr', 'glue'  , 
              'ggplot2', 'ggthemes','digest','ggrepel',
@@ -10,18 +10,24 @@
     options(stringsAsFactors = FALSE)
 
 
-# global sets
-  F = phenology()
+    # global sets
+    F = phenology()
 
-# prediction data & model
- B = Breeding()
- hatchingModel = predict_hatchday_model(B, MASS::rlm)  
+    # prediction data & model
+    B = Breeding()
+    hatchingModel = predict_hatchday_model(B, MASS::rlm)  
 
-  
-package = 'bib2'
-tags    = shiny::tags
-host    = getOption('host.bib2')
-db      = 'FIELD_BTatWESTERHOLZ'
-user    = 'bt'
-pwd     = sdb::getCredentials(user, db, host )$pwd
+
+    package = 'bib2'
+    tags    = shiny::tags
+    host    = getOption('host.bib2')
+    db      = 'FIELD_BTatWESTERHOLZ'
+    user    = 'bt'
+    pwd     = sdb::getCredentials(user, db, host )$pwd
+
+
+
+
+
+
 

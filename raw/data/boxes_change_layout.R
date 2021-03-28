@@ -151,7 +151,7 @@
 # new xy
     boxesxy2 = merge(boxesxy, x, by.x = 'box', by.y = 'o', sort = FALSE)[, .(box=  m, long, lat)]
     boxesxy2 = merge(boxesxy, boxesxy2, by = 'box', all.x  = TRUE, sort = FALSE, suffixes = c('', '_new'))
-    boxesxy2[ !is.na(long_new), ':=' (long = long_new, lat = lat_new+20) ][, ':=' (long_new = NULL, lat_new = NULL, rowID = NULL)]
+    boxesxy2[ !is.na(long_new), ':=' (long = long_new, lat = lat_new+10) ][, ':=' (long_new = NULL, lat_new = NULL, rowID = NULL)]
     boxesxy2 = boxesxy2[box != 97]
 
     # add order

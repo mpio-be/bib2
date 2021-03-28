@@ -12,6 +12,8 @@ Depends:
     rgdal,
     ggplot2,
     data.table
+Imports:
+    openxlsx
 Suggests: 
     devtools,
     shiny (>= 0.8.0),
@@ -20,7 +22,6 @@ Suggests:
     ggridges,
     testthat,
     knitr,
-    openxlsx,
     rmarkdown
 Remotes: 
     mpio-be/sdb,

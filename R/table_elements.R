@@ -5,28 +5,45 @@
 #'
 #' @param n     a data.table returned by  nests()
 #'
-#' @return path to pdf
+#' @return path to output file
 #' @export
-#' @importFrom rmarkdown pandoc_convert
+#' @importFrom openxlsx createWorkbook  addWorksheet freezePane createStyle setColWidths
+#' @importFrom openxlsx saveWorkbook insertImage  writeData
 #' 
 #' @examples
 #' \dontrun{
 #'  x = nests(Sys.Date() - 1 )
 #'  n = nest_state(x, hatchingModel = predict_hatchday_model(Breeding(), rlm) )
-#' 
+#'  p = nest_table(n)
 #' }
 #' 
 
-nest_table <- function(n) {
-    data(boxesxy2)
-    wo = boxesxy2[, .(box, walk_order)]
-    x = merge(wo, n, by = 'box', all.x = TRUE)
+nest_table <- function(n, file = tempfile(fileext = '.xlsx') ) {
 
-    o = x[, .(box, Stg = nest_stage, LaCk = lastCheck, age = AGE, EgCk = ECK, d2h = days_to_hatch)]
+    # prepare file
+        data(boxesxy2)
+        wo = boxesxy2[, .(box, walk_order)]
+        x = merge(wo, n, by = 'box', sort = FALSE)
 
-    f = tempfile()
+        o = x[, .(box, Stage = nest_stage, lastCheck, age = AGE, Eggs_or_Chicks = ECK, days_to_hatch = days_to_hatch)]
 
+    # map
+        m = map_nests(n)
+        mfile = tempfile(fileext='.png')
+        ggsave(mfile, m)
+    
+    # save to excel
+        wb = createWorkbook()
+        addWorksheet(wb, "Nests")
+        freezePane(wb, 'Nests', firstRow = TRUE)
+        head <- createStyle(halign = "CENTER", textDecoration = "bold",border = "Bottom")
+        setColWidths(wb, 'Nests', cols = 1:nrow(o), widths = "auto")
 
+        writeData(wb, 'Nests', o, borders = "all")
 
+        insertImage(wb, 'Nests', mfile,  width = 21, height = 29.7, startRow = 2, startCol = "D", units = "cm")
 
-}
+        saveWorkbook(wb,file,overwrite = TRUE)
+        Sys.chmod(file)
+
+ }
