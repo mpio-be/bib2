@@ -122,7 +122,7 @@ phenology <-  function(minimum_stage = 'C') {
 #' 													there is any chance that the bird was caught in between somewhere else
 #' @param not_banded_by_us  band numbers of birds that were banded elsewhere should be provided as a vector
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' path = RINGS_FOR_RADO(seasons = 2018)
 #' }
 RINGS_FOR_RADO = function(seasons = c(2018),new_ring = data.table(ID = c('B4H1627'), date_time = c("2014-11-08 10:02:00")),not_banded_by_us = c("TN90629") ) {
