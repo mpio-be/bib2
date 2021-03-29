@@ -77,8 +77,8 @@ map_empty <- function() {
 
         coord_equal(ratio=1) +
         # scale_x_continuous(expand = c(0,0), limits =  map_layers[nam == 'streets', c( min(long), max(long) )]  ) +
-        scale_x_continuous( expand = c(0,0) ) +
-        scale_y_continuous( expand = c(0,0) ) +
+        # scale_x_continuous( expand = c(0,0) ) +
+        # scale_y_continuous( expand = c(0,0) ) +
 
         theme_bib2()
 

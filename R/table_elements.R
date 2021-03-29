@@ -30,7 +30,13 @@ nest_table <- function(n, file = tempfile(fileext = '.xlsx') ) {
     # map
         m = map_nests(n)
         mfile = tempfile(fileext='.png')
-        ggsave(mfile, m)
+   
+        png(file = mfile, width = 2480, height = 3508, res = 400)
+        plot(m)
+        dev.off()
+   
+
+
     
     # save to excel
         wb = createWorkbook()
@@ -41,7 +47,7 @@ nest_table <- function(n, file = tempfile(fileext = '.xlsx') ) {
 
         writeData(wb, 'Nests', o, borders = "all")
 
-        insertImage(wb, 'Nests', mfile,  width = 21, height = 29.7, startRow = 2, startCol = "D", units = "cm")
+        insertImage(wb, 'Nests', mfile,  width = 21, height = 29.7, startRow = 2, startCol = "G", units = "cm")
 
         saveWorkbook(wb,file,overwrite = TRUE)
         Sys.chmod(file)
