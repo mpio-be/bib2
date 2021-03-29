@@ -120,7 +120,8 @@ shinyServer(function(input, output, session) {
     content = function(file) {
         
         cairo_pdf(file = file, width = 8.5, height = 11)
-        nests_ggplot() + print_ann()
+        g = nests_ggplot() + print_ann()
+        print(g)
         dev.off()
     })
 
