@@ -19,7 +19,7 @@
                 7   8
                 30  29
                 28  27
-                9   10
+                10  9
                 11  25
                 12  13
                 24  23
@@ -80,7 +80,7 @@
                 162 143
                 161 169
                 160 159
-                144 145
+                145 144
                 158 172
                 147 146
                 157 148
@@ -175,10 +175,7 @@
 
     ggplot(s) + geom_sf_text(aes(label = box, color = p))
 
-    require(ggforce)
 
-    ggplot(s) + geom_sf_text(aes(label = box)) + 
-    facet_wrap_paginate(~ p, ncol = 1, nrow = 1, page = 3)
 
 
 
