@@ -96,7 +96,7 @@ map_base <- function(size = 2.5, family = 'sans', fontface = 'plain',printdt = F
     g = 
     map_empty() + 
     
-    geom_point(data = xy, color = 'grey', pch = 21, size = size,
+    geom_point(data = xy, color = 'black', pch = 21, size = size,
         aes(x = long, y = lat) ) + 
 
     geom_text(data = xy,family  = family, fontface = fontface, size= size, nudge_x = 10,
