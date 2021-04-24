@@ -150,7 +150,7 @@ map_nests <- function(n, size = 2.5, family = 'sans', fontface = 'plain',
         ggtitle(title) + map_legend() + 
    
    # boxes
-   geom_point(data = xy, color = 'grey', pch = 21, size = size, 
+   geom_point(data = xy, color = 'black', pch = 21, size = size, 
         aes(x = long, y = lat) ) + 
    geom_text( data = xy, hjust = 'left', nudge_x = 5, family  = family, fontface = fontface, size = size, 
         aes(x = long, y = lat, label = box) )+ 
