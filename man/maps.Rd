@@ -86,6 +86,6 @@ map_base(family = 'sans')
 }
 
 \donttest{
- x = map_experiment()
+ x = map_experiment(2)
 }
 }
