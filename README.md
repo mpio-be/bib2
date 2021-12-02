@@ -9,7 +9,7 @@ Installation
 ------------
 
 ``` r
-install.packages("devtools")
-devtools::install_github("mpio-be/bib2")
+install.packages("remotes")
+remotes::install_github("mpio-be/bib2")
 ```
 
