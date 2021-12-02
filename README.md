@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/mpio-be/bib2.svg?branch=master)](https://travis-ci.org/mpio-be/bib2)
 
 bib2
 ------------
@@ -12,4 +11,3 @@ Installation
 install.packages("remotes")
 remotes::install_github("mpio-be/bib2")
 ```
-
